@@ -3,7 +3,7 @@
     src: url('font/TruenoSBd.otf');
 }
 
-body {
+body, html {
   width: 100%;
   height: 100%;
   margin: 0;
@@ -13,8 +13,8 @@ body {
 }
 
 #field {
-  height: 100%;
-  width: 100%;
+  /*height: 100%;*/
+  /*width: 100%;*/
   display: block;
   position: absolute;
   top: 50%;
@@ -32,9 +32,9 @@ svg {
 }
 
 svg text {
-  -webkit-text-shadow: 0 2px 3px rgba(0, 0, 0, .4);
-     -moz-text-shadow: 0 2px 3px rgba(0, 0, 0, .4);
-          text-shadow: 0 2px 3px rgba(0, 0, 0, .4);
+  -webkit-text-shadow: 0 2px 3px rgba(0, 0, 0, .35);
+     -moz-text-shadow: 0 2px 3px rgba(0, 0, 0, .35);
+          text-shadow: 0 2px 3px rgba(0, 0, 0, .35);
 }
 
 svg polygon {

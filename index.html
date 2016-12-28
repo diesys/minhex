@@ -8,11 +8,11 @@
         <meta name="Description" content="">
         <script src="snap.svg-min.js"></script>
         <script src="minjhex.min.js"></script>
-        <link rel="stylesheet" href="style.min.css">
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
 
-    <svg id="field"></svg>
+    <svg id="field" height="70%" width="85%"></svg>
 
     <script>
         // Get arguments
@@ -23,8 +23,10 @@
 
         // General settings  //////////////////////
         //--!!this could be made better
-        var dimension = 12.3,
-            N = parseInt(argv["n"]) || 5,
+        var 
+        	N = parseInt(argv["n"]) || 5,
+        	//dimension = 12.3,//
+            dimension = 12.3/5*N,							// height measured in triangles' size
             BOMBS = parseInt(argv["b"]) || 30;
 
         var base_clr = "#e8ff7d",
@@ -40,6 +42,7 @@
             font = 'Arcon';
 
         ///////////////////////////////////////////
+        // Trying to make this part useless
 
         // Page size
         var w = window,
@@ -52,11 +55,13 @@
 
 
 
-        var l = parseInt(centerY*2/dimension),
-            m = parseInt(l/18.3);
+        var l = parseInt(centerY*2/dimension),				// triangles' box side
+            //m = parseInt(l/18.3);
+            m = 1
 
-        var x0 = centerX - l*N/2,
-            y0 = centerY - l*N*Math.sqrt(3)/2;
+        var x0 = centerX - l*N/4*3,
+        	y0 = 0
+            //y0 = centerY - l*N*Math.sqrt(3)/2;
 
         var doubleClick = {};
         doubleClick.mouseClickDelay = 190;
@@ -89,13 +94,13 @@
             var x = x0 + i*l/2,
                 y = y0 + j*l*hsr3;
             var triangle;
-
+            var attributes = { fill: base_clr, strokeWidth: 12, stroke: "rgba(0,0,0,.03)" }
             if ((i+j)%2)
                 // down-triangle
-                triangle = field.polygon(x - s/2 + m*hsr3, y + m/2, x, y + s*hsr3 - m*hsr3, x + s/2 - m*hsr3, y + m/2).attr({ fill: base_clr });
+                triangle = field.polygon(x - s/2 + m*hsr3, y + m/2, x, y + s*hsr3 - m*hsr3, x + s/2 - m*hsr3, y + m/2).attr(attributes);
             else
                 // up-triangle
-                triangle = field.polygon(x, y + m, x - l/2 + m*hsr3, y + l*hsr3 - m/2, x + l/2 - m*hsr3, y + l*hsr3 - m/2).attr({ fill: base_clr });
+                triangle = field.polygon(x, y + m, x - l/2 + m*hsr3, y + l*hsr3 - m/2, x + l/2 - m*hsr3, y + l*hsr3 - m/2).attr(attributes);
 
             triangle.pos = [i,j];
             triangle.count = 0;
