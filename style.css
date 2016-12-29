@@ -9,7 +9,7 @@ body, html, .HowTo {
   margin: 0;
   background-image: url('img/tile.png');
   /*background-color: #2c7522;*/
-  background-color: #310F05;
+  background-color: #411F15;
   color: #eee;
   cursor: default;
 }
@@ -104,7 +104,7 @@ polygon {
 }
 #HT1.active {
 		display: block;
-    animation: fadein 1s ease;
+    animation: fadein .8s ease;
   }
 .HowTo img {
 		position: absolute;
@@ -114,10 +114,10 @@ polygon {
 		margin-top: 20px;
 }
 .HowTo.active img {
-    animation: fadefromleft 1.5s ease;
+    animation: fadefromleft .8s ease;
 }
 .HowTo.inactive img {
-    animation: fadefromleft 1.5s ease;
+    animation: fadefromleft .8s ease;
 		animation-direction: reverse;
 }
 .HowTo h1, .HowTo p {
@@ -129,10 +129,10 @@ polygon {
     padding-bottom: 100px;
 }
 .HowTo.active h1, .HowTo.active p {
-    animation: fadefrombottom 1.5s ease;
+    animation: fadefrombottom .8s ease;
 }
 .HowTo.inactive h1, .HowTo.inactive p {
-    animation: fadefrombottom 1.5s ease;
+    animation: fadefrombottom .8s ease;
 		animation-direction: reverse;
 }
 
@@ -153,8 +153,7 @@ polygon {
 		overflow: hidden;
 		text-align: center;
 		outline: none;
-
-	  animation: fadefrombottom 1s ease;
+    animation: fadefrombottom 1s ease;
 
     -webkit-transition: .2s ease; /* Safari */
     transition: .2s ease;
@@ -178,6 +177,7 @@ polygon {
 .button.credits {
   right: 15px;
   bottom: 15px;
+
 }
 .button.credits.hidden {
   display: none;
@@ -188,7 +188,7 @@ polygon {
     padding: 15px;
     font-size: 12pt;
     background-color: #f8b71b;
-    color: #111
+    color: #111;
     animation: fadefromtop 1s ease;
     text-transform: uppercase;
 }
