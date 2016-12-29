@@ -1,0 +1,18 @@
+MinHex
+
+\Codice
+
+	· Inizializzazione in una funzione init() a parte
+	· init() chiama una funzione adjustDimensions()
+		- adjustDimensions() imposta le dimensioni del field in base alla dimensione
+			dello schermo in modo da inscrivere il campo di gioco nel field e avere
+			il field che abbia un bordo garantito percentuale fisso sia in orizzontale
+			che in verticale
+	· chiamare init() su body.onload()
+	· chiamare adjustDimensions() su body.resize()
+
+\Note
+	· document.getElementById('field')
+	. field.setAttribute('name',value)
+		[value può essere un numero o una stringa, per esempio nel caso in cui vogliamo una percentuale]
+	· <body onload = "funzione()" onresize="altraFunzione()">
