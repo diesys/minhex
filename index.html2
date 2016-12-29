@@ -8,7 +8,6 @@
         <meta name="Description" content="">
         <script src="snap.svg-min.js"></script>
         <script src="minhex.min.js"></script>
-
         <link rel="stylesheet" href="style.css">
 
         <link rel="icon" sizes="114x114" href="img/favicon114.png" type="image/x-icon">
@@ -17,10 +16,8 @@
         <link rel="icon" sizes="256x256" href="img/favicon256.png" type="image/x-icon">
         </head>
     <body>
-      <div id="grad"></div>
 
-      <svg id="field" height="70%" width="85%"></svg>
-
+    <svg id="field" height="70%" width="85%"></svg>
 
     <script>
         // Get arguments
@@ -37,12 +34,12 @@
             dimension = 12.3/5*N,							// height measured in triangles' size
             BOMBS = parseInt(argv["b"]) || 30;
 
-        var base_clr = "#A9D41C",
+        // var base_clr = "#e8ff7d",
+        var base_clr = "#8FC23D",
             clicked_clr = "#377a01",
             over_clr = "#e8ff7d",
             // clicked_clr = "#dbf3fe",
             bomb_clr = "#ff2821",
-            bomb2_clr = "#b20e07",
             flag_clr = "#f8b71b",
             anim_dur = 130;
 
@@ -121,7 +118,7 @@
 
         function textOnCell (pos,txt) {
             var x = x0 + pos[0]*l/2,
-                y = y0 + pos[1]*l*Math.sqrt(3)/2 + (((pos[0] + pos[1]) % 2) ? 1.15 : 1.85) * l * Math.sqrt(3) / 6;
+                y = y0 + pos[1]*l*Math.sqrt(3)/2 + (((pos[0] + pos[1]) % 2) ? 1 : 2) * l * Math.sqrt(3) / 6;
 
             var opts = {'text-anchor':'middle', 'alignment-baseline': 'central'};
 
@@ -176,10 +173,6 @@
                         this.FINISHED = true;
                         cell.state = "clicked";
                         setTimeout(function () {alert("Pieces of your fleshy brain are all over the walls. Pay more attention to mines next time")},1000);
-                        for (c of Object.keys(this.cell))
-                        	if (this.cell[c].isBomb && c != pos)
-                        		this.cell[c].animate({fill: bomb2_clr}, anim_dur, mina.easein);
-                        
                         return
                     }
                     cell.animate({fill: clicked_clr}, anim_dur, mina.easein);
@@ -299,6 +292,10 @@
                 for (c of cellCoords)
                     this.cell[c].nbHood = this.nbHoodOf(coords(c)).filter( function (nbh) { return cellCoords.indexOf(nbh.toString()) != -1 } );
 
+
+
+
+
         }
 
 
@@ -307,69 +304,6 @@
         //grid.initialize();   // forse è totalmente inutile metterlo qui
 
     </script>
-
-      <!-- HowTo -->
-
-      <script>
-        function HowTo(option) {
-          ht1 = document.getElementById("HT1");
-          ht2 = document.getElementById("HT2");
-          ht3 = document.getElementById("HT3");
-
-          if (option == '1') {
-              ht1.className = "HowTo active";
-            }
-          else if (option == '2') {
-              ht1.className = "HowTo inactive";
-              ht2.className = "HowTo active";
-            }
-          else if (option == '3') {
-              ht2.className = "HowTo inactive";
-              ht3.className = "HowTo active";
-            }
-          else {
-              ht1.className = "HowTo inactive";
-              ht2.className = "HowTo inactive";
-              ht3.className = "HowTo inactive";
-            }
-          delete ht1; delete ht2; delete ht3; delete ht4;
-          }
-      </script>
-
-      <a class="button howto" onclick="HowTo(1)" href="#">MinHex</a>
-
-      <div id="HT3" class="HowTo inactive">
-        <div id="grad"></div>
-        <img src="img/howto/ht3.png" alt="HowTo" />
-        <h1>Le ore</h1>
-        <p>Immagina di far andare la lancetta dell'ora a velocità doppia, quando sono le 3 o le 9, anziché essere nei quarti del quadrante, l'ora sarà indicata nel vertice in basso; se invece sono le 6 o le 12 in quello in alto. Un orologio «solare» che anziché dirti AM o PM ti dice se che usa il sole per farti capire se le 18 (<i>tramonto</i>) sono già passate così da poterti orientare con l'ausilio della luce solare.</p>
-        <br><br>
-        <a id="closeHowTo" class="button closeHowTo" onclick="HowTo('close')" href="#">chiudi</a>
-        <a class="button HowTo next" onclick="HowTo('close')" href="#">&#62;</a>
-        <a class="button HowTo prev" onclick="HowTo(2)" href="#">&#60;</a>
-      </div>
-
-      <div id="HT2" class="HowTo inactive">
-        <div id="grad"></div>
-        <img src="img/howto/ht2.png" alt="HowTo" />
-        <h1>Gli indicatori</h1>
-        <p>Glock non ha lancette ma indicatori. Il funzionamento è quasi identico, ce ne sono di due tipi: l'indicatore delle ore è mobile e passa tra i vertici dell'esagono, quello dei minuti sta su un vertice fisso del triangolo che fa una rotazione ad ogni minuto. Entrambi gli indicatori hanno due possibili stati che indicano se ha già compiuto il primo giro.</p>
-        <br><br>
-        <a class="button closeHowTo" onclick="HowTo('close')" href="#">chiudi</a>
-        <a class="button HowTo next" onclick="HowTo(3)" href="#">&#62;</a>
-        <a class="button HowTo prev" onclick="HowTo(1)" href="#">&#60;</a>
-      </div>
-
-      <div id="HT1" class="HowTo inactive">
-        <div id="grad"></div>
-        <img src="img/howto/ht1.png" alt="HowTo" />
-        <h1>Colpo d'occhio</h1>
-        <p>Glock è un'orologio grafico che cerca un altro approccio nello scandire il tempo, è fatto per essere visto e non letto.<br/>
-          Una volta compreso il funzionamento anche vedendolo a distanza o di sfuggita sarà facile capire l'ora indicata e ancora più immediato, con una precisione dell'ordine di 5 minuti.</p>
-          <br><br>
-        <a class="button HowTo next" onclick="HowTo(2)" href="#">&#62;</a>
-        <a class="button closeHowTo" onclick="HowTo('close')" href="#">chiudi</a>
-      </div>
 
     </body>
 
