@@ -94,7 +94,7 @@ polygon {
 		overflow-x: hidden;
 		text-align: justify;
     font-family: Arcon;
-    text-shadow: 0 1px 3px rgba(0,0,0,.85);
+    text-shadow: 0 1px 3px rgba(0,0,0,.9);
 }
 .HowTo.active {
     display: block;
