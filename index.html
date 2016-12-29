@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>MinJHex</title>
+        <title>MinHex</title>
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="Description" content="">
         <script src="snap.svg-min.js"></script>
-        <script src="minjhex.min.js"></script>
+        <script src="minhex.min.js"></script>
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
@@ -23,17 +23,17 @@
 
         // General settings  //////////////////////
         //--!!this could be made better
-        var 
+        var
         	N = parseInt(argv["n"]) || 5,
         	//dimension = 12.3,//
             dimension = 12.3/5*N,							// height measured in triangles' size
             BOMBS = parseInt(argv["b"]) || 30;
 
         var base_clr = "#e8ff7d",
-            clicked_clr = "#65ba36",
-            over_clr = "#ffffdf"
+            clicked_clr = "#578111",
+            over_clr = "#ffffdf",
             // clicked_clr = "#dbf3fe",
-            bomb_clr = "#f32f20",
+            bomb_clr = "#F23831",
             flag_clr = "#f8b71b",
             anim_dur = 130;
 
