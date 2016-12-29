@@ -41,6 +41,7 @@
             over_clr = "#e8ff7d",
             // clicked_clr = "#dbf3fe",
             bomb_clr = "#ff2821",
+            bomb2_clr = "#b20e07",
             flag_clr = "#f8b71b",
             anim_dur = 130;
 
@@ -175,8 +176,8 @@
                         cell.state = "clicked";
                         setTimeout(function () {alert("Pieces of your fleshy brain are all over the walls. Pay more attention to mines next time")},1000);
                         for (c of Object.keys(this.cell))
-                        	if (this.cell[c].isBomb)
-                        		this.cell[c].animate({fill: bomb_clr}, anim_dur, mina.easein);
+                        	if (this.cell[c].isBomb && c != pos)
+                        		this.cell[c].animate({fill: bomb2_clr}, anim_dur, mina.easein);
                         
                         return
                     }
