@@ -45,7 +45,7 @@ body, html, .HowTo {
   background:         radial-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0,0,0,0.6)); /* Standard syntax */
 }
 
-#field {
+#field, #menu {
   /*height: 100%;*/
   /*width: 100%;*/
   display: block;
@@ -54,6 +54,8 @@ body, html, .HowTo {
   left: 50%;
   transform: translate(-50%,-50%);
 }
+
+#menu {display: none}
 
 svg {
   -webkit-user-select:none;
@@ -68,6 +70,12 @@ svg text {
   -webkit-text-shadow: 0 2px 1px rgba(0, 0, 0, .35);
      -moz-text-shadow: 0 2px 1px rgba(0, 0, 0, .35);
           text-shadow: 0 2px 1px rgba(0, 0, 0, .35);
+}
+
+svg#menu text {
+  -webkit-text-shadow: 0 2px 3px rgba(0, 0, 0, .4);
+     -moz-text-shadow: 0 2px 3px rgba(0, 0, 0, .4);
+          text-shadow: 0 2px 3px rgba(0, 0, 0, .4);
 }
 
 /* HOW TO */
