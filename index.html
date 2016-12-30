@@ -46,9 +46,9 @@
             flag_clr = "#f8b71b",
             anim_dur = 130;
 
-        var textDimension = 33;
+        var textDimension = 2.1;
             fontColor = "#fff";
-            font = 'Arcon';
+            font = 'OpenSansBold';
 
         ///////////////////////////////////////////
         // Trying to make this part useless
@@ -125,7 +125,7 @@
 
             var opts = {'text-anchor':'middle', 'alignment-baseline': 'central'};
 
-            opts['font-size'] = fontSize + 'px';
+            opts['font-size'] = fontSize + 'em';
             opts['font-family'] = font;
             opts['font-weight'] = 600;
             opts['fill'] = fontColor;
@@ -179,7 +179,7 @@
                         for (c of Object.keys(this.cell))
                         	if (this.cell[c].isBomb && c != pos)
                         		this.cell[c].animate({fill: bomb2_clr}, anim_dur, mina.easein);
-                        
+
                         return
                     }
                     cell.animate({fill: clicked_clr}, anim_dur, mina.easein);
