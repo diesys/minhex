@@ -38,11 +38,14 @@
             BOMBS = parseInt(argv["b"]) || 30;
 
         var base_clr = "#A9D41C",
-            clicked_clr = "#377a01",
+            stroke_clr = "rgba(0,0,0,.1)",
+            stroke_width = "2";
+            // clicked_clr = "#377a01",
+            clicked_clr = "#698511";
             over_clr = "#e8ff7d",
             // clicked_clr = "#dbf3fe",
-            bomb_clr = "#ff2821",
-            bomb2_clr = "#b20e07",
+            bomb_clr = "#C10F08",
+            bomb2_clr = "#950601",
             flag_clr = "#f8b71b",
             anim_dur = 130;
 
@@ -66,7 +69,7 @@
 
         var l = parseInt(centerY*2/dimension),				// triangles' box side
             //m = parseInt(l/18.3);
-            m = 1
+            m = 0
 
         var x0 = centerX - l*N/4*3,
         	y0 = 0
@@ -103,7 +106,7 @@
             var x = x0 + i*l/2,
                 y = y0 + j*l*hsr3;
             var triangle;
-            var attributes = { fill: base_clr, strokeWidth: 12, stroke: "rgba(0,0,0,.03)" }
+            var attributes = { fill: base_clr, strokeWidth: stroke_width, stroke: stroke_clr }
             if ((i+j)%2)
                 // down-triangle
                 triangle = field.polygon(x - s/2 + m*hsr3, y + m/2, x, y + s*hsr3 - m*hsr3, x + s/2 - m*hsr3, y + m/2).attr(attributes);
