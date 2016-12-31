@@ -11,9 +11,3 @@ MinHex
 	· chiamare init() su body.onload()
 	· chiamare adjustDimensions() su body.resize()
 	? estendere ricorsivamente lo ``scoprintorno''
-
-\Note
-	· document.getElementById('field')
-	. field.setAttribute('name',value)
-		[value può essere un numero o una stringa, per esempio nel caso in cui vogliamo una percentuale]
-	· <body onload = "funzione()" onresize="altraFunzione()">
