@@ -10,6 +10,7 @@ MinHex
 			che in verticale
 	· chiamare init() su body.onload()
 	· chiamare adjustDimensions() su body.resize()
+	? estendere ricorsivamente lo ``scoprintorno''
 
 \Note
 	· document.getElementById('field')

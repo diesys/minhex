@@ -1,26 +1,4 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>MinHex</title>
-
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="Description" content="">
-        <script src="snap.svg-min.js"></script>
-        <script src="minhex.min.js"></script>
-        <link rel="stylesheet" href="style.css">
-
-        <link rel="icon" sizes="114x114" href="img/favicon114.png" type="image/x-icon">
-        <link rel="icon" sizes="72x72" href="img/favicon72.png" type="image/x-icon">
-        <link rel="icon" sizes="144x144" href="img/favicon144.png" type="image/x-icon">
-        <link rel="icon" sizes="256x256" href="img/favicon256.png" type="image/x-icon">
-        </head>
-    <body>
-
-    <svg id="field" height="70%" width="85%"></svg>
-
-    <script>
-        // Get arguments
+// Get arguments
 
         argv = {}
         window.location.search.substring(1).split('&').forEach(function (c) { var kv = c.split('='); argv[kv[0]] = kv[1] } );
@@ -34,18 +12,21 @@
             dimension = 12.3/5*N,							// height measured in triangles' size
             BOMBS = parseInt(argv["b"]) || 30;
 
-        // var base_clr = "#e8ff7d",
-        var base_clr = "#8FC23D",
-            clicked_clr = "#377a01",
+        var base_clr = "#A9D41C",
+            stroke_clr = "rgba(0,0,0,.1)",
+            stroke_width = "2";
+            // clicked_clr = "#377a01",
+            clicked_clr = "#698511";
             over_clr = "#e8ff7d",
             // clicked_clr = "#dbf3fe",
-            bomb_clr = "#ff2821",
+            bomb_clr = "#C10F08",
+            bomb2_clr = "#950601",
             flag_clr = "#f8b71b",
             anim_dur = 130;
 
-        var textDimension = 33;
+        var textDimension = 2.1;
             fontColor = "#fff";
-            font = 'Arcon';
+            font = 'OpenSansBold';
 
         ///////////////////////////////////////////
         // Trying to make this part useless
@@ -63,7 +44,7 @@
 
         var l = parseInt(centerY*2/dimension),				// triangles' box side
             //m = parseInt(l/18.3);
-            m = 1
+            m = 0
 
         var x0 = centerX - l*N/4*3,
         	y0 = 0
@@ -78,8 +59,59 @@
         var fontSize = l*textDimension/110;
 
 
-
         /////////////////////////////////////////////////////////
+
+        // MENU
+
+        var menu = Snap('#menu');
+
+        // CONF
+        var menu_hex_points = [ [320,0], [640,0], [800,280], [640,550], [320,550], [160,280]],
+            menu_center = [ ( menu_hex_points[1][0] - menu_hex_points[0][0] / 2 ), menu_hex_points[2][1] ],
+            menu_hole = menu.circle(menu_center[0], menu_center[1], menu_hex_points[1][0] - menu_hex_points[0][0] + 15).attr({fill: "#fff"}),
+
+            //colors
+            menu_play_clr = "#a9d41c",
+            menu_hex_clr  = menu_play_clr,
+            menu_bomb_clr = "#E61913",
+            menu_size_clr = "#F5B10A",
+            menu_fame_clr = "#8BAF17",
+
+            menu_hex = menu.polygon(menu_hex_points).attr({fill: menu_hex_clr }),
+            menu_play = menu.polygon(menu_hex_points[0], menu_hex_points[1], menu_hex_points[4], menu_hex_points[5]).attr({fill: menu_play_clr }),
+            menu_bomb = menu.polygon(menu_center, menu_hex_points[3], menu_hex_points[4]).attr({ fill: menu_bomb_clr }),
+            menu_size = menu.polygon(menu_center, menu_hex_points[2], menu_hex_points[3]).attr({ fill: menu_size_clr }),
+            menu_fame = menu.polygon(menu_center, menu_hex_points[1], menu_hex_points[2]).attr({ fill: menu_fame_clr }),
+            menu_group = menu.group(menu_hex, menu_play, menu_bomb, menu_size, menu_fame).attr({mask: menu_hole});
+
+        var m_text_opt = {'text-anchor':'middle', 'alignment-baseline': 'central'};
+            m_text_opt['font-size'] = 3.5 + 'em';
+            m_text_opt['font-family'] = 'OpenSansBold';
+            m_text_opt['font-weight'] = 600;
+            m_text_opt['fill'] = "#fff";
+
+        var m_img_halfsize = 60;
+            m_bombs = menu.text(menu_center[0], 1.75 * menu_center[1], "30").attr(m_text_opt),
+            m_bomb_icon = menu.image('img/menu/bomb.png', menu_center[0] - m_img_halfsize, 1.25 * menu_center[1]),
+            m_size  = menu.text(menu_hex_points[3][0], 1.65 * menu_center[1], "7").attr(m_text_opt),
+            m_size_icon = menu.image('img/menu/size.png', menu_hex_points[3][0] - m_img_halfsize, 1.1 * menu_center[1]),
+            m_play = menu.text(menu_center[0] - 1.6 * m_img_halfsize, menu_center[1], "PLAY").attr(m_text_opt),
+            m_play.attr({fill: "#1f1f1f"}),
+            m_play_icon = menu.image('img/menu/play.png', menu_hex_points[5][0] + m_img_halfsize/2, menu_center[1] - m_img_halfsize);
+
+
+        ////// UI
+
+        //elements
+
+        var menu_play_btn = menu.group(menu_play, m_play, m_play_icon);
+
+        function closemenu() {
+          menu_hole.animate({r: 0}, 1000, mina.bounce);
+          menu.attr({display: "none"});
+        }
+
+        ////////////////////////////////////////////////////////
 
         var field = Snap('#field');
 
@@ -100,7 +132,7 @@
             var x = x0 + i*l/2,
                 y = y0 + j*l*hsr3;
             var triangle;
-            var attributes = { fill: base_clr, strokeWidth: 12, stroke: "rgba(0,0,0,.03)" }
+            var attributes = { fill: base_clr, strokeWidth: stroke_width, stroke: stroke_clr }
             if ((i+j)%2)
                 // down-triangle
                 triangle = field.polygon(x - s/2 + m*hsr3, y + m/2, x, y + s*hsr3 - m*hsr3, x + s/2 - m*hsr3, y + m/2).attr(attributes);
@@ -118,11 +150,11 @@
 
         function textOnCell (pos,txt) {
             var x = x0 + pos[0]*l/2,
-                y = y0 + pos[1]*l*Math.sqrt(3)/2 + (((pos[0] + pos[1]) % 2) ? 1 : 2) * l * Math.sqrt(3) / 6;
+                y = y0 + pos[1]*l*Math.sqrt(3)/2 + (((pos[0] + pos[1]) % 2) ? 1.15 : 1.85) * l * Math.sqrt(3) / 6;
 
             var opts = {'text-anchor':'middle', 'alignment-baseline': 'central'};
 
-            opts['font-size'] = fontSize + 'px';
+            opts['font-size'] = fontSize + 'em';
             opts['font-family'] = font;
             opts['font-weight'] = 600;
             opts['fill'] = fontColor;
@@ -173,6 +205,10 @@
                         this.FINISHED = true;
                         cell.state = "clicked";
                         setTimeout(function () {alert("Pieces of your fleshy brain are all over the walls. Pay more attention to mines next time")},1000);
+                        for (c of Object.keys(this.cell))
+                        	if (this.cell[c].isBomb && c != pos)
+                        		this.cell[c].animate({fill: bomb2_clr}, anim_dur, mina.easein);
+
                         return
                     }
                     cell.animate({fill: clicked_clr}, anim_dur, mina.easein);
@@ -265,20 +301,6 @@
                 return c.split(",").map(parseFloat);
             }
 
-            /*this.initialize = function () {
-                // adding the cells to the grid
-                for (var j = 0; j < N; j++)
-                    for (var i = -j; i < 2*N+j+1; i++)
-                        this.addCell(i,j);
-                for (var j = N; j < 2*N; j++)
-                    for (var i = j+1-2*N; i < 4*N-j; i++)
-                        this.addCell(i,j);
-
-                // calculating the neighborhood for each cells and saving it
-                var cellCoords = Object.keys(this.cell);
-                for (c of cellCoords)
-                    this.cell[c].nbHood = this.nbHoodOf(coords(c)).filter( function (nbh) { return cellCoords.indexOf(nbh.toString()) != -1 } );
-            }*/
                 // adding the cells to the grid
                 for (var j = 0; j < N; j++)
                     for (var i = -j; i < 2*N+j+1; i++)
@@ -292,19 +314,8 @@
                 for (c of cellCoords)
                     this.cell[c].nbHood = this.nbHoodOf(coords(c)).filter( function (nbh) { return cellCoords.indexOf(nbh.toString()) != -1 } );
 
+      }
 
 
-
-
-        }
-
-
-        // test code
-        var grid = new Grid(N);
-        //grid.initialize();   // forse è totalmente inutile metterlo qui
-
-    </script>
-
-    </body>
-
-</html>
+// test code
+var grid = new Grid(N);
