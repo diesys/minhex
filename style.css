@@ -28,6 +28,8 @@ body, html, .HowTo {
   cursor: default;
 }
 
+polygon
+
 #grad {
   margin: 0;
   position: fixed;
@@ -55,7 +57,11 @@ body, html, .HowTo {
   transform: translate(-50%,-50%);
 }
 
+/* */
+
 #menu {display: none}
+
+/* */
 
 svg {
   -webkit-user-select:none;
