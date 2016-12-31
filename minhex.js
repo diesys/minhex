@@ -206,8 +206,10 @@
                         cell.state = "clicked";
                         setTimeout(function () {alert("Pieces of your fleshy brain are all over the walls. Pay more attention to mines next time")},1000);
                         for (c of Object.keys(this.cell))
-                        	if (this.cell[c].isBomb && c != pos)
+                        	if (this.cell[c].isBomb && c != pos) {
                         		this.cell[c].animate({fill: bomb2_clr}, anim_dur, mina.easein);
+                                this.cell[c].state = "clicked";
+                            }
 
                         return
                     }
