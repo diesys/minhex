@@ -16,7 +16,12 @@ var menu_hex_points = [ [320,0], [640,0], [800,280], [640,550], [320,550], [160,
     menu_play = menu.polygon(menu_hex_points[0], menu_hex_points[1], menu_hex_points[4], menu_hex_points[5]).attr({fill: menu_play_clr }),
     menu_bomb = menu.polygon(menu_center, menu_hex_points[3], menu_hex_points[4]).attr({ fill: menu_bomb_clr }),
     menu_size = menu.polygon(menu_center, menu_hex_points[2], menu_hex_points[3]).attr({ fill: menu_size_clr });
+    // menu_hex_shadow = menu.polygon(menu_hex_points).attr({fill: "#000", opacity: ".5" }),
+    // menushadow = menu.filter(Snap.filter.blur(10));
+    // menu_hex_shadow.attr({ filter: menushadow });
     // menu_fame = menu.polygon(menu_center, menu_hex_points[1], menu_hex_points[2]).attr({ fill: menu_fame_clr });
+    var menushadow2 = menu.filter(Snap.filter.shadow(0, 10, 10, "#000", .6));
+    menu_hex.attr({filter: menushadow2});
 
 var m_text_opt = {'text-anchor':'middle', 'alignment-baseline': 'central'};
   m_text_opt['font-size'] = 3.5 + 'em';
