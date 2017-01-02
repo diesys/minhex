@@ -91,9 +91,26 @@ function closemenu() {
   menu_hole_shadow.animate({r: 0, opacity: ".1"}, animduration, mina.bounce);
   var shadowblur = menu.filter(Snap.filter.blur(2));
   menu_hole_shadow.attr({ filter: shadowblur });
-  // menu.attr({display: "none"});
+  setTimeout(function () {menu.attr({display: "none"})},1000);
 }
 
 // UI associations
 
 menu_group.node.onclick = function() {closemenu()};
+
+
+// Zona test!
+
+bombsNumberFloat = 30.;
+
+m_bomb_icon.node.onmousewheel = function (e) {
+    if (e.deltaY > 0) {
+        console.log("Scendo");
+        bombsNumberFloat-=.1;
+    } else {
+        console.log("Salgo");
+        bombsNumberFloat+=.1;
+    }
+    bombsNumber = parseInt(bombsNumberFloat);
+    m_bomb.node.innerHTML = bombsNumber;
+}
