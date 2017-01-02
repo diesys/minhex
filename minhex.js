@@ -6,6 +6,89 @@
 
         // General settings  //////////////////////
         //--!!this could be made better
+        var N = parseInt(argv["n"]) || 5,
+        	//dimension = 12.3,//
+            dimension = 12.3/5*N,							// height measured in triangles' size
+            BOMBS = parseInt(argv["b"]) || 30;
+
+        var base_clr = "#A9D41C",
+            stroke_clr = "rgba(0,0,0,.1)",
+            stroke_width = "2";
+            // clicked_clr = "#377a01",
+            clicked_clr = "#698511";
+            over_clr = "#e8ff7d",
+            // clicked_clr = "#dbf3fe",
+            bomb_clr = "#C10F08",
+            bomb2_clr = "#950601",
+            flag_clr = "#f8b71b",
+            anim_dur = 130;
+
+        var textDimension = 2.1;
+            fontColor = "#fff";
+            font = 'OpenSansBold';
+
+        ///////////////////////////////////////////
+        // Defining the minimum margin for the field inscribed into the page and the margin of the gametable inscribed into the field
+
+        var fieldMargin = .05,
+            bodyMarginWidth = .15,
+            bodyMarginHeight = .15;
+
+        // (Global)Page size
+        var w = window,
+        d = document,
+        e = d.documentElement,
+        g = d.getElementsByTagName('field')[0],
+        width = (w.innerWidth || e.clientWidth || g.clientWidth),
+        height = (w.innerHeight|| e.clientHeight|| g.clientHeight),
+        centerX = width / 2,
+        centerY = height / 2;
+
+        // Here there's the field definition
+        var field = Snap('#field');
+
+
+        // Calculate and Set the field dimensions
+        var hsr3 = (3 ** .5) / 2;
+
+        //  If the body ratio (y/x) is less than hsr3 (the hexagon box ratio, so the field ratio)
+        //  then we must fit the field according to the body height deriving the right width,
+        //  otherwise we must use the body width.
+        if (height/width < hsr3) {
+            fieldHeight = height * (1 - 2 * bodyMarginHeight);
+            fieldWidth = fieldHeight / hsr3;
+        } else {
+            fieldWidth = width * (1 - 2 * bodyMarginWidth);
+            fieldHeight = fieldWidth * hsr3;
+        }
+
+        document.getElementById('field').setAttribute('width',fieldWidth);
+        document.getElementById('field').setAttribute('height',fieldHeight);
+
+        // Calculate and set the big hexagon dimensions and position
+
+        //var l = parseInt(centerY*2/dimension),				// triangles' box side
+        var l = parseInt(fieldWidth * (1 - 2 * fieldMargin) * .5 / N),
+            //m = parseInt(l/18.3);
+            m = 0
+
+        //var x0 = centerX - l*N/4*3,
+        //	y0 = 0
+        var x0 = fieldWidth * .5 * (.5 + fieldMargin),
+            y0 = fieldHeight * fieldMargin;
+
+
+        var doubleClick = {};
+        doubleClick.mouseClickDelay = 190;
+        doubleClick.lastClickTime = +new Date();
+        doubleClick.waitingSndClick = false;
+        doubleClick.lastClick = null;
+
+        var fontSize = l*textDimension/110;// Get arguments
+
+
+        // General settings  //////////////////////
+        //--!!this could be made better
         var
         	N = parseInt(argv["n"]) || 5,
         	//dimension = 12.3,//
