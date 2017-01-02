@@ -258,7 +258,7 @@
                         cell.animate({fill: bomb_clr}, anim_dur, mina.easein);
                         this.FINISHED = true;
                         cell.state = "clicked";
-                        setTimeout(function () {alert("Pieces of your fleshy brain are all over the walls. Pay more attention to mines next time")},1000);
+                        setTimeout(function () {alert("Pieces of your fleshy brain are all over the walls. Pay more attention to mines next time")}, 700);
                         for (c of Object.keys(this.cell))
                         	if (this.cell[c].isBomb && c != pos) {
                         		this.cell[c].animate({fill: bomb2_clr}, anim_dur, mina.easein);
@@ -290,7 +290,7 @@
 
             this.checkVictory = function () {
                 if (this.clickedCells == 6*N*N)
-                    setTimeout(function () {alert("You are a real mine surviver! Good Job")},1000);
+                    setTimeout(function () {alert("You are a real mine surviver! Good Job")}, 700);
             }
 
             this.toggleFlag = function (pos) {

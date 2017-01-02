@@ -34,7 +34,7 @@ var //menu_hex_points = [ [320,0], [640,0], [800,280], [640,550], [320,550], [16
 
     // filters
     menushadow = menu.filter(Snap.filter.shadow(0, 10, 15, "#000", .4)),
-    menuopt_shadow = menu.filter(Snap.filter.shadow(0, 2, 3, "#000", .2)),
+    menuopt_shadow = menu.filter(Snap.filter.shadow(0, 0, 3, "#000", .2)),
 
     //menu options elements
     menu_hex = menu.polygon(menu_hex_points).attr({fill: menu_hex_clr }),
@@ -46,26 +46,26 @@ var //menu_hex_points = [ [320,0], [640,0], [800,280], [640,550], [320,550], [16
     menu_hex.attr({filter: menushadow});
 
 var m_text_opt = {'text-anchor':'middle', 'alignment-baseline': 'central'};
-    m_text_opt['font-size'] = 3 + 'em';
+    m_text_opt['font-size'] = 2 + 'em';
     m_text_opt['font-family'] = 'OpenSansBold';
     m_text_opt['font-weight'] = 600;
     m_text_opt['fill'] = "#fff";
 
 // Grandezza immagini percentuale rispetto al lato dell'esagono !!
-var bombBox = 0.4,
-    sizeBox = 0.4,
-    playBox = 0.4;
+var bombBox = 0.35,
+    sizeBox = 0.35,
+    playBox = 0.35;
 // va fatto lo stesso per il testo !!
 // le posizioni non mi convincono  !!
 
-var m_img_halfsize = 55,
+var m_img_halfsize = 45,
     m_bomb = menu.text(menu_center[0], 1.75 * menu_center[1], "30").attr(m_text_opt),
     m_bomb_icon = menu.image('img/menu/bomb.png', menu_center[0] - m_img_halfsize, 1.20 * menu_center[1], N*l*bombBox, N*l*bombBox),
     // m_bomb_icon = menu.image('img/menu/bomb.png', menu_center[0] - m_img_halfsize, 1.25 * menu_center[1]),
     m_size  = menu.text(menu_hex_points[3][0], 1.6 * menu_center[1], "7").attr(m_text_opt),
     m_size_icon = menu.image('img/menu/size.png', menu_hex_points[3][0] - m_img_halfsize, 1.05 * menu_center[1], N*l*sizeBox, N*l*sizeBox),
     // m_size_icon = menu.image('img/menu/size.png', menu_hex_points[3][0] - m_img_halfsize, 1.1 * menu_center[1]),
-    m_play = menu.text(menu_center[0] - 1.3 * m_img_halfsize, menu_center[1], "PLAY").attr(m_text_opt),
+    m_play = menu.text(menu_center[0] - 1.9 * m_img_halfsize, menu_center[1], "PLAY").attr(m_text_opt),
     m_play_icon = menu.image('img/menu/play.png', menu_hex_points[5][0] + m_img_halfsize/2, menu_center[1] - m_img_halfsize, N*l*playBox, N*l*playBox);
     // m_play_icon = menu.image('img/menu/play.png', menu_hex_points[5][0] + m_img_halfsize/2, menu_center[1] - m_img_halfsize);
     m_play.attr({fill: "#1f1f1f"});
