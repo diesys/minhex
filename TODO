@@ -11,3 +11,11 @@ MinHex
 	· chiamare init() su body.onload()
 	· chiamare adjustDimensions() su body.resize()
 	? estendere ricorsivamente lo ``scoprintorno''
+
+\ui
+
+	· creare funzione nuova partita (che becca le variabili delle bombe e dimensione e va all'url personalizzato)
+	· fare funzioni per incrementare e decrementare bombe e dimensioni (e creare i triangolini a cui associarle)
+	· nel momento in cui vengono mostrate bombe e dimensione devono essere le stesse della partita appena fatta (cosi play e' davvero un rematch)
+	· setTimeout del display: none in closemenu()
+	· fare howto, inglese
