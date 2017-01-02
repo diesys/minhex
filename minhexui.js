@@ -98,24 +98,33 @@ function closemenu() {
 
 menu_group.node.onclick = function() {closemenu()};
 
-
-// Zona test!
+//// MouseWheel - Zona test!
 
 bombsNumberFloat = 30.;
+sizeNumberFloat = 7.;
 
-function bombWheel (e) {
-    if (e.deltaY > 0) {
-        console.log("Scendo");
-        bombsNumberFloat-=.1;
-    } else {
-        console.log("Salgo");
-        bombsNumberFloat+=.1;
-    }
+function wheelSelect (e, opt) {
+  if (opt == 'bomb') {
+    if (e.deltaY > 0) bombsNumberFloat-=.1;
+    else bombsNumberFloat+=.1;
     bombsNumber = parseInt(bombsNumberFloat);
     m_bomb.node.innerHTML = bombsNumber;
+  }
+  else if (opt == 'size') {
+    if (e.deltaY > 0) sizeNumberFloat-=.1;
+    else sizeNumberFloat+=.1;
+    sizeNumber = parseInt(sizeNumberFloat);
+    m_size.node.innerHTML = sizeNumber;
+  }
 }
 
 
-menu_bomb.node.onmousewheel = function (e) { bombWheel(e)};
-m_bomb_icon.node.onmousewheel = function (e) { bombWheel(e)};
-m_bomb.node.onmousewheel = function (e) { bombWheel(e)};
+menu_bomb.node.onmousewheel = function (e) { wheelSelect(e, 'bomb')};
+m_bomb_icon.node.onmousewheel = function (e) { wheelSelect(e, 'bomb')};
+m_bomb.node.onmousewheel = function (e) { wheelSelect(e, 'bomb')};
+
+menu_size.node.onmousewheel = function (e) { wheelSelect(e, 'size')};
+m_size_icon.node.onmousewheel = function (e) { wheelSelect(e, 'size')};
+m_size.node.onmousewheel = function (e) { wheelSelect(e, 'size')};
+
+////
