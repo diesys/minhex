@@ -91,7 +91,7 @@ function closemenu() {
   menu_hole_shadow.animate({r: 0, opacity: ".1"}, animduration, mina.bounce);
   var shadowblur = menu.filter(Snap.filter.blur(2));
   menu_hole_shadow.attr({ filter: shadowblur });
-  setTimeout(function () {menu.attr({display: "none"})},1000);
+  setTimeout(function () {menu.attr({display: "none"})}, 1000);
 }
 
 // UI associations
@@ -103,7 +103,7 @@ menu_group.node.onclick = function() {closemenu()};
 
 bombsNumberFloat = 30.;
 
-m_bomb_icon.node.onmousewheel = function (e) {
+function bombWheel (e) {
     if (e.deltaY > 0) {
         console.log("Scendo");
         bombsNumberFloat-=.1;
@@ -114,3 +114,8 @@ m_bomb_icon.node.onmousewheel = function (e) {
     bombsNumber = parseInt(bombsNumberFloat);
     m_bomb.node.innerHTML = bombsNumber;
 }
+
+
+menu_bomb.node.onmousewheel = function (e) { bombWheel(e)};
+m_bomb_icon.node.onmousewheel = function (e) { bombWheel(e)};
+m_bomb.node.onmousewheel = function (e) { bombWheel(e)};
