@@ -1,7 +1,17 @@
 var menu = Snap('#menu');
 
 // CONF
-var menu_hex_points = [ [320,0], [640,0], [800,280], [640,550], [320,550], [160,280]],
+    document.getElementById('menu').setAttribute('width',fieldWidth);
+    document.getElementById('menu').setAttribute('height',fieldHeight);
+    var menu_hex_points = new Array()
+    menu_hex_points.push([x0,y0])
+    menu_hex_points.push([x0 + N*l, y0])
+    menu_hex_points.push([x0 + N*1.5*l, y0 + N*l*hsr3])
+    menu_hex_points.push([x0 + N*l, y0 + N*l*hsr3*2])
+    menu_hex_points.push([x0, y0 + N*l*hsr3*2])
+    menu_hex_points.push([x0-N*l/2, y0 + N*l*hsr3])
+
+var //menu_hex_points = [ [320,0], [640,0], [800,280], [640,550], [320,550], [160,280]],
     menu_center = [ ( menu_hex_points[1][0] - menu_hex_points[0][0] / 2 ), menu_hex_points[2][1] ],
 
     //colors
@@ -20,14 +30,21 @@ var menu_hex_points = [ [320,0], [640,0], [800,280], [640,550], [320,550], [160,
     // menushadow = menu.filter(Snap.filter.blur(10));
     // menu_hex_shadow.attr({ filter: menushadow });
     // menu_fame = menu.polygon(menu_center, menu_hex_points[1], menu_hex_points[2]).attr({ fill: menu_fame_clr });
-    var menushadow2 = menu.filter(Snap.filter.shadow(0, 10, 10, "#000", .6));
-    menu_hex.attr({filter: menushadow2});
+    var menushadow = menu.filter(Snap.filter.shadow(0, 10, 10, "#000", .6));
+    menu_hex.attr({filter: menushadow});
 
 var m_text_opt = {'text-anchor':'middle', 'alignment-baseline': 'central'};
-  m_text_opt['font-size'] = 3.5 + 'em';
-  m_text_opt['font-family'] = 'OpenSansBold';
-  m_text_opt['font-weight'] = 600;
-  m_text_opt['fill'] = "#fff";
+    m_text_opt['font-size'] = 3.5 + 'em';
+    m_text_opt['font-family'] = 'OpenSansBold';
+    m_text_opt['font-weight'] = 600;
+    m_text_opt['fill'] = "#fff";
+
+// Grandezza immagini percentuale rispetto al lato dell'esagono !!
+var bombBox = 0.34,
+    sizeBox = 0.34,
+    playBox = 0.5;
+// va fatto lo stesso per il testo !!
+// le posizioni non mi convincono  !!
 
 var m_img_halfsize = 60,
     m_bomb = menu.text(menu_center[0], 1.75 * menu_center[1], "30").attr(m_text_opt),
