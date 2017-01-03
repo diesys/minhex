@@ -14,13 +14,13 @@ if(argv["rematch"] == "true") menu.attr({display: "none"});
 // CONF
     document.getElementById('menu').setAttribute('width',fieldWidth);
     document.getElementById('menu').setAttribute('height',fieldHeight);
-    var menu_hex_points = new Array()
-    menu_hex_points.push([x0,y0])
-    menu_hex_points.push([x0 + N*l, y0])
-    menu_hex_points.push([x0 + N*1.5*l, y0 + N*l*hsr3])
-    menu_hex_points.push([x0 + N*l, y0 + N*l*hsr3*2])
-    menu_hex_points.push([x0, y0 + N*l*hsr3*2])
-    menu_hex_points.push([x0-N*l/2, y0 + N*l*hsr3])
+    // var menu_hex_points = new Array()
+    // menu_hex_points.push([x0,y0])
+    // menu_hex_points.push([x0 + N*l, y0])
+    // menu_hex_points.push([x0 + N*1.5*l, y0 + N*l*hsr3])
+    // menu_hex_points.push([x0 + N*l, y0 + N*l*hsr3*2])
+    // menu_hex_points.push([x0, y0 + N*l*hsr3*2])
+    // menu_hex_points.push([x0-N*l/2, y0 + N*l*hsr3])
 
 var //menu_hex_points = [ [320,0], [640,0], [800,280], [640,550], [320,550], [160,280]],
     menu_center = [ menu_hex_points[0][0] + (menu_hex_points[1][0] - menu_hex_points[0][0]) / 2, menu_hex_points[2][1] ],
@@ -33,8 +33,8 @@ var //menu_hex_points = [ [320,0], [640,0], [800,280], [640,550], [320,550], [16
     menu_fame_clr = "#8BAF17",
 
     // filters
-    menushadow = menu.filter(Snap.filter.shadow(0, 10, 15, "#000", .4)),
-    menuopt_shadow = menu.filter(Snap.filter.shadow(0, 0, 3, "#000", .2)),
+    // menushadow = menu.filter(Snap.filter.shadow(0, 10, 15, "#000", .4)),
+    menuopt_shadow = menu.filter(Snap.filter.shadow(0, 1, 4, "#000", .3)),
 
     //menu options elements
     menu_hex = menu.polygon(menu_hex_points).attr({fill: menu_hex_clr }),
@@ -43,7 +43,7 @@ var //menu_hex_points = [ [320,0], [640,0], [800,280], [640,550], [320,550], [16
     menu_bomb = menu.polygon(menu_center, menu_hex_points[3], menu_hex_points[4]).attr({ fill: menu_bomb_clr, filter: menuopt_shadow }),
     // menu_fame = menu.polygon(menu_center, menu_hex_points[1], menu_hex_points[2]).attr({ fill: menu_fame_clr }),
     menu_size = menu.polygon(menu_center, menu_hex_points[2], menu_hex_points[3]).attr({ fill: menu_size_clr, filter: menuopt_shadow });
-    menu_hex.attr({filter: menushadow});
+    // menu_hex.attr({filter: menushadow});
 
 var m_text_opt = {'text-anchor':'middle', 'alignment-baseline': 'central'};
     m_text_opt['font-size'] = 24 + 'pt';
@@ -136,5 +136,3 @@ m_bomb.node.onmousewheel = function (e) { wheelSelect(e, 'bomb')};
 menu_size.node.onmousewheel = function (e) { wheelSelect(e, 'size')};
 m_size_icon.node.onmousewheel = function (e) { wheelSelect(e, 'size')};
 m_size.node.onmousewheel = function (e) { wheelSelect(e, 'size')};
-
-////

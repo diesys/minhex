@@ -19,3 +19,4 @@ MinHex
 	· nel momento in cui vengono mostrate bombe e dimensione devono essere le stesse della partita appena fatta (cosi play e' davvero un rematch)
 	· setTimeout del display: none in closemenu()
 	· fare howto, inglese
+	· ombra del piano di gioco
