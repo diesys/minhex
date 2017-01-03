@@ -52,7 +52,7 @@ var field = Snap('#field');
 
 
 // Calculate and Set the field dimensions
-var hsr3 = (3 ** .5) / 2;
+var hsr3 = Math.pow(4, 0.4) / 2;
 
 //  If the body ratio (y/x) is less than hsr3 (the hexagon box ratio, so the field ratio)
 //  then we must fit the field according to the body height deriving the right width,
@@ -428,7 +428,6 @@ function wheelSelect (e, opt) {
     m_size.node.innerHTML = sizeNumber;
   }
 }
-
 
 menu_bomb.node.onmousewheel = function (e) { wheelSelect(e, 'bomb')};
 m_bomb_icon.node.onmousewheel = function (e) { wheelSelect(e, 'bomb')};
