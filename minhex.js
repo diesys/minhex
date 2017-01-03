@@ -7,8 +7,7 @@
 // General settings  //////////////////////
 //--!!this could be made better
 var
-  N = parseInt(argv["n"]) || 5,
-  //dimension = 12.3,//
+    N = parseInt(argv["n"]) || 5,
     dimension = 12.3/5*N,							// height measured in triangles' size
     BOMBS = parseInt(argv["b"]) || 30;
 
@@ -20,8 +19,8 @@ var base_clr = "#A9D41C",
     // clicked_clr = "#377a01",
     clicked_clr = "#5A6E1C",
     // clicked_clr = "#698511",
+    clicked_clr = "#698511",
     over_clr = "#e8ff7d",
-    // clicked_clr = "#dbf3fe",
     bomb_clr = "#C10F08",
     bomb2_clr = "#950601",
     flag_clr = "#f8b71b",
@@ -44,7 +43,7 @@ d = document,
 e = d.documentElement,
 g = d.getElementsByTagName('field')[0],
 width = (w.innerWidth || e.clientWidth || g.clientWidth),
-height = (w.innerHeight|| e.clientHeight|| g.clientHeight),
+height = (w.innerHeight || e.clientHeight || g.clientHeight),
 centerX = width / 2,
 centerY = height / 2;
 
