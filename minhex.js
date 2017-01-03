@@ -7,8 +7,7 @@
 // General settings  //////////////////////
 //--!!this could be made better
 var
-  N = parseInt(argv["n"]) || 5,
-  //dimension = 12.3,//
+    N = parseInt(argv["n"]) || 5,
     dimension = 12.3/5*N,							// height measured in triangles' size
     BOMBS = parseInt(argv["b"]) || 30;
 
@@ -17,10 +16,8 @@ var base_clr = "#A9D41C",
     field_bg_opacity = ".8",
     stroke_clr = "rgba(0,0,0,.1)",
     stroke_width = "2",
-    // clicked_clr = "#377a01",
     clicked_clr = "#698511",
     over_clr = "#e8ff7d",
-    // clicked_clr = "#dbf3fe",
     bomb_clr = "#C10F08",
     bomb2_clr = "#950601",
     flag_clr = "#f8b71b",
