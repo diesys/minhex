@@ -46,7 +46,7 @@ var //menu_hex_points = [ [320,0], [640,0], [800,280], [640,550], [320,550], [16
     menu_hex.attr({filter: menushadow});
 
 var m_text_opt = {'text-anchor':'middle', 'alignment-baseline': 'central'};
-    m_text_opt['font-size'] = 2 + 'em';
+    m_text_opt['font-size'] = 24 + 'pt';
     m_text_opt['font-family'] = 'OpenSansBold';
     m_text_opt['font-weight'] = 600;
     m_text_opt['fill'] = "#fff";
@@ -60,10 +60,10 @@ var bombBox = 0.35,
 
 var m_img_halfsize = 45,
     m_bomb = menu.text(menu_center[0], 1.75 * menu_center[1], "30").attr(m_text_opt),
-    m_bomb_icon = menu.image('img/menu/bomb.png', menu_center[0] - m_img_halfsize, 1.20 * menu_center[1], N*l*bombBox, N*l*bombBox),
+    m_bomb_icon = menu.image('img/menu/bomb.png', menu_center[0] - m_img_halfsize, 1.25 * menu_center[1], N*l*bombBox, N*l*bombBox),
     // m_bomb_icon = menu.image('img/menu/bomb.png', menu_center[0] - m_img_halfsize, 1.25 * menu_center[1]),
     m_size  = menu.text(menu_hex_points[3][0], 1.6 * menu_center[1], "7").attr(m_text_opt),
-    m_size_icon = menu.image('img/menu/size.png', menu_hex_points[3][0] - m_img_halfsize, 1.05 * menu_center[1], N*l*sizeBox, N*l*sizeBox),
+    m_size_icon = menu.image('img/menu/size.png', menu_hex_points[3][0] - m_img_halfsize, 1.1 * menu_center[1], N*l*sizeBox, N*l*sizeBox),
     // m_size_icon = menu.image('img/menu/size.png', menu_hex_points[3][0] - m_img_halfsize, 1.1 * menu_center[1]),
     m_play = menu.text(menu_center[0] - 1.9 * m_img_halfsize, menu_center[1], "PLAY").attr(m_text_opt),
     m_play_icon = menu.image('img/menu/play.png', menu_hex_points[5][0] + m_img_halfsize/2, menu_center[1] - m_img_halfsize, N*l*playBox, N*l*playBox);
@@ -92,6 +92,16 @@ function closemenu() {
   var shadowblur = menu.filter(Snap.filter.blur(2));
   menu_hole_shadow.attr({ filter: shadowblur });
   setTimeout(function () {menu.attr({display: "none"})}, 1000);
+}
+
+function openmenu() {
+  setTimeout(function () {menu.attr({display: "block"})}, 0);
+  var animduration = 1000;
+  menu_hole_shadow.attr({opacity: ".1"});
+  menu_hole.animate({r: menu_hex_points[1][0]}, animduration, mina.bounce);
+  menu_hole_shadow.animate({r: (menu_hex_points[1][0] + 25), opacity: ".3"}, animduration, mina.bounce);
+  var shadowblur = menu.filter(Snap.filter.blur(2));
+  menu_hole_shadow.attr({ filter: shadowblur });
 }
 
 // UI associations
