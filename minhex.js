@@ -40,7 +40,7 @@ d = document,
 e = d.documentElement,
 g = d.getElementsByTagName('field')[0],
 width = (w.innerWidth || e.clientWidth || g.clientWidth),
-height = (w.innerHeight|| e.clientHeight|| g.clientHeight),
+height = (w.innerHeight || e.clientHeight || g.clientHeight),
 centerX = width / 2,
 centerY = height / 2;
 
