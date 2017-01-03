@@ -177,7 +177,7 @@ function Grid (N) {
                 cell.animate({fill: bomb_clr}, anim_dur, mina.easein);
                 this.FINISHED = true;
                 cell.state = "clicked";
-                setTimeout(function () {alert("Pieces of your fleshy brain are all over the walls. Pay more attention to mines next time")}, 700);
+                setTimeout(function () {alert("Pieces of your fleshy brain are all over the walls. Pay more attention to mines next time")}, 400);
                 for (c of Object.keys(this.cell))
                   if (this.cell[c].isBomb && c != pos) {
                     this.cell[c].animate({fill: bomb2_clr}, anim_dur, mina.easein);
