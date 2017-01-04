@@ -563,26 +563,16 @@ function closemenu() {
 }
 
 function openmenu() {
+    var animduration = 800;
     setTimeout(function() {
-        menu.attr({
-            display: "block"
-        })
-    }, 0);
-    var animduration = 1000;
-    menu_hole_shadow.attr({
-        opacity: ".1"
-    });
-    menu_hole.animate({
-        r: menu_hex_points[1][0]
-    }, animduration, mina.bounce);
-    menu_hole_shadow.animate({
-        r: (menu_hex_points[1][0] + 25),
-        opacity: ".3"
-    }, animduration, mina.bounce);
-    var shadowblur = menu.filter(Snap.filter.blur(2));
-    menu_hole_shadow.attr({
-        filter: shadowblur
-    });
+      menu_hole_shadow.attr({
+          opacity: ".1"
+      });
+      menu_hole.animate({
+          r: menu_hex_points[1][0]
+      }, animduration, mina.ease);
+    }, 200);
+
 }
 
 // UI associations
@@ -611,5 +601,6 @@ m_size.node.onmousewheel = function(e) {
     wheelSelect(e, 'size')
 };
 
+openmenu();
 
 var grid;
