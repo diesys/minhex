@@ -191,7 +191,9 @@ function Grid(N, BOMBS) {
 
     this.refreshBombs = function(delta) {
         this.remBmbs += delta;
-        document.getElementById("RemainingBombs").innerHTML = "<center><h2>" + this.remBmbs + "</h2></center>";
+        //just a temp fix to a bug that can show negative bombs remaining if you put too flags
+        if (this.remBmbs >= 0)
+          document.getElementById("RemainingBombs").innerHTML = "<center><h2>" + this.remBmbs + "</h2></center>";
     }
 
     this.openCell = function(pos) {
@@ -219,6 +221,8 @@ function Grid(N, BOMBS) {
                       if (answer)
                         // the url just without vars, and the just used ones
                         window.location = window.location.href.split('?')[0] + "?n=" + N + "&b=" + B;
+                      else
+                        window.location = window.location.href.split('?')[0];
                 }, 700);
                 for (c of Object.keys(this.cell))
                     if (this.cell[c].isBomb && c != pos) {
@@ -256,7 +260,15 @@ function Grid(N, BOMBS) {
     this.checkVictory = function() {
         if (this.clickedCells == 6 * N * N)
             setTimeout(function() {
-                alert("You are a real mine surviver! Good Job")
+              // Ok to retry with same parameters or cancel to have the menu back again
+              var answ = confirm ("You are a real mine surviver! Good Job. Retry?")
+                if (answ)
+                  // the url just without vars, and the just used ones
+                  window.location = window.location.href.split('?')[0] + "?n=" + N + "&b=" + B;
+
+                  // this should open the menu and cancel variabiles instead of reloading the page
+                else
+                  window.location = window.location.href.split('?')[0];
             }, 700);
     }
 

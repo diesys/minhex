@@ -2,6 +2,8 @@ MinHex
 
 \Codice
 
+	! Correggere bug che ti permette di vincere mettendo anche una bandierina in un posto sbagliato, purche siano giuste quelle dove ci sono davvero le bombe
+
 	· Inizializzazione in una funzione init() a parte
 	· init() chiama una funzione adjustDimensions()
 		- adjustDimensions() imposta le dimensioni del field in base alla dimensione
@@ -12,7 +14,8 @@ MinHex
 	· chiamare adjustDimensions() su body.resize()
 	? estendere ricorsivamente lo ``scoprintorno''
 
+
 \ui
 
-	· rematch 
+	· rematch
 	· fare howto, inglese
