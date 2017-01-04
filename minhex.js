@@ -540,24 +540,34 @@ menu_group.node.onclick = function() {
 
 
 var bombsNumberFloat = B * 1.,
-    sizeNumberFloat = N * 1.;
+    sizeNumberFloat = N * 1.,
+    maxbombs = 3*sizeNumber*(sizeNumber+1),            //number of cells
+    maxsize  = 12;                                     //just too cells for screens, quite unsable
 
 function wheelSelect(e, opt) {
     if (opt == 'bomb') {
-        if (e.deltaY > 0) bombsNumberFloat -= .1;
-        else bombsNumberFloat += .1;
+      if (e.deltaY > 0)
+        bombsNumberFloat -= .1;
+      else
+        bombsNumberFloat += .1;
 
-        // i think this if is equivalent to
-        // bombsNumberFloat += e.deltaY * .1;
-        bombsNumber = parseInt(bombsNumberFloat);
+      bombsNumber = parseInt(bombsNumberFloat);       // i think this if is equivalent to bombsNumberFloat += e.deltaY * .1;
+      if(bombsNumber > 0)
         m_bomb.node.innerHTML = bombsNumber;
-    } else if (opt == 'size') {
-        if (e.deltaY > 0) sizeNumberFloat -= .1;
-        else sizeNumberFloat += .1;
-        sizeNumber = parseInt(sizeNumberFloat);
+    }
+
+    else if (opt == 'size') {
+      if (e.deltaY > 0)
+        sizeNumberFloat -= .1;
+      else
+        sizeNumberFloat += .1;
+
+      sizeNumber = parseInt(sizeNumberFloat);
+      if (sizeNumber > 0 && sizeNumber <= maxsize)
         m_size.node.innerHTML = sizeNumber;
     }
 }
+
 
 
 menu_bomb.node.onmousewheel = function(e) {
