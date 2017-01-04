@@ -445,7 +445,7 @@ var bombBox = 0.35,
 // va fatto lo stesso per il testo !!
 // le posizioni non mi convincono  !!
 
-var m_img_halfsize = 45,
+var m_img_halfsize = 40,
     m_bomb = menu.text(menu_center[0], 1.75 * menu_center[1], B).attr(m_text_opt),
     m_bomb_icon = menu.image('img/menu/bomb.png', menu_center[0] - m_img_halfsize, 1.25 * menu_center[1], L * bombBox, L * bombBox),
     // m_bomb_icon = menu.image('img/menu/bomb.png', menu_center[0] - m_img_halfsize, 1.25 * menu_center[1]),
