@@ -193,7 +193,7 @@ function Grid(N, BOMBS) {
         this.remBmbs += delta;
         //just a temp fix to a bug that can show negative bombs remaining if you put too flags
         if (this.remBmbs >= 0)
-          document.getElementById("RemainingBombs").innerHTML = "<center><h2>" + this.remBmbs + "</h2></center>";
+            document.getElementById("RemainingBombs").innerHTML = "<center><h2>" + this.remBmbs + "</h2></center>";
     }
 
     this.openCell = function(pos) {
@@ -217,11 +217,11 @@ function Grid(N, BOMBS) {
                 cell.state = "clicked";
                 setTimeout(function() {
                     // rematch
-                    var answer = confirm ("Pieces of your fleshy brain are all over the walls. Pay more attention to mines next time. Rematch?")
-                      if (answer)
-                        // the url just without vars, and the just used ones
+                    var answer = confirm("Pieces of your fleshy brain are all over the walls. Pay more attention to mines next time. Rematch?")
+                    if (answer)
+                    // the url just without vars, and the just used ones
                         window.location = window.location.href.split('?')[0] + "?n=" + N + "&b=" + B; // + "&rematch=true"; //seems do not work the rematch url
-                      else
+                    else
                         window.location = window.location.href.split('?')[0] + "?n=" + N + "&b=" + B;
                 }, 700);
                 for (c of Object.keys(this.cell))
@@ -260,15 +260,15 @@ function Grid(N, BOMBS) {
     this.checkVictory = function() {
         if (this.clickedCells == 6 * N * N)
             setTimeout(function() {
-              // Ok to retry with same parameters or cancel to have the menu back again
-              var answ = confirm ("You are a real mine surviver! Good Job. Retry?")
+                // Ok to retry with same parameters or cancel to have the menu back again
+                var answ = confirm("You are a real mine surviver! Good Job. Retry?")
                 if (answ)
-                  // the url just without vars, and the just used ones
-                  window.location = window.location.href.split('?')[0] + "?n=" + N + "&b=" + B; // + "&rematch=true"; //seems do not work the rematch url
+                // the url just without vars, and the just used ones
+                    window.location = window.location.href.split('?')[0] + "?n=" + N + "&b=" + B; // + "&rematch=true"; //seems do not work the rematch url
 
-                  // this should open the menu and cancel variabiles instead of reloading the page?
+                // this should open the menu and cancel variabiles instead of reloading the page?
                 else
-                  window.location = window.location.href.split('?')[0] + "?n=" + N + "&b=" + B;
+                    window.location = window.location.href.split('?')[0] + "?n=" + N + "&b=" + B;
             }, 700);
     }
 
@@ -441,20 +441,20 @@ var menu_center = [menu_hex_points[0][0] + (menu_hex_points[1][0] - menu_hex_poi
         filter: menuopt_shadow
     });
 
-    // field appear
-    var fieldshadow = field.filter(Snap.filter.shadow(0, 8, 12, "#000", .4)),
-        field_bg = field.polygon(menu_hex_points).attr({
-            fill: field_bg_color,
-            opacity: field_bg_opacity,
-            filter: fieldshadow,
-            mask: menu_hole
-        });
+// field appear
+var fieldshadow = field.filter(Snap.filter.shadow(0, 8, 12, "#000", .4)),
+    field_bg = field.polygon(menu_hex_points).attr({
+        fill: field_bg_color,
+        opacity: field_bg_opacity,
+        filter: fieldshadow,
+        mask: menu_hole
+    });
 
-    // if (argv["rematch"] == "true") {
-    //   field_bg.attr({
-    //     display: "none"
-    //   });
-    // }
+// if (argv["rematch"] == "true") {
+//   field_bg.attr({
+//     display: "none"
+//   });
+// }
 
 var m_text_opt = {
     'text-anchor': 'middle',
@@ -512,79 +512,77 @@ var menu_play_btn = menu.group(menu_play, m_play, m_play_icon),
 
 var bombsNumberFloat = B * 1.,
     sizeNumberFloat = N * 1.,
-    maxbombs = 3*sizeNumber*(sizeNumber+1),            //number of cells
-    maxsize  = 14;                                     //just too cells for screens, quite unsable
+    maxbombs = 3 * sizeNumber * (sizeNumber + 1), //number of cells
+    maxsize = 14; //just too cells for screens, quite unsable
 
 function wheelSelect(e, opt) {
     if (opt == 'bomb') {
-      if (e.deltaY > 0)
-        bombsNumberFloat -= .1;
-      else
-        bombsNumberFloat += .1;
+        if (e.deltaY > 0)
+            bombsNumberFloat -= .1;
+        else
+            bombsNumberFloat += .1;
 
-      bN = parseInt(bombsNumberFloat);       // i think this if is equivalent to bombsNumberFloat += e.deltaY * .1;
-      if(bN > 0) {
-        bombsNumber = bN;
-        m_bomb.node.innerHTML = bombsNumber;
-      }
-    }
+        bN = parseInt(bombsNumberFloat); // i think this if is equivalent to bombsNumberFloat += e.deltaY * .1;
+        if (bN > 0) {
+            bombsNumber = bN;
+            m_bomb.node.innerHTML = bombsNumber;
+        }
+    } else if (opt == 'size') {
+        if (e.deltaY > 0)
+            sizeNumberFloat -= .1;
+        else
+            sizeNumberFloat += .1;
 
-    else if (opt == 'size') {
-      if (e.deltaY > 0)
-        sizeNumberFloat -= .1;
-      else
-        sizeNumberFloat += .1;
-
-      sN = parseInt(sizeNumberFloat);
-      if (sN > 0 && sN <= maxsize) {
-        sizeNumber = sN;
-        m_size.node.innerHTML = sizeNumber;
-        maxbombs = 3*sizeNumber*(sizeNumber+1)
-      }
+        sN = parseInt(sizeNumberFloat);
+        if (sN > 0 && sN <= maxsize) {
+            sizeNumber = sN;
+            m_size.node.innerHTML = sizeNumber;
+            maxbombs = 3 * sizeNumber * (sizeNumber + 1)
+        }
     }
 }
 
 //// Menu
 
 function closemenu() {
-  if (bombsNumber < maxbombs) {
-    var animduration = 1000;
-    menu_hole_shadow.attr({
-        opacity: ".3"
-    });
-    menu_hole.animate({
-        r: 0
-    }, animduration, mina.bounce);
-    menu_hole_shadow.animate({
-        r: 0,
-        opacity: ".1"
-    }, animduration, mina.bounce);
-    var shadowblur = menu.filter(Snap.filter.blur(2));
-    menu_hole_shadow.attr({
-        filter: shadowblur
-    });
-    setTimeout(function() {
-        menu.attr({
-            display: "none"
-        })
-    }, 1000);
-    // Time to play!
-    initializeScale();
-    grid = new Grid(sizeNumber, bombsNumber);
-  } else {
-    alert("How brave! You chose too many bombs, more that you can afford, retry with less!");
-  }
+    if (bombsNumber < maxbombs) {
+        var animduration = 1000;
+        menu_hole_shadow.attr({
+            opacity: ".3"
+        });
+        menu_hole.animate({
+            r: 0
+        }, animduration, mina.bounce);
+        menu_hole_shadow.animate({
+            r: 0,
+            opacity: ".1"
+        }, animduration, mina.bounce);
+        var shadowblur = menu.filter(Snap.filter.blur(2));
+        menu_hole_shadow.attr({
+            filter: shadowblur
+        });
+        setTimeout(function() {
+            menu.attr({
+                display: "none"
+            })
+        }, 1000);
+        // Time to play!
+        initializeScale();
+        grid = new Grid(sizeNumber, bombsNumber);
+    } else {
+        alert("How brave! You chose too many bombs, more that you can afford, retry with less!");
+    }
 }
 
 function openmenu() {
     var animduration = 800;
     setTimeout(function() {
-      menu_hole_shadow.attr({
-          opacity: ".1"
-      });
-      menu_hole.animate({
-          r: menu_hex_points[1][0]
-      }, animduration, mina.ease);
+        menu_hole_shadow.attr({
+            opacity: ".1"
+        });
+        menu_hole.animate({
+            r: menu_hex_points[1][0]
+        }, animduration, mina.ease);
     }, 200);
 
 }

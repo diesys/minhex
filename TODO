@@ -16,9 +16,9 @@ MinHex
 	· chiamare adjustDimensions() su body.resize()
 	? estendere ricorsivamente lo ``scoprintorno''
 
-
 \ui
 
+	· rematch dovrebbe non mostrare di nuovo il menu
 	? rematch interfaccia
 	· personalizzare le alert con il css
 	· fare howto, inglese
