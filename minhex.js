@@ -264,7 +264,7 @@ function Grid(N, BOMBS) {
                 var answ = confirm("You are a real mine surviver! Good Job. Retry?")
                 if (answ)
                 // the url just without vars, and the just used ones
-                    window.location = window.location.href.split('?')[0] + "?n=" + N + "&b=" + B; // + "&rematch=true"; //seems do not work the rematch url
+                    window.location = window.location.href.split('?')[0] + "?n=" + sizeNumber + "&b=" + bombsNumber; // + "&rematch=true"; //seems do not work the rematch url
 
                 // this should open the menu and cancel variabiles instead of reloading the page?
                 else
