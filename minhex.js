@@ -9,18 +9,20 @@ window.location.search.substring(1).split('&').forEach(function(c) {
 
 // General settings  //////////////////////
 //--!!this could be made better
-var N = parseInt(argv["n"]) || 5,
+var
+    N = parseInt(argv["n"]) || 5,
     dimension = 12.3 / 5 * N, // height measured in triangles' size
-    BOMBS = parseInt(argv["b"]) || 30;
+    B = parseInt(argv["b"]) || 30;
+
+var sizeNumber = N,
+    bombsNumber = B;
+
 
 var base_clr = "#A9D41C",
     field_bg_color = "#59710E",
     field_bg_opacity = ".8",
     stroke_clr = "rgba(0,0,0,.1)",
     stroke_width = "2",
-    // clicked_clr = "#377a01",
-    clicked_clr = "#5A6E1C",
-    // clicked_clr = "#698511",
     clicked_clr = "#698511",
     over_clr = "#e8ff7d",
     bomb_clr = "#C10F08",
@@ -72,13 +74,12 @@ document.getElementById('field').setAttribute('height', fieldHeight);
 
 // Calculate and set the big hexagon dimensions and position
 
-//var l = parseInt(centerY*2/dimension),				// triangles' box side
-var l = parseInt(fieldWidth * (1 - 2 * fieldMargin) * .5 / N),
-    // distance between triangles   m = parseInt(l/18.3);
+// triangles' box side
+//var l = parseInt(fieldWidth * (1 - 2 * fieldMargin) * .5 / N),
+// distance between triangles   m = parseInt(l/18.3);
+var l,
     m = 0.1
 
-//var x0 = centerX - l*N/4*3,
-//	y0 = 0
 var x0 = fieldWidth * .5 * (.5 + fieldMargin),
     y0 = fieldHeight * fieldMargin;
 
@@ -89,7 +90,20 @@ doubleClick.lastClickTime = +new Date();
 doubleClick.waitingSndClick = false;
 doubleClick.lastClick = null;
 
-var fontSize = l * textDimension / 110;
+//var fontSize = l*textDimension/110;
+var fontSize;
+var L = fieldWidth * (.5 - fieldMargin);
+//////////////////////////////////////////////////////////// PORCO DIO INIZIALIZZAZIONE ///////////////////////////////////////////////////////
+
+function initializeScale() {
+    //l = parseInt(fieldWidth * (1 - 2 * fieldMargin) * .5 / N),
+    l = L / sizeNumber;
+    fontSize = l * textDimension / 110;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
 function mouseOver() {
     if (this.state == "virgin")
@@ -147,12 +161,14 @@ function textOnCell(pos, txt) {
     return field.text(x, y, txt).attr(opts);
 }
 
-function Grid(N) {
+function Grid(N, BOMBS) {
 
+    this.BOMBS = BOMBS;
     this.STARTED = false;
     this.FINISHED = false;
     this.cell = {};
     this.clickedCells = 0;
+    this.remBmbs = BOMBS;
 
     this.mouseClick = function(pos) {
         return function() {
@@ -171,6 +187,11 @@ function Grid(N) {
             };
             doubleClick.lastClick = setTimeout(f, doubleClick.mouseClickDelay);
         }
+    }
+
+    this.refreshBombs = function(delta) {
+        this.remBmbs += delta;
+        document.getElementById("RemainingBombs").innerHTML = "<center><h2>" + this.remBmbs + "</h2></center>";
     }
 
     this.openCell = function(pos) {
@@ -194,7 +215,7 @@ function Grid(N) {
                 cell.state = "clicked";
                 setTimeout(function() {
                     alert("Pieces of your fleshy brain are all over the walls. Pay more attention to mines next time")
-                }, 400);
+                }, 700);
                 for (c of Object.keys(this.cell))
                     if (this.cell[c].isBomb && c != pos) {
                         this.cell[c].animate({
@@ -247,6 +268,7 @@ function Grid(N) {
                     fill: flag_clr
                 }, anim_dur, mina.easein);
                 this.clickedCells++;
+                this.refreshBombs(-1);
                 break;
             case "flag":
                 cell.state = "virgin";
@@ -254,6 +276,7 @@ function Grid(N) {
                     fill: base_clr
                 }, anim_dur, mina.easeout);
                 this.clickedCells--;
+                this.refreshBombs(1);
         }
         this.checkVictory();
     }
@@ -301,7 +324,7 @@ function Grid(N) {
         var candidates = Object.keys(this.cell).filter(function(x) {
             return toExclude.indexOf(x) == -1
         });
-        for (var b = 0; b < BOMBS; b++) {
+        for (var b = 0; b < this.BOMBS; b++) {
             var choiceInd = Math.floor(Math.random() * candidates.length);
             var bomb = this.cell[candidates[choiceInd]]
             bomb.isBomb = true;
@@ -329,17 +352,18 @@ function Grid(N) {
         this.cell[c].nbHood = this.nbHoodOf(coords(c)).filter(function(nbh) {
             return cellCoords.indexOf(nbh.toString()) != -1
         });
+    this.refreshBombs(0);
 
 }
 
 // field appear
 var menu_hex_points = new Array()
 menu_hex_points.push([x0, y0])
-menu_hex_points.push([x0 + N * l, y0])
-menu_hex_points.push([x0 + N * 1.5 * l, y0 + N * l * hsr3])
-menu_hex_points.push([x0 + N * l, y0 + N * l * hsr3 * 2])
-menu_hex_points.push([x0, y0 + N * l * hsr3 * 2])
-menu_hex_points.push([x0 - N * l / 2, y0 + N * l * hsr3])
+menu_hex_points.push([x0 + L, y0])
+menu_hex_points.push([x0 + L * 1.5, y0 + L * hsr3])
+menu_hex_points.push([x0 + L, y0 + L * hsr3 * 2])
+menu_hex_points.push([x0, y0 + L * hsr3 * 2])
+menu_hex_points.push([x0 - L / 2, y0 + L * hsr3])
 var fieldshadow = field.filter(Snap.filter.shadow(0, 8, 18, "#000", .4)),
     field_bg = field.polygon(menu_hex_points).attr({
         fill: field_bg_color,
@@ -348,7 +372,7 @@ var fieldshadow = field.filter(Snap.filter.shadow(0, 8, 18, "#000", .4)),
     });
 
 // test code
-var grid = new Grid(N);
+//var grid = new Grid(N);
 
 
 ////////////////////////////////////////// UI /////////////////////////////////////////////////////////////////////////////////
@@ -422,14 +446,14 @@ var bombBox = 0.35,
 // le posizioni non mi convincono  !!
 
 var m_img_halfsize = 45,
-    m_bomb = menu.text(menu_center[0], 1.75 * menu_center[1], "30").attr(m_text_opt),
-    m_bomb_icon = menu.image('img/menu/bomb.png', menu_center[0] - m_img_halfsize, 1.25 * menu_center[1], N * l * bombBox, N * l * bombBox),
+    m_bomb = menu.text(menu_center[0], 1.75 * menu_center[1], B).attr(m_text_opt),
+    m_bomb_icon = menu.image('img/menu/bomb.png', menu_center[0] - m_img_halfsize, 1.25 * menu_center[1], L * bombBox, L * bombBox),
     // m_bomb_icon = menu.image('img/menu/bomb.png', menu_center[0] - m_img_halfsize, 1.25 * menu_center[1]),
-    m_size = menu.text(menu_hex_points[3][0], 1.6 * menu_center[1], "7").attr(m_text_opt),
-    m_size_icon = menu.image('img/menu/size.png', menu_hex_points[3][0] - m_img_halfsize, 1.1 * menu_center[1], N * l * sizeBox, N * l * sizeBox),
+    m_size = menu.text(menu_hex_points[3][0], 1.6 * menu_center[1], N).attr(m_text_opt),
+    m_size_icon = menu.image('img/menu/size.png', menu_hex_points[3][0] - m_img_halfsize, 1.1 * menu_center[1], L * sizeBox, L * sizeBox),
     // m_size_icon = menu.image('img/menu/size.png', menu_hex_points[3][0] - m_img_halfsize, 1.1 * menu_center[1]),
     m_play = menu.text(menu_center[0] - 1.9 * m_img_halfsize, menu_center[1], "PLAY").attr(m_text_opt),
-    m_play_icon = menu.image('img/menu/play.png', menu_hex_points[5][0] + m_img_halfsize / 2, menu_center[1] - m_img_halfsize, N * l * playBox, N * l * playBox);
+    m_play_icon = menu.image('img/menu/play.png', menu_hex_points[5][0] + m_img_halfsize / 2, menu_center[1] - m_img_halfsize, L * playBox, L * playBox);
 // m_play_icon = menu.image('img/menu/play.png', menu_hex_points[5][0] + m_img_halfsize/2, menu_center[1] - m_img_halfsize);
 m_play.attr({
     fill: "#1f1f1f"
@@ -478,6 +502,9 @@ function closemenu() {
             display: "none"
         })
     }, 1000);
+    // Time to play!
+    initializeScale();
+    grid = new Grid(sizeNumber, bombsNumber);
 }
 
 function openmenu() {
@@ -511,13 +538,17 @@ menu_group.node.onclick = function() {
 
 //// MouseWheel - Zona test!
 
-bombsNumberFloat = 30.;
-sizeNumberFloat = 7.;
+
+var bombsNumberFloat = B * 1.,
+    sizeNumberFloat = N * 1.;
 
 function wheelSelect(e, opt) {
     if (opt == 'bomb') {
         if (e.deltaY > 0) bombsNumberFloat -= .1;
         else bombsNumberFloat += .1;
+
+        // i think this if is equivalent to
+        // bombsNumberFloat += e.deltaY * .1;
         bombsNumber = parseInt(bombsNumberFloat);
         m_bomb.node.innerHTML = bombsNumber;
     } else if (opt == 'size') {
@@ -528,6 +559,7 @@ function wheelSelect(e, opt) {
     }
 }
 
+
 menu_bomb.node.onmousewheel = function(e) {
     wheelSelect(e, 'bomb')
 };
@@ -537,6 +569,7 @@ m_bomb_icon.node.onmousewheel = function(e) {
 m_bomb.node.onmousewheel = function(e) {
     wheelSelect(e, 'bomb')
 };
+
 menu_size.node.onmousewheel = function(e) {
     wheelSelect(e, 'size')
 };
@@ -546,3 +579,6 @@ m_size_icon.node.onmousewheel = function(e) {
 m_size.node.onmousewheel = function(e) {
     wheelSelect(e, 'size')
 };
+
+
+var grid;
