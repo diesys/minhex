@@ -372,25 +372,6 @@ function Grid(N, BOMBS) {
 
 }
 
-// field appear
-var menu_hex_points = new Array()
-menu_hex_points.push([x0, y0])
-menu_hex_points.push([x0 + L, y0])
-menu_hex_points.push([x0 + L * 1.5, y0 + L * hsr3])
-menu_hex_points.push([x0 + L, y0 + L * hsr3 * 2])
-menu_hex_points.push([x0, y0 + L * hsr3 * 2])
-menu_hex_points.push([x0 - L / 2, y0 + L * hsr3])
-var fieldshadow = field.filter(Snap.filter.shadow(0, 8, 18, "#000", .4)),
-    field_bg = field.polygon(menu_hex_points).attr({
-        fill: field_bg_color,
-        opacity: field_bg_opacity,
-        filter: fieldshadow
-    });
-
-// test code
-//var grid = new Grid(N);
-
-
 ////////////////////////////////////////// UI /////////////////////////////////////////////////////////////////////////////////
 
 var menu = Snap('#menu');
@@ -399,6 +380,7 @@ var menu = Snap('#menu');
 if (argv["rematch"] == "true") menu.attr({
     display: "none"
 });
+
 
 // UI CONF
 document.getElementById('menu').setAttribute('width', fieldWidth);
@@ -411,6 +393,16 @@ document.getElementById('menu').setAttribute('height', fieldHeight);
 // menu_hex_points.push([x0, y0 + N*l*hsr3*2])
 // menu_hex_points.push([x0-N*l/2, y0 + N*l*hsr3])
 
+
+// hex field coords
+var menu_hex_points = new Array()
+menu_hex_points.push([x0, y0])
+menu_hex_points.push([x0 + L, y0])
+menu_hex_points.push([x0 + L * 1.5, y0 + L * hsr3])
+menu_hex_points.push([x0 + L, y0 + L * hsr3 * 2])
+menu_hex_points.push([x0, y0 + L * hsr3 * 2])
+menu_hex_points.push([x0 - L / 2, y0 + L * hsr3])
+
 var menu_center = [menu_hex_points[0][0] + (menu_hex_points[1][0] - menu_hex_points[0][0]) / 2, menu_hex_points[2][1]],
 
     //colors
@@ -419,6 +411,8 @@ var menu_center = [menu_hex_points[0][0] + (menu_hex_points[1][0] - menu_hex_poi
     menu_bomb_clr = "#E61913",
     menu_size_clr = "#F5B10A",
     menu_fame_clr = "#8BAF17",
+
+
 
     // filters
     // menushadow = menu.filter(Snap.filter.shadow(0, 10, 15, "#000", .4)),
@@ -431,6 +425,7 @@ var menu_center = [menu_hex_points[0][0] + (menu_hex_points[1][0] - menu_hex_poi
     menu_hex_holemask = menu.polygon(menu_hex_points).attr({
         fill: "#fff"
     }),
+
     menu_play = menu.polygon(menu_hex_points[0], menu_hex_points[1], menu_hex_points[4], menu_hex_points[5]).attr({
         fill: menu_play_clr
     }),
@@ -443,7 +438,15 @@ var menu_center = [menu_hex_points[0][0] + (menu_hex_points[1][0] - menu_hex_poi
         fill: menu_size_clr,
         filter: menuopt_shadow
     });
-// menu_hex.attr({filter: menushadow});
+
+    // field appear
+    var fieldshadow = field.filter(Snap.filter.shadow(0, 8, 12, "#000", .4)),
+        field_bg = field.polygon(menu_hex_points).attr({
+            fill: field_bg_color,
+            opacity: field_bg_opacity,
+            // filter: fieldshadow,
+            mask: menu_hex_holemask
+        });
 
 var m_text_opt = {
     'text-anchor': 'middle',
@@ -488,7 +491,7 @@ var menu_play_btn = menu.group(menu_play, m_play, m_play_icon),
         opacity: "0",
         mask: menu_hex_holemask
     }),
-    menu_hole = menu.circle(menu_center[0], menu_center[1], menu_hex_points[1][0]).attr({
+    menu_hole = menu.circle(menu_center[0], menu_center[1], 0).attr({
         fill: "#fff"
     }),
     menu_group = menu.group(menu_hex, menu_play, m_play, m_play_icon, menu_bomb, m_bomb, m_bomb_icon, menu_size, m_size, m_size_icon).attr({
@@ -511,9 +514,11 @@ function wheelSelect(e, opt) {
       else
         bombsNumberFloat += .1;
 
-      bombsNumber = parseInt(bombsNumberFloat);       // i think this if is equivalent to bombsNumberFloat += e.deltaY * .1;
-      if(bombsNumber > 0)
+      bN = parseInt(bombsNumberFloat);       // i think this if is equivalent to bombsNumberFloat += e.deltaY * .1;
+      if(bN > 0) {
+        bombsNumber = bN;
         m_bomb.node.innerHTML = bombsNumber;
+      }
     }
 
     else if (opt == 'size') {
@@ -522,8 +527,9 @@ function wheelSelect(e, opt) {
       else
         sizeNumberFloat += .1;
 
-      sizeNumber = parseInt(sizeNumberFloat);
-      if (sizeNumber > 0 && sizeNumber <= maxsize) {
+      sN = parseInt(sizeNumberFloat);
+      if (sN > 0 && sN <= maxsize) {
+        sizeNumber = sN;
         m_size.node.innerHTML = sizeNumber;
         maxbombs = 3*sizeNumber*(sizeNumber+1)
       }
@@ -566,7 +572,8 @@ function openmenu() {
     var animduration = 800;
     setTimeout(function() {
       menu_hole_shadow.attr({
-          opacity: ".1"
+          // opacity: ".8",
+          filter: fieldshadow
       });
       menu_hole.animate({
           r: menu_hex_points[1][0]
@@ -602,5 +609,4 @@ m_size.node.onmousewheel = function(e) {
 };
 
 openmenu();
-
 var grid;
