@@ -4,6 +4,8 @@ MinHex
 
 	! Correggere bug che ti permette di vincere mettendo anche una bandierina in un posto sbagliato, purche siano giuste quelle dove ci sono davvero le bombe
 
+	· Rivedere il codice per essere minimizzato perche sono quasi mille righe tutto..
+
 	· Inizializzazione in una funzione init() a parte
 	· init() chiama una funzione adjustDimensions()
 		- adjustDimensions() imposta le dimensioni del field in base alla dimensione
@@ -17,5 +19,6 @@ MinHex
 
 \ui
 
-	· rematch
+	? rematch interfaccia
+	· personalizzare le alert con il css
 	· fare howto, inglese
