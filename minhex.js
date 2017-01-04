@@ -220,9 +220,9 @@ function Grid(N, BOMBS) {
                     var answer = confirm ("Pieces of your fleshy brain are all over the walls. Pay more attention to mines next time. Rematch?")
                       if (answer)
                         // the url just without vars, and the just used ones
-                        window.location = window.location.href.split('?')[0] + "?n=" + N + "&b=" + B;
+                        window.location = window.location.href.split('?')[0] + "?n=" + N + "&b=" + B; // + "&rematch=true"; //seems do not work the rematch url
                       else
-                        window.location = window.location.href.split('?')[0];
+                        window.location = window.location.href.split('?')[0] + "?n=" + N + "&b=" + B;
                 }, 700);
                 for (c of Object.keys(this.cell))
                     if (this.cell[c].isBomb && c != pos) {
@@ -264,11 +264,11 @@ function Grid(N, BOMBS) {
               var answ = confirm ("You are a real mine surviver! Good Job. Retry?")
                 if (answ)
                   // the url just without vars, and the just used ones
-                  window.location = window.location.href.split('?')[0] + "?n=" + N + "&b=" + B;
+                  window.location = window.location.href.split('?')[0] + "?n=" + N + "&b=" + B; // + "&rematch=true"; //seems do not work the rematch url
 
-                  // this should open the menu and cancel variabiles instead of reloading the page
+                  // this should open the menu and cancel variabiles instead of reloading the page?
                 else
-                  window.location = window.location.href.split('?')[0];
+                  window.location = window.location.href.split('?')[0] + "?n=" + N + "&b=" + B;
             }, 700);
     }
 
@@ -377,9 +377,11 @@ function Grid(N, BOMBS) {
 var menu = Snap('#menu');
 
 // hide the menu if it's a rematch
-if (argv["rematch"] == "true") menu.attr({
-    display: "none"
-});
+// if (argv["rematch"] == "true") {
+//   menu.attr({
+//     display: "none"
+//   });
+// }
 
 
 // UI CONF
@@ -447,6 +449,12 @@ var menu_center = [menu_hex_points[0][0] + (menu_hex_points[1][0] - menu_hex_poi
             filter: fieldshadow,
             mask: menu_hole
         });
+
+    // if (argv["rematch"] == "true") {
+    //   field_bg.attr({
+    //     display: "none"
+    //   });
+    // }
 
 var m_text_opt = {
     'text-anchor': 'middle',
