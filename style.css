@@ -201,6 +201,7 @@ svg#menu text {
    padding: 8px;
    border-radius: 4px;
    background-image: url('img/tile.png');
+   background-size: 220px;
    background-color: #f8b71b;
    border: 3px solid rgba(0, 0, 0, .3);
    color: #111;
@@ -260,15 +261,14 @@ svg#menu text {
 }
 
 .button.HowTo {
-   max-height: 16px;
+   max-height: 22px;
    max-width: 20px;
    top: 50%;
    padding: 15px;
-   background-color: #fff;
    color: #333;
    background-color: #f8b71b;
    color: #111;
-   box-shadow: 0px 2px 3px rgba(0, 0, 0, .1);
+   box-shadow: 0px 2px 8px rgba(0, 0, 0, .3);
    text-transform: none;
 }
 
