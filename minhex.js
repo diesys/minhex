@@ -214,7 +214,11 @@ function Grid(N, BOMBS) {
                 this.FINISHED = true;
                 cell.state = "clicked";
                 setTimeout(function() {
-                    alert("Pieces of your fleshy brain are all over the walls. Pay more attention to mines next time")
+                    // rematch
+                    var answer = confirm ("Pieces of your fleshy brain are all over the walls. Pay more attention to mines next time. Rematch?")
+                      if (answer)
+                        // the url just without vars, and the just used ones
+                        window.location = window.location.href.split('?')[0] + "?n=" + N + "&b=" + B;
                 }, 700);
                 for (c of Object.keys(this.cell))
                     if (this.cell[c].isBomb && c != pos) {
@@ -517,7 +521,6 @@ function wheelSelect(e, opt) {
 //// Menu
 
 function closemenu() {
-  console.log(bombsNumber, maxbombs);
   if (bombsNumber < maxbombs) {
     var animduration = 1000;
     menu_hole_shadow.attr({
