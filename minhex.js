@@ -1,14 +1,16 @@
 // Get arguments
 
-        argv = {}
-        window.location.search.substring(1).split('&').forEach(function (c) { var kv = c.split('='); argv[kv[0]] = kv[1] } );
+argv = {}
+window.location.search.substring(1).split('&').forEach(function(c) {
+    var kv = c.split('=');
+    argv[kv[0]] = kv[1]
+});
 
 
 // General settings  //////////////////////
 //--!!this could be made better
-var
-    N = parseInt(argv["n"]) || 5,
-    dimension = 12.3/5*N,							// height measured in triangles' size
+var N = parseInt(argv["n"]) || 5,
+    dimension = 12.3 / 5 * N, // height measured in triangles' size
     BOMBS = parseInt(argv["b"]) || 30;
 
 var base_clr = "#A9D41C",
@@ -39,13 +41,13 @@ var fieldMargin = .05,
 
 // (Global)Page size
 var w = window,
-d = document,
-e = d.documentElement,
-g = d.getElementsByTagName('field')[0],
-width = (w.innerWidth || e.clientWidth || g.clientWidth),
-height = (w.innerHeight || e.clientHeight || g.clientHeight),
-centerX = width / 2,
-centerY = height / 2;
+    d = document,
+    e = d.documentElement,
+    g = d.getElementsByTagName('field')[0],
+    width = (w.innerWidth || e.clientWidth || g.clientWidth),
+    height = (w.innerHeight || e.clientHeight || g.clientHeight),
+    centerX = width / 2,
+    centerY = height / 2;
 
 // Here there's the field definition
 var field = Snap('#field');
@@ -57,7 +59,7 @@ var hsr3 = Math.pow(4, 0.4) / 2;
 //  If the body ratio (y/x) is less than hsr3 (the hexagon box ratio, so the field ratio)
 //  then we must fit the field according to the body height deriving the right width,
 //  otherwise we must use the body width.
-if (height/width < hsr3) {
+if (height / width < hsr3) {
     fieldHeight = height * (1 - 2 * bodyMarginHeight);
     fieldWidth = fieldHeight / hsr3;
 } else {
@@ -65,8 +67,8 @@ if (height/width < hsr3) {
     fieldHeight = fieldWidth * hsr3;
 }
 
-document.getElementById('field').setAttribute('width',fieldWidth);
-document.getElementById('field').setAttribute('height',fieldHeight);
+document.getElementById('field').setAttribute('width', fieldWidth);
+document.getElementById('field').setAttribute('height', fieldHeight);
 
 // Calculate and set the big hexagon dimensions and position
 
@@ -87,33 +89,41 @@ doubleClick.lastClickTime = +new Date();
 doubleClick.waitingSndClick = false;
 doubleClick.lastClick = null;
 
-var fontSize = l*textDimension/110;
+var fontSize = l * textDimension / 110;
 
-function mouseOver () {
+function mouseOver() {
     if (this.state == "virgin")
-        this.animate({fill: over_clr}, anim_dur, mina.easein);
+        this.animate({
+            fill: over_clr
+        }, anim_dur, mina.easein);
 }
 
-function mouseOut () {
+function mouseOut() {
     if (this.state == "virgin")
-        this.animate({fill: base_clr}, anim_dur, mina.easeout);
+        this.animate({
+            fill: base_clr
+        }, anim_dur, mina.easeout);
 }
 
-function drawCell (i, j) {
-    var hsr3 = Math.sqrt(3)/2;
+function drawCell(i, j) {
+    var hsr3 = Math.sqrt(3) / 2;
     var s = l - m;
-    var x = x0 + i*l/2,
-        y = y0 + j*l*hsr3;
+    var x = x0 + i * l / 2,
+        y = y0 + j * l * hsr3;
     var triangle;
-    var attributes = { fill: base_clr, strokeWidth: stroke_width, stroke: stroke_clr }
-    if ((i+j)%2)
-        // down-triangle
-        triangle = field.polygon(x - s/2 + m*hsr3, y + m/2, x, y + s*hsr3 - m*hsr3, x + s/2 - m*hsr3, y + m/2).attr(attributes);
+    var attributes = {
+        fill: base_clr,
+        strokeWidth: stroke_width,
+        stroke: stroke_clr
+    }
+    if ((i + j) % 2)
+    // down-triangle
+        triangle = field.polygon(x - s / 2 + m * hsr3, y + m / 2, x, y + s * hsr3 - m * hsr3, x + s / 2 - m * hsr3, y + m / 2).attr(attributes);
     else
-        // up-triangle
-        triangle = field.polygon(x, y + m, x - l/2 + m*hsr3, y + l*hsr3 - m/2, x + l/2 - m*hsr3, y + l*hsr3 - m/2).attr(attributes);
+    // up-triangle
+        triangle = field.polygon(x, y + m, x - l / 2 + m * hsr3, y + l * hsr3 - m / 2, x + l / 2 - m * hsr3, y + l * hsr3 - m / 2).attr(attributes);
 
-    triangle.pos = [i,j];
+    triangle.pos = [i, j];
     triangle.count = 0;
     triangle.mouseover(mouseOver);
     triangle.mouseout(mouseOut);
@@ -121,28 +131,31 @@ function drawCell (i, j) {
     return triangle
 }
 
-function textOnCell (pos,txt) {
-    var x = x0 + pos[0]*l/2,
-        y = y0 + pos[1]*l*Math.sqrt(3)/2 + (((pos[0] + pos[1]) % 2) ? 1.15 : 1.85) * l * Math.sqrt(3) / 6;
+function textOnCell(pos, txt) {
+    var x = x0 + pos[0] * l / 2,
+        y = y0 + pos[1] * l * Math.sqrt(3) / 2 + (((pos[0] + pos[1]) % 2) ? 1.15 : 1.85) * l * Math.sqrt(3) / 6;
 
-    var opts = {'text-anchor':'middle', 'alignment-baseline': 'central'};
+    var opts = {
+        'text-anchor': 'middle',
+        'alignment-baseline': 'central'
+    };
 
     opts['font-size'] = fontSize + 'em';
     opts['font-family'] = font;
     opts['font-weight'] = 600;
     opts['fill'] = fontColor;
-    return field.text(x,y,txt).attr(opts);
+    return field.text(x, y, txt).attr(opts);
 }
 
-function Grid (N) {
+function Grid(N) {
 
     this.STARTED = false;
     this.FINISHED = false;
     this.cell = {};
     this.clickedCells = 0;
 
-    this.mouseClick = function (pos) {
-        return function () {
+    this.mouseClick = function(pos) {
+        return function() {
             if (doubleClick.waitingSndClick) {
                 // double click
                 this.grid.toggleFlag(pos);
@@ -151,7 +164,7 @@ function Grid (N) {
                 return
             }
             doubleClick.waitingSndClick = true;
-            var f = function () {
+            var f = function() {
                 // single click
                 doubleClick.waitingSndClick = false;
                 this.grid.openCell(pos);
@@ -160,9 +173,9 @@ function Grid (N) {
         }
     }
 
-    this.openCell = function (pos) {
+    this.openCell = function(pos) {
         if (this.FINISHED)
-                return
+            return
 
         var cell = this.cell[pos];
         if (!this.STARTED) {
@@ -174,101 +187,127 @@ function Grid (N) {
             cell.state = "clicked";
             this.clickedCells++;
             if (cell.isBomb) {
-                cell.animate({fill: bomb_clr}, anim_dur, mina.easein);
+                cell.animate({
+                    fill: bomb_clr
+                }, anim_dur, mina.easein);
                 this.FINISHED = true;
                 cell.state = "clicked";
-                setTimeout(function () {alert("Pieces of your fleshy brain are all over the walls. Pay more attention to mines next time")}, 400);
+                setTimeout(function() {
+                    alert("Pieces of your fleshy brain are all over the walls. Pay more attention to mines next time")
+                }, 400);
                 for (c of Object.keys(this.cell))
-                  if (this.cell[c].isBomb && c != pos) {
-                    this.cell[c].animate({fill: bomb2_clr}, anim_dur, mina.easein);
+                    if (this.cell[c].isBomb && c != pos) {
+                        this.cell[c].animate({
+                            fill: bomb2_clr
+                        }, anim_dur, mina.easein);
                         this.cell[c].state = "clicked";
                     }
 
                 return
             }
-            cell.animate({fill: clicked_clr}, anim_dur, mina.easein);
+            cell.animate({
+                fill: clicked_clr
+            }, anim_dur, mina.easein);
             if (cell.count)
                 textOnCell(cell.pos, cell.count.toString()).click(this.mouseClick(pos));
             else
                 for (c of cell.nbHood)
                     this.openCell(c);
 
-        } else      // convert to switch?
-            if (cell.state == "clicked") {
-                var placedBombs = 0;
+        } else // convert to switch?
+        if (cell.state == "clicked") {
+            var placedBombs = 0;
+            for (c of cell.nbHood)
+                if (this.cell[c].state == "flag")
+                    placedBombs++;
+            if (placedBombs == cell.count)
                 for (c of cell.nbHood)
-                    if (this.cell[c].state == "flag")
-                        placedBombs++;
-                if (placedBombs == cell.count)
-                    for (c of cell.nbHood)
-                        if (this.cell[c].state == "virgin")
-                            this.openCell(c);
-            }
+                    if (this.cell[c].state == "virgin")
+                        this.openCell(c);
+        }
         this.checkVictory();
     }
 
-    this.checkVictory = function () {
-        if (this.clickedCells == 6*N*N)
-            setTimeout(function () {alert("You are a real mine surviver! Good Job")}, 700);
+    this.checkVictory = function() {
+        if (this.clickedCells == 6 * N * N)
+            setTimeout(function() {
+                alert("You are a real mine surviver! Good Job")
+            }, 700);
     }
 
-    this.toggleFlag = function (pos) {
-            if (this.FINISHED || !this.STARTED)
-                return
+    this.toggleFlag = function(pos) {
+        if (this.FINISHED || !this.STARTED)
+            return
 
-            var cell = this.cell[pos];
-            switch (cell.state) {
-                case "virgin":
-                    cell.state = "flag";
-                    cell.animate({fill: flag_clr}, anim_dur, mina.easein);
-                    this.clickedCells++;
-                    break;
-                case "flag":
-                    cell.state = "virgin";
-                    cell.animate({fill: base_clr}, anim_dur, mina.easeout);
-                    this.clickedCells--;
-            }
-            this.checkVictory();
+        var cell = this.cell[pos];
+        switch (cell.state) {
+            case "virgin":
+                cell.state = "flag";
+                cell.animate({
+                    fill: flag_clr
+                }, anim_dur, mina.easein);
+                this.clickedCells++;
+                break;
+            case "flag":
+                cell.state = "virgin";
+                cell.animate({
+                    fill: base_clr
+                }, anim_dur, mina.easeout);
+                this.clickedCells--;
+        }
+        this.checkVictory();
     }
 
-    this.addCell = function (i,j) {
-        var c = drawCell(i,j);
+    this.addCell = function(i, j) {
+        var c = drawCell(i, j);
         c.isBomb = false;
-        c.state = "virgin"                  // virgin, flag, clicked
-        c.click(this.mouseClick([i,j]));
+        c.state = "virgin" // virgin, flag, clicked
+        c.click(this.mouseClick([i, j]));
         c.grid = this;
         c.nbHood = [];
-        this.cell[[i,j]] = c;
+        this.cell[[i, j]] = c;
     }
 
-    this.nbHoodOf = function (pos) {
+    this.nbHoodOf = function(pos) {
         var nbh = [];
-        var i = pos[0], j = pos[1];
-        for (k of [-2, -1, 1, 2])
-            nbh.push([i+k, j]);
-        for (k of [-1, -0, 1])
-            nbh = nbh.concat([[i+k, j-1], [i+k, j+1]]);
+        var i = pos[0],
+            j = pos[1];
+        for (k of[-2, -1, 1, 2])
+            nbh.push([i + k, j]);
+        for (k of[-1, -0, 1])
+            nbh = nbh.concat([
+                [i + k, j - 1],
+                [i + k, j + 1]
+            ]);
 
         var row
-        if ((i+j) % 2) row = -1; else row = 1;
-        nbh = nbh.concat([[i-2, j + row], [i+2, j + row]]);
+        if ((i + j) % 2) row = -1;
+        else row = 1;
+        nbh = nbh.concat([
+            [i - 2, j + row],
+            [i + 2, j + row]
+        ]);
 
         return nbh
     }
 
 
-    this.placeBombs = function (firstClick) {
+    this.placeBombs = function(firstClick) {
         // exclude the cells next to the first click, so you can start safely
-        var toExclude = this.cell[firstClick].nbHood.map(function (x) { return x.toString() });
+        var toExclude = this.cell[firstClick].nbHood.map(function(x) {
+            return x.toString()
+        });
         toExclude.push(firstClick.toString());
-        var candidates = Object.keys(this.cell).filter(function(x) { return toExclude.indexOf(x) == -1 });
+        var candidates = Object.keys(this.cell).filter(function(x) {
+            return toExclude.indexOf(x) == -1
+        });
         for (var b = 0; b < BOMBS; b++) {
-            var choiceInd = Math.floor(Math.random()*candidates.length);
+            var choiceInd = Math.floor(Math.random() * candidates.length);
             var bomb = this.cell[candidates[choiceInd]]
             bomb.isBomb = true;
             for (nextToBomb of bomb.nbHood)
                 this.cell[nextToBomb].count++;
-            candidates.splice(choiceInd,1);
+            candidates.splice(choiceInd, 1);
         }
     }
 
@@ -276,31 +315,37 @@ function Grid (N) {
         return c.split(",").map(parseFloat);
     }
 
-        // adding the cells to the grid
-        for (var j = 0; j < N; j++)
-            for (var i = -j; i < 2*N+j+1; i++)
-                this.addCell(i,j);
-        for (var j = N; j < 2*N; j++)
-            for (var i = j+1-2*N; i < 4*N-j; i++)
-                this.addCell(i,j);
+    // adding the cells to the grid
+    for (var j = 0; j < N; j++)
+        for (var i = -j; i < 2 * N + j + 1; i++)
+            this.addCell(i, j);
+    for (var j = N; j < 2 * N; j++)
+        for (var i = j + 1 - 2 * N; i < 4 * N - j; i++)
+            this.addCell(i, j);
 
-        // calculating the neighborhood for each cells and saving it
-        var cellCoords = Object.keys(this.cell);
-        for (c of cellCoords)
-            this.cell[c].nbHood = this.nbHoodOf(coords(c)).filter( function (nbh) { return cellCoords.indexOf(nbh.toString()) != -1 } );
+    // calculating the neighborhood for each cells and saving it
+    var cellCoords = Object.keys(this.cell);
+    for (c of cellCoords)
+        this.cell[c].nbHood = this.nbHoodOf(coords(c)).filter(function(nbh) {
+            return cellCoords.indexOf(nbh.toString()) != -1
+        });
 
 }
 
 // field appear
 var menu_hex_points = new Array()
-menu_hex_points.push([x0,y0])
-menu_hex_points.push([x0 + N*l, y0])
-menu_hex_points.push([x0 + N*1.5*l, y0 + N*l*hsr3])
-menu_hex_points.push([x0 + N*l, y0 + N*l*hsr3*2])
-menu_hex_points.push([x0, y0 + N*l*hsr3*2])
-menu_hex_points.push([x0-N*l/2, y0 + N*l*hsr3])
+menu_hex_points.push([x0, y0])
+menu_hex_points.push([x0 + N * l, y0])
+menu_hex_points.push([x0 + N * 1.5 * l, y0 + N * l * hsr3])
+menu_hex_points.push([x0 + N * l, y0 + N * l * hsr3 * 2])
+menu_hex_points.push([x0, y0 + N * l * hsr3 * 2])
+menu_hex_points.push([x0 - N * l / 2, y0 + N * l * hsr3])
 var fieldshadow = field.filter(Snap.filter.shadow(0, 8, 18, "#000", .4)),
-field_bg = field.polygon(menu_hex_points).attr({fill: field_bg_color, opacity: field_bg_opacity, filter: fieldshadow });
+    field_bg = field.polygon(menu_hex_points).attr({
+        fill: field_bg_color,
+        opacity: field_bg_opacity,
+        filter: fieldshadow
+    });
 
 // test code
 var grid = new Grid(N);
@@ -311,24 +356,26 @@ var grid = new Grid(N);
 var menu = Snap('#menu');
 
 // hide the menu if it's a rematch
-if(argv["rematch"] == "true") menu.attr({display: "none"});
+if (argv["rematch"] == "true") menu.attr({
+    display: "none"
+});
 
 // UI CONF
-    document.getElementById('menu').setAttribute('width',fieldWidth);
-    document.getElementById('menu').setAttribute('height',fieldHeight);
-    // var menu_hex_points = new Array()
-    // menu_hex_points.push([x0,y0])
-    // menu_hex_points.push([x0 + N*l, y0])
-    // menu_hex_points.push([x0 + N*1.5*l, y0 + N*l*hsr3])
-    // menu_hex_points.push([x0 + N*l, y0 + N*l*hsr3*2])
-    // menu_hex_points.push([x0, y0 + N*l*hsr3*2])
-    // menu_hex_points.push([x0-N*l/2, y0 + N*l*hsr3])
+document.getElementById('menu').setAttribute('width', fieldWidth);
+document.getElementById('menu').setAttribute('height', fieldHeight);
+// var menu_hex_points = new Array()
+// menu_hex_points.push([x0,y0])
+// menu_hex_points.push([x0 + N*l, y0])
+// menu_hex_points.push([x0 + N*1.5*l, y0 + N*l*hsr3])
+// menu_hex_points.push([x0 + N*l, y0 + N*l*hsr3*2])
+// menu_hex_points.push([x0, y0 + N*l*hsr3*2])
+// menu_hex_points.push([x0-N*l/2, y0 + N*l*hsr3])
 
-var menu_center = [ menu_hex_points[0][0] + (menu_hex_points[1][0] - menu_hex_points[0][0]) / 2, menu_hex_points[2][1] ],
+var menu_center = [menu_hex_points[0][0] + (menu_hex_points[1][0] - menu_hex_points[0][0]) / 2, menu_hex_points[2][1]],
 
     //colors
     menu_play_clr = "#a9d41c",
-    menu_hex_clr  = menu_play_clr,
+    menu_hex_clr = menu_play_clr,
     menu_bomb_clr = "#E61913",
     menu_size_clr = "#F5B10A",
     menu_fame_clr = "#8BAF17",
@@ -338,19 +385,34 @@ var menu_center = [ menu_hex_points[0][0] + (menu_hex_points[1][0] - menu_hex_po
     menuopt_shadow = menu.filter(Snap.filter.shadow(0, 1, 4, "#000", .3)),
 
     //menu options elements
-    menu_hex = menu.polygon(menu_hex_points).attr({fill: menu_hex_clr }),
-    menu_hex_holemask = menu.polygon(menu_hex_points).attr({fill: "#fff" }),
-    menu_play = menu.polygon(menu_hex_points[0], menu_hex_points[1], menu_hex_points[4], menu_hex_points[5]).attr({fill: menu_play_clr }),
-    menu_bomb = menu.polygon(menu_center, menu_hex_points[3], menu_hex_points[4]).attr({ fill: menu_bomb_clr, filter: menuopt_shadow }),
+    menu_hex = menu.polygon(menu_hex_points).attr({
+        fill: menu_hex_clr
+    }),
+    menu_hex_holemask = menu.polygon(menu_hex_points).attr({
+        fill: "#fff"
+    }),
+    menu_play = menu.polygon(menu_hex_points[0], menu_hex_points[1], menu_hex_points[4], menu_hex_points[5]).attr({
+        fill: menu_play_clr
+    }),
+    menu_bomb = menu.polygon(menu_center, menu_hex_points[3], menu_hex_points[4]).attr({
+        fill: menu_bomb_clr,
+        filter: menuopt_shadow
+    }),
     // menu_fame = menu.polygon(menu_center, menu_hex_points[1], menu_hex_points[2]).attr({ fill: menu_fame_clr }),
-    menu_size = menu.polygon(menu_center, menu_hex_points[2], menu_hex_points[3]).attr({ fill: menu_size_clr, filter: menuopt_shadow });
-    // menu_hex.attr({filter: menushadow});
+    menu_size = menu.polygon(menu_center, menu_hex_points[2], menu_hex_points[3]).attr({
+        fill: menu_size_clr,
+        filter: menuopt_shadow
+    });
+// menu_hex.attr({filter: menushadow});
 
-var m_text_opt = {'text-anchor':'middle', 'alignment-baseline': 'central'};
-    m_text_opt['font-size'] = 24 + 'pt';
-    m_text_opt['font-family'] = 'OpenSansBold';
-    m_text_opt['font-weight'] = 600;
-    m_text_opt['fill'] = "#fff";
+var m_text_opt = {
+    'text-anchor': 'middle',
+    'alignment-baseline': 'central'
+};
+m_text_opt['font-size'] = 24 + 'pt';
+m_text_opt['font-family'] = 'OpenSansBold';
+m_text_opt['font-weight'] = 600;
+m_text_opt['fill'] = "#fff";
 
 // Grandezza immagini percentuale rispetto al lato dell'esagono !!
 var bombBox = 0.35,
@@ -361,15 +423,17 @@ var bombBox = 0.35,
 
 var m_img_halfsize = 45,
     m_bomb = menu.text(menu_center[0], 1.75 * menu_center[1], "30").attr(m_text_opt),
-    m_bomb_icon = menu.image('img/menu/bomb.png', menu_center[0] - m_img_halfsize, 1.25 * menu_center[1], N*l*bombBox, N*l*bombBox),
+    m_bomb_icon = menu.image('img/menu/bomb.png', menu_center[0] - m_img_halfsize, 1.25 * menu_center[1], N * l * bombBox, N * l * bombBox),
     // m_bomb_icon = menu.image('img/menu/bomb.png', menu_center[0] - m_img_halfsize, 1.25 * menu_center[1]),
-    m_size  = menu.text(menu_hex_points[3][0], 1.6 * menu_center[1], "7").attr(m_text_opt),
-    m_size_icon = menu.image('img/menu/size.png', menu_hex_points[3][0] - m_img_halfsize, 1.1 * menu_center[1], N*l*sizeBox, N*l*sizeBox),
+    m_size = menu.text(menu_hex_points[3][0], 1.6 * menu_center[1], "7").attr(m_text_opt),
+    m_size_icon = menu.image('img/menu/size.png', menu_hex_points[3][0] - m_img_halfsize, 1.1 * menu_center[1], N * l * sizeBox, N * l * sizeBox),
     // m_size_icon = menu.image('img/menu/size.png', menu_hex_points[3][0] - m_img_halfsize, 1.1 * menu_center[1]),
     m_play = menu.text(menu_center[0] - 1.9 * m_img_halfsize, menu_center[1], "PLAY").attr(m_text_opt),
-    m_play_icon = menu.image('img/menu/play.png', menu_hex_points[5][0] + m_img_halfsize/2, menu_center[1] - m_img_halfsize, N*l*playBox, N*l*playBox);
-    // m_play_icon = menu.image('img/menu/play.png', menu_hex_points[5][0] + m_img_halfsize/2, menu_center[1] - m_img_halfsize);
-    m_play.attr({fill: "#1f1f1f"});
+    m_play_icon = menu.image('img/menu/play.png', menu_hex_points[5][0] + m_img_halfsize / 2, menu_center[1] - m_img_halfsize, N * l * playBox, N * l * playBox);
+// m_play_icon = menu.image('img/menu/play.png', menu_hex_points[5][0] + m_img_halfsize/2, menu_center[1] - m_img_halfsize);
+m_play.attr({
+    fill: "#1f1f1f"
+});
 
 
 //elements
@@ -379,60 +443,106 @@ var menu_play_btn = menu.group(menu_play, m_play, m_play_icon),
     menu_bomb_opt = menu.group(menu_bomb, m_bomb, m_bomb_icon),
     // menu_fame_opt = menu.group(menu_fame, /*m_fame,*/ m_fame_icon),
 
-    menu_hole_shadow = menu.circle(menu_center[0], menu_center[1] + 2, menu_hex_points[1][0] + 25).attr({fill: "#000", opacity: "0", mask: menu_hex_holemask }),
-    menu_hole =        menu.circle(menu_center[0], menu_center[1],     menu_hex_points[1][0]).attr({fill: "#fff"}),
-    menu_group = menu.group(menu_hex, menu_play, m_play, m_play_icon, menu_bomb, m_bomb, m_bomb_icon, menu_size, m_size, m_size_icon).attr({mask: menu_hole});
+    menu_hole_shadow = menu.circle(menu_center[0], menu_center[1] + 2, menu_hex_points[1][0] + 25).attr({
+        fill: "#000",
+        opacity: "0",
+        mask: menu_hex_holemask
+    }),
+    menu_hole = menu.circle(menu_center[0], menu_center[1], menu_hex_points[1][0]).attr({
+        fill: "#fff"
+    }),
+    menu_group = menu.group(menu_hex, menu_play, m_play, m_play_icon, menu_bomb, m_bomb, m_bomb_icon, menu_size, m_size, m_size_icon).attr({
+        mask: menu_hole
+    });
 
 // functions
 
 function closemenu() {
-  var animduration = 1000;
-  menu_hole_shadow.attr({opacity: ".3"});
-  menu_hole.animate({r: 0}, animduration, mina.bounce);
-  menu_hole_shadow.animate({r: 0, opacity: ".1"}, animduration, mina.bounce);
-  var shadowblur = menu.filter(Snap.filter.blur(2));
-  menu_hole_shadow.attr({ filter: shadowblur });
-  setTimeout(function () {menu.attr({display: "none"})}, 1000);
+    var animduration = 1000;
+    menu_hole_shadow.attr({
+        opacity: ".3"
+    });
+    menu_hole.animate({
+        r: 0
+    }, animduration, mina.bounce);
+    menu_hole_shadow.animate({
+        r: 0,
+        opacity: ".1"
+    }, animduration, mina.bounce);
+    var shadowblur = menu.filter(Snap.filter.blur(2));
+    menu_hole_shadow.attr({
+        filter: shadowblur
+    });
+    setTimeout(function() {
+        menu.attr({
+            display: "none"
+        })
+    }, 1000);
 }
 
 function openmenu() {
-  setTimeout(function () {menu.attr({display: "block"})}, 0);
-  var animduration = 1000;
-  menu_hole_shadow.attr({opacity: ".1"});
-  menu_hole.animate({r: menu_hex_points[1][0]}, animduration, mina.bounce);
-  menu_hole_shadow.animate({r: (menu_hex_points[1][0] + 25), opacity: ".3"}, animduration, mina.bounce);
-  var shadowblur = menu.filter(Snap.filter.blur(2));
-  menu_hole_shadow.attr({ filter: shadowblur });
+    setTimeout(function() {
+        menu.attr({
+            display: "block"
+        })
+    }, 0);
+    var animduration = 1000;
+    menu_hole_shadow.attr({
+        opacity: ".1"
+    });
+    menu_hole.animate({
+        r: menu_hex_points[1][0]
+    }, animduration, mina.bounce);
+    menu_hole_shadow.animate({
+        r: (menu_hex_points[1][0] + 25),
+        opacity: ".3"
+    }, animduration, mina.bounce);
+    var shadowblur = menu.filter(Snap.filter.blur(2));
+    menu_hole_shadow.attr({
+        filter: shadowblur
+    });
 }
 
 // UI associations
 
-menu_group.node.onclick = function() {closemenu()};
+menu_group.node.onclick = function() {
+    closemenu()
+};
 
 //// MouseWheel - Zona test!
 
 bombsNumberFloat = 30.;
 sizeNumberFloat = 7.;
 
-function wheelSelect (e, opt) {
-  if (opt == 'bomb') {
-    if (e.deltaY > 0) bombsNumberFloat-=.1;
-    else bombsNumberFloat+=.1;
-    bombsNumber = parseInt(bombsNumberFloat);
-    m_bomb.node.innerHTML = bombsNumber;
-  }
-  else if (opt == 'size') {
-    if (e.deltaY > 0) sizeNumberFloat-=.1;
-    else sizeNumberFloat+=.1;
-    sizeNumber = parseInt(sizeNumberFloat);
-    m_size.node.innerHTML = sizeNumber;
-  }
+function wheelSelect(e, opt) {
+    if (opt == 'bomb') {
+        if (e.deltaY > 0) bombsNumberFloat -= .1;
+        else bombsNumberFloat += .1;
+        bombsNumber = parseInt(bombsNumberFloat);
+        m_bomb.node.innerHTML = bombsNumber;
+    } else if (opt == 'size') {
+        if (e.deltaY > 0) sizeNumberFloat -= .1;
+        else sizeNumberFloat += .1;
+        sizeNumber = parseInt(sizeNumberFloat);
+        m_size.node.innerHTML = sizeNumber;
+    }
 }
 
-menu_bomb.node.onmousewheel = function (e) { wheelSelect(e, 'bomb')};
-m_bomb_icon.node.onmousewheel = function (e) { wheelSelect(e, 'bomb')};
-m_bomb.node.onmousewheel = function (e) { wheelSelect(e, 'bomb')};
-
-menu_size.node.onmousewheel = function (e) { wheelSelect(e, 'size')};
-m_size_icon.node.onmousewheel = function (e) { wheelSelect(e, 'size')};
-m_size.node.onmousewheel = function (e) { wheelSelect(e, 'size')};
+menu_bomb.node.onmousewheel = function(e) {
+    wheelSelect(e, 'bomb')
+};
+m_bomb_icon.node.onmousewheel = function(e) {
+    wheelSelect(e, 'bomb')
+};
+m_bomb.node.onmousewheel = function(e) {
+    wheelSelect(e, 'bomb')
+};
+menu_size.node.onmousewheel = function(e) {
+    wheelSelect(e, 'size')
+};
+m_size_icon.node.onmousewheel = function(e) {
+    wheelSelect(e, 'size')
+};
+m_size.node.onmousewheel = function(e) {
+    wheelSelect(e, 'size')
+};
