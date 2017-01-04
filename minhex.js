@@ -440,7 +440,7 @@ var menu_center = [menu_hex_points[0][0] + (menu_hex_points[1][0] - menu_hex_poi
     });
 
     // field appear
-    var fieldshadow = field.filter(Snap.filter.shadow(0, 8, 18, "#000", .4)),
+    var fieldshadow = field.filter(Snap.filter.shadow(0, 8, 12, "#000", .4)),
         field_bg = field.polygon(menu_hex_points).attr({
             fill: field_bg_color,
             opacity: field_bg_opacity,
