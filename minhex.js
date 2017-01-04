@@ -481,7 +481,44 @@ var menu_play_btn = menu.group(menu_play, m_play, m_play_icon),
 
 // functions
 
+//// MouseWheel
+
+var bombsNumberFloat = B * 1.,
+    sizeNumberFloat = N * 1.,
+    maxbombs = 3*sizeNumber*(sizeNumber+1),            //number of cells
+    maxsize  = 14;                                     //just too cells for screens, quite unsable
+
+function wheelSelect(e, opt) {
+    if (opt == 'bomb') {
+      if (e.deltaY > 0)
+        bombsNumberFloat -= .1;
+      else
+        bombsNumberFloat += .1;
+
+      bombsNumber = parseInt(bombsNumberFloat);       // i think this if is equivalent to bombsNumberFloat += e.deltaY * .1;
+      if(bombsNumber > 0)
+        m_bomb.node.innerHTML = bombsNumber;
+    }
+
+    else if (opt == 'size') {
+      if (e.deltaY > 0)
+        sizeNumberFloat -= .1;
+      else
+        sizeNumberFloat += .1;
+
+      sizeNumber = parseInt(sizeNumberFloat);
+      if (sizeNumber > 0 && sizeNumber <= maxsize) {
+        m_size.node.innerHTML = sizeNumber;
+        maxbombs = 3*sizeNumber*(sizeNumber+1)
+      }
+    }
+}
+
+//// Menu
+
 function closemenu() {
+  console.log(bombsNumber, maxbombs);
+  if (bombsNumber < maxbombs) {
     var animduration = 1000;
     menu_hole_shadow.attr({
         opacity: ".3"
@@ -505,6 +542,9 @@ function closemenu() {
     // Time to play!
     initializeScale();
     grid = new Grid(sizeNumber, bombsNumber);
+  } else {
+    alert("How brave! You chose too many bombs, more that you can afford, retry with less!");
+  }
 }
 
 function openmenu() {
@@ -535,40 +575,6 @@ function openmenu() {
 menu_group.node.onclick = function() {
     closemenu()
 };
-
-//// MouseWheel - Zona test!
-
-
-var bombsNumberFloat = B * 1.,
-    sizeNumberFloat = N * 1.,
-    maxbombs = 3*sizeNumber*(sizeNumber+1),            //number of cells
-    maxsize  = 12;                                     //just too cells for screens, quite unsable
-
-function wheelSelect(e, opt) {
-    if (opt == 'bomb') {
-      if (e.deltaY > 0)
-        bombsNumberFloat -= .1;
-      else
-        bombsNumberFloat += .1;
-
-      bombsNumber = parseInt(bombsNumberFloat);       // i think this if is equivalent to bombsNumberFloat += e.deltaY * .1;
-      if(bombsNumber > 0)
-        m_bomb.node.innerHTML = bombsNumber;
-    }
-
-    else if (opt == 'size') {
-      if (e.deltaY > 0)
-        sizeNumberFloat -= .1;
-      else
-        sizeNumberFloat += .1;
-
-      sizeNumber = parseInt(sizeNumberFloat);
-      if (sizeNumber > 0 && sizeNumber <= maxsize)
-        m_size.node.innerHTML = sizeNumber;
-    }
-}
-
-
 
 menu_bomb.node.onmousewheel = function(e) {
     wheelSelect(e, 'bomb')
