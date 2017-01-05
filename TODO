@@ -22,7 +22,7 @@ MinHex
 			ricorsiva, che una volta terminato l'albero delle chiamate andrebbe resettata.
 
 \ui
-
+	· closehowto animato, dissolvenza magari
 	· rematch dovrebbe non mostrare di nuovo il menu	(*)
 	? rematch interfaccia								(*)
 	· personalizzare le alert con il css (o fare uno splashscreen)
@@ -32,8 +32,7 @@ MinHex
 
 
 \howto
-	
-	· ordine delle pagine invertito
+
 	· sistemare in generale
 	· spiegare i controlli
 	· aggiungere immagine per spiegare l'intorno

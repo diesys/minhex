@@ -17,13 +17,12 @@ body, html, .HowTo {
    height: 100%;
    margin: 0;
    background-image: url('img/tile.png');
-   /*background-color: #2c7522;*/
    background-color: #411F15;
    color: #eee;
    cursor: default;
 }
 
-#grad {
+#grad, #grad_ht {
    margin: 0;
    position: fixed;
    padding: 0;
@@ -33,14 +32,28 @@ body, html, .HowTo {
    width: 100%;
    overflow: hidden;
    z-index: 0;
+}
+
+#grad {
    /* Safari 5.1 to 6.0 */
-   background: -webkit-radial-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6));
+   background: -webkit-radial-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7));
    /* For Opera 11.6 to 12.0 */
-   background: -o-radial-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6));
+   background: -o-radial-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7));
    /* For Firefox 3.6 to 15 */
-   background: -moz-radial-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6));
+   background: -moz-radial-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7));
    /* Standard syntax */
-   background: radial-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6));
+   background: radial-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7));
+}
+
+#grad_ht {
+   /* Safari 5.1 to 6.0 */
+   background: -webkit-radial-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
+   /* For Opera 11.6 to 12.0 */
+   background: -o-radial-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
+   /* For Firefox 3.6 to 15 */
+   background: -moz-radial-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
+   /* Standard syntax */
+   background: radial-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
 }
 
 #field, #menu {
@@ -132,13 +145,15 @@ svg#menu text {
 
 .HowTo {
    position: fixed;
-   margin: 0px;
+   margin: 0 0;
    padding: 20px;
    z-index: 1001;
    overflow-y: scroll;
    overflow-x: hidden;
    text-align: justify;
    text-shadow: 0 2px 3px rgba(0, 0, 0, .9);
+   background-color: #411F15;
+   top: 0px;
 }
 
 .HowTo.active {
@@ -202,7 +217,7 @@ svg#menu text {
    color: #111;
    font-family: 'OpenSansBold';
    font-size: 12pt;
-   box-shadow: 0px 2px 10px rgba(0, 0, 0, .8);
+   box-shadow: 0px 2px 10px rgba(0, 0, 0, .6);
    cursor: pointer;
    text-decoration: none;
    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
@@ -297,4 +312,12 @@ svg#menu text {
    /* Safari */
    -webkit-transition: .2s ease;
    transition: .2s ease;
+}
+
+#RemainingBombs {
+   z-index: 0;
+   /*float: right;*/
+   /*right: 50%;*/
+   display: inherit;
+   /*transform: translateX(50%);*/
 }
