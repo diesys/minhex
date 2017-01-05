@@ -198,7 +198,7 @@ svg#menu text {
    background-image: url('img/tile.png');
    background-size: 220px;
    background-color: #f8b71b;
-   border: 3px solid rgba(0, 0, 0, .3);
+   border: 2px solid rgba(0, 0, 0, .3);
    color: #111;
    font-family: 'OpenSansBold';
    font-size: 12pt;
