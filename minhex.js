@@ -587,6 +587,32 @@ function openmenu() {
 
 }
 
+function HowTo(option) {
+    ht1 = document.getElementById("HT1");
+    ht2 = document.getElementById("HT2");
+    ht3 = document.getElementById("HT3");
+    // var animduration = 800;
+
+    if (option == '1') {
+        ht1.className = "HowTo active";
+    } else if (option == '2') {
+        ht1.className = "HowTo inactive";
+        ht2.className = "HowTo active";
+    } else if (option == '3') {
+        ht2.className = "HowTo inactive";
+        ht3.className = "HowTo active";
+    } else /*setTimeout(function()*/ {
+        ht1.className = "HowTo inactive";
+        ht2.className = "HowTo inactive";
+        ht3.className = "HowTo inactive";
+    }/*, 200;));*/
+
+    delete ht1;
+    delete ht2;
+    delete ht3;
+    delete ht4;
+}
+
 // UI associations
 
 menu_group.node.onclick = function() {
