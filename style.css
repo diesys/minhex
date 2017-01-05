@@ -188,9 +188,8 @@ svg#menu text {
 
 .HowTo h1, .HowTo p {
    position: relative;
-   ;
    top: 55%;
-   padding: 0px 100px 0px 80px;
+   padding: 0px 40px 0px 40px;
 }
 
 .HowTo p {
