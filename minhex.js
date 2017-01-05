@@ -220,9 +220,9 @@ function Grid(N, BOMBS) {
                     var answer = confirm("Pieces of your fleshy brain are all over the walls. Pay more attention to mines next time. Rematch?")
                     if (answer)
                     // the url just without vars, and the just used ones
-                        window.location = window.location.href.split('?')[0] + "?n=" + N + "&b=" + B; // + "&rematch=true"; //seems do not work the rematch url
+                        window.location = window.location.href.split('?')[0] + "?n=" + sizeNumber + "&b=" + bombsNumber; // + "&rematch=true"; //seems do not work the rematch url
                     else
-                        window.location = window.location.href.split('?')[0] + "?n=" + N + "&b=" + B;
+                        window.location = window.location.href.split('?')[0] + "?n=" + sizeNumber + "&b=" + bombsNumber;
                 }, 700);
                 for (c of Object.keys(this.cell))
                     if (this.cell[c].isBomb && c != pos) {
@@ -268,7 +268,7 @@ function Grid(N, BOMBS) {
 
                 // this should open the menu and cancel variabiles instead of reloading the page?
                 else
-                    window.location = window.location.href.split('?')[0] + "?n=" + N + "&b=" + B;
+                    window.location = window.location.href.split('?')[0] + "?n=" + sizeNumber + "&b=" + bombsNumber;
             }, 700);
     }
 
