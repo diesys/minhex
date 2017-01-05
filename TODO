@@ -2,23 +2,40 @@ MinHex
 
 \Codice
 
-	! Correggere bug che ti permette di vincere mettendo anche una bandierina in un posto sbagliato, purche siano giuste quelle dove ci sono davvero le bombe
-
 	· Rivedere il codice per essere minimizzato perche sono quasi mille righe tutto..
+		· È importante?
+		· Non credo si possa fare poi così tanto, magari con estrema fatica puoi renderlo un po' più della metà,
+			ma a scapito di leggibilità (già scarsa), forse efficienza (minimamente), I suppost
 
-	· Inizializzazione in una funzione init() a parte
-	· init() chiama una funzione adjustDimensions()
-		- adjustDimensions() imposta le dimensioni del field in base alla dimensione
-			dello schermo in modo da inscrivere il campo di gioco nel field e avere
-			il field che abbia un bordo garantito percentuale fisso sia in orizzontale
-			che in verticale
-	· chiamare init() su body.onload()
-	· chiamare adjustDimensions() su body.resize()
-	? estendere ricorsivamente lo ``scoprintorno''
+	· Accomodare un po' l'etichetta delle bombe rimanenti. Farla cliccabile per la nuova partita? (permetterebbe di lasciar
+		vedere il campo una volta finita la partita - cosa utile)
+
+\Gioco
+
+	? se clicco una casella con scritto 4 che ha tre celle non cliccate e una bomba piazzata piazza automaticamente
+		le altre tre bombe - utile
+
+	? clic lungo come alternativa al doppio click - boh
+
+	? sistemare la chiamata ricorsiva dello ``scoprintorno'' (se si riesce a fare in modo efficiente)
+		-> Non clicca ricorsivamente sulle celle già cliccate. Cliccare ma aggiungere altra flag per la chiamata
+			ricorsiva, che una volta terminato l'albero delle chiamate andrebbe resettata.
 
 \ui
 
-	· rematch dovrebbe non mostrare di nuovo il menu
-	? rematch interfaccia
-	· personalizzare le alert con il css
-	· fare howto, inglese
+	· rematch dovrebbe non mostrare di nuovo il menu	(*)
+	? rematch interfaccia								(*)
+	· personalizzare le alert con il css (o fare uno splashscreen)
+
+
+	(*)	Capire cosa vogliamo che sia il rematch
+
+
+\howto
+	
+	· ordine delle pagine invertito
+	· sistemare in generale
+	· spiegare i controlli
+	· aggiungere immagine per spiegare l'intorno
+	· aggiungere link alla pagina di wikipedia e riferimento a mines di windows(?)
+	· scrivere (anche) in inglese. Magari con controllo sulla provenienza.
