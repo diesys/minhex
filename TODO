@@ -10,6 +10,8 @@ MinHex
 	· Accomodare un po' l'etichetta delle bombe rimanenti. Farla cliccabile per la nuova partita? (permetterebbe di lasciar
 		vedere il campo una volta finita la partita - cosa utile)
 
+	· Aggiungere rightclick per le bandierine ed eventualmente longtouch per i cell
+
 \Gioco
 
 	? se clicco una casella con scritto 4 che ha tre celle non cliccate e una bomba piazzata piazza automaticamente
