@@ -24,6 +24,7 @@ MinHex
 			ricorsiva, che una volta terminato l'albero delle chiamate andrebbe resettata.
 
 \ui
+	! img del menu non sono centrate
 	· closehowto animato, dissolvenza magari
 	· rematch dovrebbe non mostrare di nuovo il menu	(*)
 	? rematch interfaccia								(*)

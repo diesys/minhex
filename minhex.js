@@ -443,7 +443,7 @@ var menu_center = [menu_hex_points[0][0] + (menu_hex_points[1][0] - menu_hex_poi
     });
 
 // field appear
-var fieldshadow = field.filter(Snap.filter.shadow(0, 8, 12, "#000", .4)),
+var fieldshadow = field.filter(Snap.filter.shadow(0, 6, 12, "#000", .4)),
     field_bg = field.polygon(menu_hex_points).attr({
         fill: field_bg_color,
         opacity: field_bg_opacity,
@@ -576,7 +576,7 @@ function closemenu() {
 }
 
 function openmenu_hole() {
-    var animduration = 800;
+    var animduration = 500;
     setTimeout(function() {
         menu_hole.animate({
             r: menu_hex_points[1][0]
@@ -586,7 +586,7 @@ function openmenu_hole() {
 }
 
 function openmenu() {
-    var animduration = 1800;
+    var animduration = 1100;
     setTimeout(function() {
         menu_group.animate({
             transform: "r" + 360, centerX, centerY

@@ -16,10 +16,13 @@ body, html, .HowTo {
    width: 100%;
    height: 100%;
    margin: 0;
+   bottom: 0;
    background-image: url('img/tile.png');
    background-color: #411F15;
    color: #eee;
    cursor: default;
+   position: fixed;
+   overflow-y: hidden;
 }
 
 #grad, #grad_ht {
