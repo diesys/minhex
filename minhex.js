@@ -575,12 +575,22 @@ function closemenu() {
     }
 }
 
-function openmenu() {
+function openmenu_hole() {
     var animduration = 800;
     setTimeout(function() {
-        menu_hole_shadow.attr({
-            opacity: ".1"
-        });
+        menu_hole.animate({
+            r: menu_hex_points[1][0]
+        }, animduration, mina.ease);
+    }, 200);
+
+}
+
+function openmenu() {
+    var animduration = 1800;
+    setTimeout(function() {
+        menu_group.animate({
+            transform: "r" + 360, centerX, centerY
+          }, animduration, mina.ease);
         menu_hole.animate({
             r: menu_hex_points[1][0]
         }, animduration, mina.ease);
