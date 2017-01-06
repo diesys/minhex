@@ -419,7 +419,7 @@ var menu_center = [menu_hex_points[0][0] + (menu_hex_points[1][0] - menu_hex_poi
 
     // filters
     // menushadow = menu.filter(Snap.filter.shadow(0, 10, 15, "#000", .4)),
-    menuopt_shadow = menu.filter(Snap.filter.shadow(0, 1, 4, "#000", .3)),
+    menuopt_shadow = menu.filter(Snap.filter.shadow(0, 1, 3, "#000", .3)),
 
     //menu options elements
     menu_hex = menu.polygon(menu_hex_points).attr({
