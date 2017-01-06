@@ -19,8 +19,9 @@ var sizeNumber = N,
 
 
 var base_clr = "#A9D41C",
-    field_bg_color = "#59710E",
-    field_bg_opacity = ".8",
+    // field_bg_color = "#59710E",
+    field_bg_color = "#190900",
+    field_bg_opacity = "1",
     stroke_clr = "rgba(0,0,0,.1)",
     stroke_width = "2",
     clicked_clr = "#698511",
