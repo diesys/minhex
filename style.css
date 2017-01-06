@@ -146,12 +146,12 @@ svg#menu text {
 .HowTo {
    position: fixed;
    margin: 0 0;
-   padding: 20px;
+   padding: 0px;
    z-index: 1001;
    overflow-y: scroll;
    overflow-x: hidden;
    text-align: justify;
-   text-shadow: 0 2px 3px rgba(0, 0, 0, .9);
+   text-shadow: 0 2px 3px rgba(0, 0, 0, .8);
    background-color: #411F15;
    top: 0px;
 }
@@ -189,11 +189,22 @@ svg#menu text {
 .HowTo h1, .HowTo p {
    position: relative;
    top: 55%;
-   padding: 0px 40px 0px 40px;
+   margin: 0 17% 0 15%;
+   padding: 8px 12px;
 }
 
 .HowTo p {
    padding-bottom: 100px;
+}
+
+.HowTo a, .HowTo a:link, .HowTo a:visited  {
+   color: #f8b71b;
+   text-decoration: none;
+   font-weight: bold;
+}
+
+.HowTo a:hover {
+   color: #f8d75b;
 }
 
 .HowTo.active h1, .HowTo.active p {
@@ -208,18 +219,21 @@ svg#menu text {
 .button {
    position: fixed;
    padding: 8px;
-   border-radius: 4px;
+   border-radius: 2px;
    background-image: url('img/tile.png');
    background-size: 220px;
-   background-color: #f8b71b;
+   /*background-color: #f8b71b;*/
+   /*background-color: #633A17;*/
+   background-color: #5D2B1D;
    border: 2px solid rgba(0, 0, 0, .3);
-   color: #111;
+   /*color: #111;*/
+   color: #f8b71b;
    font-family: 'OpenSansBold';
    font-size: 12pt;
    box-shadow: 0px 2px 10px rgba(0, 0, 0, .6);
    cursor: pointer;
    text-decoration: none;
-   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+   text-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
    overflow: hidden;
    text-align: center;
    outline: none;
@@ -231,6 +245,7 @@ svg#menu text {
 
 .button:hover {
    transform: translateY(2px);
+   color: #f8d74b;
    /* Safari */
    -webkit-transition: .2s ease;
    transition: .2s ease;
@@ -260,10 +275,9 @@ svg#menu text {
 .button.closeHowTo {
    right: 50px;
    top: -6px;
-   padding: 15px;
+   padding: 12px;
+   padding-top: 15px;
    font-size: 12pt;
-   background-color: #f8b71b;
-   color: #111;
    animation: fadefromtop 1s ease;
    text-transform: uppercase;
 }
@@ -273,12 +287,14 @@ svg#menu text {
    max-width: 20px;
    top: 50%;
    padding: 15px;
-   color: #333;
-   background-color: #f8b71b;
    color: #111;
    box-shadow: 0px 2px 8px rgba(0, 0, 0, .3);
    text-transform: none;
 }
+
+ .button.HowTo a {
+   color: #f8b71b;
+ }
 
 .button.HowTo:hover {
    box-shadow: 0px 2px 15px rgba(0, 0, 0, .1);
