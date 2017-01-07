@@ -517,25 +517,29 @@ var bombsNumberFloat = B * 1.,
     maxbombs = 3 * sizeNumber * (sizeNumber + 1), //number of cells
     maxsize = 14; //just too cells for screens, quite unsable
 
+
 function wheelSelect(e, opt) {
+    var speedWheel = .01;
     // credo si possa snellire molto questa, meglio usare l'oggetto chiamante se riusciamo, piuttosto che determinarlo dentro la funzione
     if (opt == 'bomb') {
-        if (e.deltaY > 0)
+/*        if (e.deltaY > 0)
             bombsNumberFloat -= .1;
         else
             bombsNumberFloat += .1;
-
+*/
+        bombsNumberFloat -= e.deltaY * speedWheel;
         bN = parseInt(bombsNumberFloat); // i think this if is equivalent to bombsNumberFloat += e.deltaY * .1;
         if (bN > 0) {
             bombsNumber = bN;
             m_bomb.node.innerHTML = bombsNumber;
         }
     } else if (opt == 'size') {
-        if (e.deltaY > 0)
+        /*if (e.deltaY > 0)
             sizeNumberFloat -= .1;
         else
             sizeNumberFloat += .1;
-
+        */
+        sizeNumberFloat -= e.deltaY * speedWheel;
         sN = parseInt(sizeNumberFloat);
         if (sN > 0 && sN <= maxsize) {
             sizeNumber = sN;
@@ -546,6 +550,36 @@ function wheelSelect(e, opt) {
 }
 
 //// Menu
+
+// inhibit click when dragging
+var dragging = false,
+    dragTolerance = 5;
+
+function dragSelect (obj) {
+    var speedDrag = .1;
+    return function (dx, dy) {
+        if (Math.abs(dy)+Math.abs(dx) < dragTolerance)
+            return;
+        dragging = true;
+
+        if (obj == "bomb") {
+            bombsNumberFloat = B - dy * speedDrag;
+            bN = parseInt(bombsNumberFloat);
+            if (bN > 0) {
+                bombsNumber = bN;
+                m_bomb.node.innerHTML = bombsNumber;
+            }
+        } else if (obj == "size") {
+            sizeNumberFloat = N - dy * speedDrag;
+            sN = parseInt(sizeNumberFloat);
+            if (sN > 0 && sN <= maxsize) {
+                sizeNumber = sN;
+                m_size.node.innerHTML = sizeNumber;
+                maxbombs = 3 * sizeNumber * (sizeNumber + 1)
+            }
+        }
+    }
+}
 
 function closemenu() {
     if (bombsNumber < maxbombs) {
@@ -629,6 +663,8 @@ function HowTo(option) {
 // UI associations
 
 menu_group.node.onclick = function() {
+    if (dragging == true)
+        return;
     closemenu()
 };
 
@@ -656,24 +692,28 @@ m_size.node.onmousewheel = function(e) {
 // Ora proviamo con il drag
 
 var dragChangeSpeed = 4;
+var stopDragDelay = 100;
+
+var startDrg = function () { dragging = true }
+var stopDrg = function () { setTimeout(function () { dragging = false }, stopDragDelay) }
 
 menu_bomb.node.setAttribute("draggable","true");
-menu_bomb.drag(function (dx, dy) { wheelSelect({ deltaY: dy * dragChangeSpeed }, 'bomb') });
+menu_bomb.drag(dragSelect('bomb'), function () {}, function () { B = bombsNumber; stopDrg() });
 
 m_bomb_icon.node.setAttribute("draggable","true");
-m_bomb_icon.drag(function (dx, dy) { console.log(dy); wheelSelect({ deltaY: dy * dragChangeSpeed }, 'bomb') });
+m_bomb_icon.drag(dragSelect('bomb'), function () {}, function () { B = bombsNumber; stopDrg() });
 
 m_bomb.node.setAttribute("draggable","true");
-m_bomb.drag(function (dx, dy) { wheelSelect({ deltaY: dy * dragChangeSpeed }, 'bomb') });
+m_bomb.drag(dragSelect('bomb'), function () {}, function () { B = bombsNumber; stopDrg() });
 
 menu_size.node.setAttribute("draggable","true");
-menu_size.drag(function (dx, dy) { wheelSelect({ deltaY: dy * dragChangeSpeed }, 'size') });
+menu_size.drag(dragSelect('size'), function () {}, function () { N = sizeNumber; stopDrg() });
 
 m_size_icon.node.setAttribute("draggable","true");
-m_size_icon.drag(function (dx, dy) { wheelSelect({ deltaY: dy * dragChangeSpeed }, 'size') });
+m_size_icon.drag(dragSelect('size'), function () {}, function () { N = sizeNumber; stopDrg() });
 
 m_size.node.setAttribute("draggable","true");
-m_size.drag(function (dx, dy) { wheelSelect({ deltaY: dy * dragChangeSpeed }, 'size') });
+m_size.drag(dragSelect('size'), function () { dragging = true }, function () { N = sizeNumber; stopDrg() });
 
 
 openmenu();
