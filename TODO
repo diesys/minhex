@@ -24,7 +24,7 @@ MinHex
 			ricorsiva, che una volta terminato l'albero delle chiamate andrebbe resettata.
 
 \ui
-	! img del menu non sono centrate
+	· sistemare dragging per selezionare bombe e dimensione (così non è un granché)
 	· closehowto animato, dissolvenza magari
 	· rematch dovrebbe non mostrare di nuovo il menu	(*)
 	? rematch interfaccia								(*)
@@ -34,12 +34,10 @@ MinHex
 	(*)	Capire cosa vogliamo che sia il rematch
 
 	· aggiungere descrizione tag e altro nei meta dell'html
+		[che vuol dire?]
 
 
 \howto
 
-	· sistemare in generale
-	· spiegare i controlli
-	· aggiungere immagine per spiegare l'intorno
-	· aggiungere link alla pagina di wikipedia e riferimento a mines di windows(?)
+	? aggiungere immagine per spiegare l'intorno
 	· scrivere (anche) in inglese. Magari con controllo sulla provenienza.

@@ -461,7 +461,7 @@ var m_text_opt = {
     'text-anchor': 'middle',
     'alignment-baseline': 'central'
 };
-m_text_opt['font-size'] = 24 + 'pt';
+m_text_opt['font-size'] = parseInt(L * .1) + 'pt';
 m_text_opt['font-family'] = 'OpenSansBold';
 m_text_opt['font-weight'] = 600;
 m_text_opt['fill'] = "#fff";
@@ -473,15 +473,16 @@ var bombBox = 0.35,
 // va fatto lo stesso per il testo !!
 // le posizioni non mi convincono  !!
 
-var m_img_halfsize = 40,
-    m_bomb = menu.text(menu_center[0], 1.75 * menu_center[1], B).attr(m_text_opt),
-    m_bomb_icon = menu.image('img/menu/bomb.png', menu_center[0] - m_img_halfsize, 1.25 * menu_center[1], L * bombBox, L * bombBox),
+//var m_img_halfsize = 40,
+// non mi piace questo sistema
+var m_bomb = menu.text(menu_center[0], 1.75 * menu_center[1], B).attr(m_text_opt),
+    m_bomb_icon = menu.image('img/menu/bomb.png', menu_center[0] - L * bombBox * .5, 1.25 * menu_center[1], L * bombBox, L * bombBox),
     // m_bomb_icon = menu.image('img/menu/bomb.png', menu_center[0] - m_img_halfsize, 1.25 * menu_center[1]),
     m_size = menu.text(menu_hex_points[3][0], 1.6 * menu_center[1], N).attr(m_text_opt),
-    m_size_icon = menu.image('img/menu/size.png', menu_hex_points[3][0] - m_img_halfsize, 1.1 * menu_center[1], L * sizeBox, L * sizeBox),
+    m_size_icon = menu.image('img/menu/size.png', menu_hex_points[3][0] - L * sizeBox * .5, 1.1 * menu_center[1], L * sizeBox, L * sizeBox),
     // m_size_icon = menu.image('img/menu/size.png', menu_hex_points[3][0] - m_img_halfsize, 1.1 * menu_center[1]),
-    m_play = menu.text(menu_center[0] - 1.9 * m_img_halfsize, menu_center[1], "PLAY").attr(m_text_opt),
-    m_play_icon = menu.image('img/menu/play.png', menu_hex_points[5][0] + m_img_halfsize / 2, menu_center[1] - m_img_halfsize, L * playBox, L * playBox);
+    m_play = menu.text(menu_center[0] - .95 * L * playBox, menu_center[1], "PLAY").attr(m_text_opt),
+    m_play_icon = menu.image('img/menu/play.png', menu_hex_points[5][0] + L * playBox * .25, menu_center[1] - L * playBox * .5, L * playBox, L * playBox);
 // m_play_icon = menu.image('img/menu/play.png', menu_hex_points[5][0] + m_img_halfsize/2, menu_center[1] - m_img_halfsize);
 m_play.attr({
     fill: "#1f1f1f"
@@ -517,6 +518,7 @@ var bombsNumberFloat = B * 1.,
     maxsize = 14; //just too cells for screens, quite unsable
 
 function wheelSelect(e, opt) {
+    // credo si possa snellire molto questa, meglio usare l'oggetto chiamante se riusciamo, piuttosto che determinarlo dentro la funzione
     if (opt == 'bomb') {
         if (e.deltaY > 0)
             bombsNumberFloat -= .1;
@@ -630,6 +632,7 @@ menu_group.node.onclick = function() {
     closemenu()
 };
 
+
 menu_bomb.node.onmousewheel = function(e) {
     wheelSelect(e, 'bomb')
 };
@@ -649,6 +652,29 @@ m_size_icon.node.onmousewheel = function(e) {
 m_size.node.onmousewheel = function(e) {
     wheelSelect(e, 'size')
 };
+
+// Ora proviamo con il drag
+
+var dragChangeSpeed = 4;
+
+menu_bomb.node.setAttribute("draggable","true");
+menu_bomb.drag(function (dx, dy) { wheelSelect({ deltaY: dy * dragChangeSpeed }, 'bomb') });
+
+m_bomb_icon.node.setAttribute("draggable","true");
+m_bomb_icon.drag(function (dx, dy) { console.log(dy); wheelSelect({ deltaY: dy * dragChangeSpeed }, 'bomb') });
+
+m_bomb.node.setAttribute("draggable","true");
+m_bomb.drag(function (dx, dy) { wheelSelect({ deltaY: dy * dragChangeSpeed }, 'bomb') });
+
+menu_size.node.setAttribute("draggable","true");
+menu_size.drag(function (dx, dy) { wheelSelect({ deltaY: dy * dragChangeSpeed }, 'size') });
+
+m_size_icon.node.setAttribute("draggable","true");
+m_size_icon.drag(function (dx, dy) { wheelSelect({ deltaY: dy * dragChangeSpeed }, 'size') });
+
+m_size.node.setAttribute("draggable","true");
+m_size.drag(function (dx, dy) { wheelSelect({ deltaY: dy * dragChangeSpeed }, 'size') });
+
 
 openmenu();
 var grid;
