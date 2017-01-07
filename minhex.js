@@ -577,25 +577,25 @@ function closemenu() {
     }
 }
 
-function openmenu_hole() {
-    var animduration = 500;
-    setTimeout(function() {
-        menu_hole.animate({
-            r: menu_hex_points[1][0]
-        }, animduration, mina.ease);
-    }, 200);
-
-}
+// function openmenu_hole() {
+//     var animduration = 1100;
+//     setTimeout(function() {
+//         menu_hole.animate({
+//             r: menu_hex_points[1][0]
+//         }, animduration, mina.ease);
+//     }, 200);
+//
+// }
 
 function openmenu() {
-    var animduration = 1100;
+    var animduration = 400;
     setTimeout(function() {
-        menu_group.animate({
-            transform: "r" + 360, centerX, centerY
-          }, animduration, mina.ease);
+        // menu_group.animate({
+        //     transform: "r" + 360, centerX, centerY
+        //   }, animduration, mina.ease);
         menu_hole.animate({
             r: menu_hex_points[1][0]
-        }, animduration, mina.ease);
+        }, animduration, mina.easeout);
     }, 200);
 
 }
