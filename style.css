@@ -90,6 +90,27 @@ svg#menu text {
    text-shadow: 0 2px 3px rgba(0, 0, 0, .4);
 }
 
+@keyframes wobbly {
+    50%  {bottom: 10px;}
+    100% {bottom: 0px;}
+}
+
+#scroll_hint {
+   position: absolute;
+   z-index: 2;
+   width: 25%;
+   min-width: 200px;
+   margin: 3%;
+   bottom: 0;
+   right: 0;
+   animation: wobbly 1.5s 2;
+}
+
+#scroll_hint.hidden {
+   transform: translateY(250px);
+   transition: all .7s;
+   opacity: 0;
+}
 
 /* HOW TO */
 

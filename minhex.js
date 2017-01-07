@@ -483,6 +483,7 @@ var m_bomb = menu.text(menu_center[0], 1.75 * menu_center[1], B).attr(m_text_opt
     // m_size_icon = menu.image('img/menu/size.png', menu_hex_points[3][0] - m_img_halfsize, 1.1 * menu_center[1]),
     m_play = menu.text(menu_center[0] - .95 * L * playBox, menu_center[1], "PLAY").attr(m_text_opt),
     m_play_icon = menu.image('img/menu/play.png', menu_hex_points[5][0] + L * playBox * .25, menu_center[1] - L * playBox * .5, L * playBox, L * playBox);
+
 // m_play_icon = menu.image('img/menu/play.png', menu_hex_points[5][0] + m_img_halfsize/2, menu_center[1] - m_img_halfsize);
 m_play.attr({
     fill: "#1f1f1f"
@@ -490,6 +491,8 @@ m_play.attr({
 
 
 //elements
+
+var scroll_hint = document.getElementById('scroll_hint');
 
 var menu_play_btn = menu.group(menu_play, m_play, m_play_icon),
     menu_size_opt = menu.group(menu_size, m_size, m_size_icon),
@@ -568,6 +571,7 @@ function closemenu() {
             menu.attr({
                 display: "none"
             })
+            scroll_hint.className = "hidden"
         }, 1000);
         // Time to play!
         initializeScale();
