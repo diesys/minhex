@@ -518,6 +518,7 @@ var bombsNumberFloat = B * 1.,
     maxsize = 14; //just too cells for screens, quite unsable
 
 function wheelSelect(e, opt) {
+    // credo si possa snellire molto questa, meglio usare l'oggetto chiamante se riusciamo, piuttosto che determinarlo dentro la funzione
     if (opt == 'bomb') {
         if (e.deltaY > 0)
             bombsNumberFloat -= .1;
@@ -631,6 +632,7 @@ menu_group.node.onclick = function() {
     closemenu()
 };
 
+
 menu_bomb.node.onmousewheel = function(e) {
     wheelSelect(e, 'bomb')
 };
@@ -650,6 +652,29 @@ m_size_icon.node.onmousewheel = function(e) {
 m_size.node.onmousewheel = function(e) {
     wheelSelect(e, 'size')
 };
+
+// Ora proviamo con il drag
+
+var dragChangeSpeed = 4;
+
+menu_bomb.node.setAttribute("draggable","true");
+menu_bomb.drag(function (dx, dy) { wheelSelect({ deltaY: dy * dragChangeSpeed }, 'bomb') });
+
+m_bomb_icon.node.setAttribute("draggable","true");
+m_bomb_icon.drag(function (dx, dy) { console.log(dy); wheelSelect({ deltaY: dy * dragChangeSpeed }, 'bomb') });
+
+m_bomb.node.setAttribute("draggable","true");
+m_bomb.drag(function (dx, dy) { wheelSelect({ deltaY: dy * dragChangeSpeed }, 'bomb') });
+
+menu_size.node.setAttribute("draggable","true");
+menu_size.drag(function (dx, dy) { wheelSelect({ deltaY: dy * dragChangeSpeed }, 'size') });
+
+m_size_icon.node.setAttribute("draggable","true");
+m_size_icon.drag(function (dx, dy) { wheelSelect({ deltaY: dy * dragChangeSpeed }, 'size') });
+
+m_size.node.setAttribute("draggable","true");
+m_size.drag(function (dx, dy) { wheelSelect({ deltaY: dy * dragChangeSpeed }, 'size') });
+
 
 openmenu();
 var grid;
