@@ -39,8 +39,8 @@ var textDimension = 2.1,
 // Defining the minimum margin for the field inscribed into the page and the margin of the gametable inscribed into the field
 
 var fieldMargin = .05,
-    bodyMarginWidth = .15,
-    bodyMarginHeight = .15;
+    bodyMarginWidth = .1,
+    bodyMarginHeight = .1;
 
 // (Global)Page size
 var w = window,
