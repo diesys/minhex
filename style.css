@@ -384,8 +384,9 @@ h2#RemainingBombs {
   width: 15px;
   height: 20px;
   margin-top: 5px;
-  padding: 42px 50px 42px 36px;
+  padding: 45px 40px;
   padding-right: 50px;
+  font-size: 1.1em;
 }
 
 h2.visible#RemainingBombs {
