@@ -576,7 +576,7 @@ function dragSelect (obj) {
         } else if (obj == "size") {
             sizeNumberFloat = N - dy * speedDrag;
             sN = parseInt(sizeNumberFloat);
-            if (sN > 0 && sN <= maxsize) {
+            if (sN > 1 && sN <= maxsize) {
                 sizeNumber = sN;
                 m_size.node.innerHTML = sizeNumber;
                 maxbombs = 3 * sizeNumber * (sizeNumber + 1)
