@@ -99,7 +99,7 @@ var x0 = fieldWidth * .5 * (.5 + fieldMargin),
 
 
 var doubleClick = {};
-doubleClick.mouseClickDelay = 190;
+doubleClick.mouseClickDelay = 250;
 doubleClick.lastClickTime = +new Date();
 doubleClick.waitingSndClick = false;
 doubleClick.lastClick = null;
