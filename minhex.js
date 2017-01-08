@@ -194,7 +194,7 @@ function Grid(N, BOMBS) {
         this.remBmbs += delta;
         //just a temp fix to a bug that can show negative bombs remaining if you put too flags
         if (this.remBmbs >= 0)
-            document.getElementById("RemainingBombs").innerHTML = "<center><h2>" + this.remBmbs + "</h2></center>";
+            document.getElementById("RemainingBombs").innerHTML = this.remBmbs;
     }
 
     this.openCell = function(pos) {
@@ -499,18 +499,19 @@ var menu_play_btn = menu.group(menu_play, m_play, m_play_icon),
     menu_bomb_opt = menu.group(menu_bomb, m_bomb, m_bomb_icon),
     // menu_fame_opt = menu.group(menu_fame, /*m_fame,*/ m_fame_icon),
 
-    menu_hole_shadow = menu.circle(menu_center[0], menu_center[1] + 2, menu_hex_points[1][0] + 25).attr({
+    menu_hole = menu.circle(menu_center[0], menu_center[1], menu_hex_points[1][0] / 8).attr({
+        fill: "#fff"
+    }),
+
+    menu_hole_shadow = menu.circle(menu_center[0], menu_center[1] + 2, menu_hex_points[1][0] + 45).attr({
         fill: "#000",
         opacity: "0",
         mask: menu_hex_holemask
     }),
-    menu_hole = menu.circle(menu_center[0], menu_center[1], 0).attr({
-        fill: "#fff"
-    }),
+
     menu_group = menu.group(menu_hex, menu_play, m_play, m_play_icon, menu_bomb, m_bomb, m_bomb_icon, menu_size, m_size, m_size_icon).attr({
         mask: menu_hole
     });
-
 // functions
 
 //// MouseWheel
@@ -597,16 +598,16 @@ function closemenu() {
             r: 0,
             opacity: ".1"
         }, animduration, mina.bounce);
-        var shadowblur = menu.filter(Snap.filter.blur(2));
-        menu_hole_shadow.attr({
-            filter: shadowblur
-        });
         setTimeout(function() {
             menu.attr({
                 display: "none"
             })
+        }, animduration);
+        setTimeout(function() {
             scroll_hint.className = "hidden"
-        }, 1000);
+            document.getElementById("RemainingBombs").className = "visible"
+        }, 500);
+
         // Time to play!
         initializeScale();
         grid = new Grid(sizeNumber, bombsNumber);
@@ -638,6 +639,8 @@ function openmenu() {
 
 }
 
+// HowTo
+
 function HowTo(option) {
     ht1 = document.getElementById("HT1");
     ht2 = document.getElementById("HT2");
@@ -647,22 +650,35 @@ function HowTo(option) {
     if (option == '1') {
         ht1.className = "HowTo active";
     } else if (option == '2') {
-        ht1.className = "HowTo inactive";
+        ht1.className = "HowTo hidden";
         ht2.className = "HowTo active";
     } else if (option == '3') {
-        ht2.className = "HowTo inactive";
+        ht2.className = "HowTo hidden";
         ht3.className = "HowTo active";
-    } else /*setTimeout(function()*/ {
+    } else {
         ht1.className = "HowTo inactive";
         ht2.className = "HowTo inactive";
         ht3.className = "HowTo inactive";
-    }/*, 200;));*/
 
-    delete ht1;
-    delete ht2;
-    delete ht3;
-    delete ht4;
+        setTimeout(function() {
+          ht1.className = "HowTo hidden";
+          ht2.className = "HowTo hidden";
+          ht3.className = "HowTo hidden";
+        }, 900); ///// !!!! DONT CHANGE UNTIL YOU CHANGE THE CSS ANIMATION FADEOUT DURARION !!!
+    }
 }
+
+// function fadeOut(element, milliseconds) {
+//   var interv = milliseconds / 20;
+//   for(i=0; i < 2000; i++) {
+//     setTimeout(function() {
+//       element.attr({
+//         opacity: i/20
+//       })
+//     }, interv)
+//   }
+//
+// }
 
 // UI associations
 

@@ -31,7 +31,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <!-- Favicon -->
-    <link rel="icon" href="img/favicon.png" type="image/x-icon">
+    <link rel="icon" href="img/favicon72.png" type="image/x-icon">
     <link rel="shortcut icon" href="#">
 
     <link rel="icon" sizes="114x114" href="img/favicon114.png" type="image/x-icon">
@@ -47,9 +47,11 @@
 </head>
 
 <body>
-    <div id="grad"><img id="scroll_hint" src="img/menu/hint.png" /></div>
+    <div id="grad">
+      <img id="scroll_hint" src="img/menu/hint.png" />
+    </div>
 
-    <div id="RemainingBombs"></div>
+    <h2 id="RemainingBombs"></h2>
 
     <svg id="field" height="70%" width="85%"></svg>
 
@@ -60,7 +62,7 @@
 
     <a class="button howto" onclick="HowTo(1)" href="#">MinHex</a>
 
-    <div id="HT3" class="HowTo inactive">
+    <div id="HT3" class="HowTo hidden">
         <div id="grad_ht"></div>
         <!--<img src="img/howto/ht3.png" alt="HowTo" />-->
         <h1>Perché?</h1>
@@ -79,7 +81,7 @@
         <a class="button HowTo prev" onclick="HowTo(2)" href="#">&#60;</a>
     </div>
 
-    <div id="HT2" class="HowTo inactive">
+    <div id="HT2" class="HowTo hidden">
         <div id="grad_ht"></div>
         <!--<img src="img/howto/ht2.png" alt="HowTo" />-->
         <h1>Come si gioca?</h1>
@@ -98,7 +100,7 @@
         <a class="button HowTo prev" onclick="HowTo(1)" href="#">&#60;</a>
     </div>
 
-    <div id="HT1" class="HowTo inactive">
+    <div id="HT1" class="HowTo hidden">
         <div id="grad_ht"></div>
         <!--<img src="img/howto/ht1.png" alt="HowTo" />-->
         <h1>Boom!</h1>
