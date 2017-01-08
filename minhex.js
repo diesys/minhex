@@ -18,14 +18,18 @@ var sizeNumber = N,
     bombsNumber = B;
 
 
-var base_clr = "#A9D41C",
+var
+    // base_clr = "#A9D41C",
+    base_clr = "#76B918",
     // field_bg_color = "#59710E",
     field_bg_color = "#190900",
     field_bg_opacity = "1",
     stroke_clr = "rgba(0,0,0,.1)",
     stroke_width = "2",
-    clicked_clr = "#698511",
-    over_clr = "#e8ff7d",
+    // clicked_clr = "#698511",
+    clicked_clr = "#507521",
+    // over_clr = "#e8ff7d",
+    over_clr = "#B4E575",
     bomb_clr = "#C10F08",
     bomb2_clr = "#950601",
     flag_clr = "#f8b71b",
@@ -409,11 +413,13 @@ menu_hex_points.push([x0 - L / 2, y0 + L * hsr3])
 var menu_center = [menu_hex_points[0][0] + (menu_hex_points[1][0] - menu_hex_points[0][0]) / 2, menu_hex_points[2][1]],
 
     //colors
-    menu_play_clr = "#a9d41c",
+    // menu_play_clr = "#a9d41c",
+    menu_play_clr = base_clr,
     menu_hex_clr = menu_play_clr,
     menu_bomb_clr = "#E61913",
     menu_size_clr = "#F5B10A",
-    menu_fame_clr = "#8BAF17",
+    // menu_fame_clr = "#8BAF17",
+    menu_fame_clr = "clicked_clr",
 
 
 

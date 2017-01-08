@@ -7,6 +7,10 @@ MinHex
 		· Non credo si possa fare poi così tanto, magari con estrema fatica puoi renderlo un po' più della metà,
 			ma a scapito di leggibilità (già scarsa), forse efficienza (minimamente), I suppost
 
+			Quando si fa la versione minimizzata semplicemente non si include quella intera nell'html però di solito è prassi lasciare nel server la stessa non minimizzata in cui togli l'infisso ".min", al momento per il css è così, se vedi ci sono entrambe.
+			Serve di solito ridurre il traffico, ché non sembra ma in poco una pagina con già mille immagini diventa pesante senza che te ne accorgi:
+			e soprattutto se non lo minimizza vuol dire che non rispetta degli standard che possono dare problemi come il fatto che prima non lo eseguiva su certi browser perché facevi la potenza con ** e non con Math.pow()
+
 	· Accomodare un po' l'etichetta delle bombe rimanenti. Farla cliccabile per la nuova partita? (permetterebbe di lasciar
 		vedere il campo una volta finita la partita - cosa utile)
 
@@ -17,26 +21,27 @@ MinHex
 	? se clicco una casella con scritto 4 che ha tre celle non cliccate e una bomba piazzata piazza automaticamente
 		le altre tre bombe - utile
 
-	? clic lungo come alternativa al doppio click - boh
+	? clic lungo come alternativa al doppio click - boh (io metterei pulsante destro e di conseguenza click lungo sul cel)
+		per i cell e' utile, perche' certe volte si sbaglia e scoppia a caso (magari fare anche il doppioclick piu tollerante aiuta, ogni tanto capita di esplodere per sbaglio)
 
 	? sistemare la chiamata ricorsiva dello ``scoprintorno'' (se si riesce a fare in modo efficiente)
 		-> Non clicca ricorsivamente sulle celle già cliccate. Cliccare ma aggiungere altra flag per la chiamata
 			ricorsiva, che una volta terminato l'albero delle chiamate andrebbe resettata.
 
+	? quando esplodi le bandierine giuste dovrebbero avere un colore particolare, no?
+
+	? rimpicciolire un pochino i triangoli salvi per focalizzare l'attenzione su quelli da esplorare ancora
+
 \ui
-	· sistemare dragging per selezionare bombe e dimensione (così non è un granché)
-	· closehowto animato, dissolvenza magari
 	· rematch dovrebbe non mostrare di nuovo il menu	(*)
 	? rematch interfaccia								(*)
 	· personalizzare le alert con il css (o fare uno splashscreen)
-
 
 	(*)	Capire cosa vogliamo che sia il rematch
 
 	· aggiungere descrizione tag e altro nei meta dell'html
 		[che vuol dire? sono cose per l'indicizzazione e metadati]
 
-	· personalizzare alert
 	· colori
 	· screenshot howto
 
