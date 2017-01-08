@@ -545,7 +545,7 @@ function wheelSelect(e, opt) {
         */
         sizeNumberFloat -= e.deltaY * speedWheel;
         sN = parseInt(sizeNumberFloat);
-        if (sN > 0 && sN <= maxsize) {
+        if (sN > 1 && sN <= maxsize) {
             sizeNumber = sN;
             m_size.node.innerHTML = sizeNumber;
             maxbombs = 3 * sizeNumber * (sizeNumber + 1)
