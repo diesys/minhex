@@ -393,3 +393,36 @@ h2.visible#RemainingBombs {
   display: block;
   animation: fadefromright .5s;
 }
+
+
+/* CUSTOM SWEET-ALERT2 */
+
+.swal2-modal {
+  border-radius: 3px;
+  box-shadow: 0 5px 25px -5px rgba(0,0,0,.7);
+}
+
+.swal2-modal .swal2-title, .swal2-modal .swal2-content {
+  color: #fff;
+  text-shadow: 0 2px 1px rgba(0, 0, 0, 0.5);
+  font-family: 'OpenSans';
+}
+
+.swal2-modal .swal2-title {
+  color: #f8b71b;
+}
+
+.swal2-modal .swal2-content {
+  margin-bottom: 15px;
+}
+
+.swal2-modal .swal2-styled {
+  color: #111;
+  border: none;
+  outline: none;
+  font-weight: bold;
+  border-radius: 2px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, .6);
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
+  background-image: url('img/tile_light.png');
+}

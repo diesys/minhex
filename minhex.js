@@ -8,6 +8,15 @@ window.location.search.substring(1).split('&').forEach(function(c) {
 
 
 // General settings  //////////////////////
+
+//SWEET-ALERT2 default
+swal.setDefaults({
+    background: '#5A3120 url(img/tile.png)',
+    confirmButtonColor: '#f8b71b',
+    showCloseButton: true,
+    showConfirmButton: false
+})
+
 //--!!this could be made better
 var
     N = parseInt(argv["n"]) || 5,
@@ -220,15 +229,20 @@ function Grid(N, BOMBS) {
                 }, anim_dur, mina.easein);
                 this.FINISHED = true;
                 cell.state = "clicked";
-                setTimeout(function() {
-                    // rematch
-                    var answer = confirm("Pieces of your fleshy brain are all over the walls. Pay more attention to mines next time. Rematch?")
-                    if (answer)
-                    // the url just without vars, and the just used ones
-                        window.location = window.location.href.split('?')[0] + "?n=" + sizeNumber + "&b=" + bombsNumber; // + "&rematch=true"; //seems do not work the rematch url
-                    else
-                        window.location = window.location.href.split('?')[0] + "?n=" + sizeNumber + "&b=" + bombsNumber;
-                }, 700);
+                // setTimeout(function() {
+                //     // rematch
+                //     var answer = confirm("Pieces of your fleshy brain are all over the walls. Pay more attention to mines next time. Rematch?")
+                //     if (answer)
+                //     // the url just without vars, and the just used ones
+                //         window.location = window.location.href.split('?')[0] + "?n=" + sizeNumber + "&b=" + bombsNumber; // + "&rematch=true"; //seems do not work the rematch url
+                //     else
+                //         window.location = window.location.href.split('?')[0] + "?n=" + sizeNumber + "&b=" + bombsNumber;
+                // }, 700);
+                swal({
+                  title: 'Damn!',
+                  text: 'Pieces of your fleshy brain are all over the walls. Pay more attention to mines next time!',
+                })
+
                 for (c of Object.keys(this.cell))
                     if (this.cell[c].isBomb && c != pos) {
                         this.cell[c].animate({
@@ -262,7 +276,7 @@ function Grid(N, BOMBS) {
         this.checkVictory();
     }
 
-    this.checkVictory = function() {
+    this.checkVictoryOldAlert = function() {
         if (this.clickedCells == 6 * N * N)
             setTimeout(function() {
                 // Ok to retry with same parameters or cancel to have the menu back again
@@ -275,6 +289,14 @@ function Grid(N, BOMBS) {
                 else
                     window.location = window.location.href.split('?')[0] + "?n=" + sizeNumber + "&b=" + bombsNumber;
             }, 700);
+    }
+
+    this.checkVictory = function() {
+        if (this.clickedCells == 6 * N * N)
+            swal({
+              title: 'Awesome!',
+              text: 'You are a real mine survive, good job!',
+            })
     }
 
     this.toggleFlag = function(pos) {
@@ -618,19 +640,21 @@ function closemenu() {
         initializeScale();
         grid = new Grid(sizeNumber, bombsNumber);
     } else {
-        alert("How brave! You chose too many bombs, more that you can afford, retry with less!");
-    }
+        swal({
+          title: 'How brave you!',
+          text: 'You chose too many bombs, more that you can afford, retry with less!',
+          timer: 2000,
+        }).then(
+          function () {},
+            // handling the promise rejection
+            function (dismiss) {
+              if (dismiss === 'timer') {
+                console.log('sweetalert closed by the timer, retry with less bombs')
+              }
+            }
+        )
+      }
 }
-
-// function openmenu_hole() {
-//     var animduration = 1100;
-//     setTimeout(function() {
-//         menu_hole.animate({
-//             r: menu_hex_points[1][0]
-//         }, animduration, mina.ease);
-//     }, 200);
-//
-// }
 
 function openmenu() {
     var animduration = 400;
@@ -665,7 +689,7 @@ function HowTo(option) {
         ht1.className = "HowTo inactive";
         ht2.className = "HowTo inactive";
         ht3.className = "HowTo inactive";
-
+        //intermediate class to get a disappearing animation
         setTimeout(function() {
           ht1.className = "HowTo hidden";
           ht2.className = "HowTo hidden";
