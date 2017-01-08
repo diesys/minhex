@@ -718,6 +718,10 @@ menu_group.node.onclick = function() {
     closemenu()
 };
 
+document.getElementById("RemainingBombs").onclick = function () {
+    console.log("boh");
+    window.location = window.location.href.split('?')[0] + "?n=" + sizeNumber + "&b=" + bombsNumber;
+}
 
 menu_bomb.node.onmousewheel = function(e) {
     wheelSelect(e, 'bomb')
@@ -767,4 +771,4 @@ m_size.drag(dragSelect('size'), function () { dragging = true }, function () { N
 
 
 openmenu();
-var grid;
+//var grid;
