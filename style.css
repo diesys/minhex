@@ -22,7 +22,7 @@ body, html, .HowTo {
    color: #eee;
    cursor: default;
    position: fixed;
-   overflow-y: hidden;
+   /*overflow-y: hidden;*/
 }
 
 #grad, #grad_ht {
