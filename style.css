@@ -214,17 +214,13 @@ svg#menu text {
    position: absolute;
    left: 50%;
    height: 300px;
-   transform: translate(-55%, 0);
-   margin-top: 20px;
+   transform: translateX(-50%);
+   margin-top: 40px;
+   padding-bottom: 25px;
 }
 
 .HowTo.active img {
    animation: fadefromleft .8s ease;
-}
-
-.HowTo.inactive img {
-   animation: fadefromleft .8s ease;
-   animation-direction: reverse;
 }
 
 .HowTo h1, .HowTo p {
