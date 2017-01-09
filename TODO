@@ -34,6 +34,7 @@ MinHex
 \ui
 	· La transizione tra indicatoreBombe e refresh la farei con la dissolvenza invece di questo movimento, è fastidioso se vai verso qualcosa che questa ad un certo
 	  punto ti scappi e poi c'è un lag
+	? Il drag per le impostazioni non sembra funzionare a puntino su Firefox
 	· Sistemare il controllo sui valori minimi e massimi di bombe e dimensione, adesso ne ammette in prima battuta di fuorirange e la cosa crea problemi!
 		-> il controllo va risolto a monte, non ammettendo valori inaccettabili subito, non controllando e in caso scegliendo di non aggiornare
 	· Il movimento dell'indicatore delle bombe avanti e indietro (che succede anche se rimane fermo il mouse) sfalsa anche le scritte delle bombe e il field...
@@ -47,3 +48,15 @@ MinHex
 	· screenshot howto
 	? aggiungere immagine per spiegare l'intorno
 	· scrivere (anche) in inglese. Magari con controllo sulla provenienza.
+
+
+\Note
+
+
+----------------	Wheel on Firefox
+var mousewheelevt=(/Firefox/i.test(navigator.userAgent))? "DOMMouseScroll" : "mousewheel" //FF doesn't recognize mousewheel as of FF3.x
+ 
+if (document.attachEvent) //if IE (and Opera depending on user setting)
+    document.attachEvent("on"+mousewheelevt, function(e){alert('Mouse wheel movement detected!')})
+else if (document.addEventListener) //WC3 browsers
+    document.addEventListener(mousewheelevt, function(e){alert('Mouse wheel movement detected!')}, false)

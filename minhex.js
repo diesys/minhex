@@ -779,13 +779,22 @@ var startDrg = function () { dragging = true }
 var stopDrg = function () { setTimeout(function () { dragging = false }, stopDragDelay) }
 
 menu_bomb.node.setAttribute("draggable","true");
-menu_bomb.drag(dragSelect('bomb'), function () {}, function () { B = bombsNumber; stopDrg() });
+menu_bomb.drag(dragSelect('bomb'), function () {}, function () {event.dataTransfer.setData('text/plain', null); B = bombsNumber; stopDrg() });
+/*menu_bomb.node.addEventListener('dragstart', function (e){
+                e.dataTransfer.setData('text/plain', 'node');
+            }, false);*/
 
 m_bomb_icon.node.setAttribute("draggable","true");
-m_bomb_icon.drag(dragSelect('bomb'), function () {}, function () { B = bombsNumber; stopDrg() });
+m_bomb_icon.drag(dragSelect('bomb'), function () {}, function () {event.dataTransfer.setData('text/plain', null); B = bombsNumber; stopDrg() });
+/*m_bomb_icon.node.addEventListener('dragstart', function (e){
+                e.dataTransfer.setData('text/plain', 'node');
+            }, false);*/
 
 m_bomb.node.setAttribute("draggable","true");
-m_bomb.drag(dragSelect('bomb'), function () {}, function () { B = bombsNumber; stopDrg() });
+m_bomb.drag(dragSelect('bomb'), function () {}, function () {event.dataTransfer.setData('text/plain', null); B = bombsNumber; stopDrg() });
+/*m_bomb.node.addEventListener('dragstart', function (e){
+                e.dataTransfer.setData('text/plain', 'node');
+            }, false);*/
 
 menu_size.node.setAttribute("draggable","true");
 menu_size.drag(dragSelect('size'), function () {}, function () { N = sizeNumber; stopDrg() });
