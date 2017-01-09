@@ -280,7 +280,7 @@ function Grid(N, BOMBS) {
         if (this.clickedCells == 6 * N * N)
             setTimeout(function() {
                 // Ok to retry with same parameters or cancel to have the menu back again
-                var answ = confirm("You are a real mine surviver! Good Job. Retry?")
+                var answ = confirm("You are a real mine survivor! Good Job. Retry?")
                 if (answ)
                 // the url just without vars, and the just used ones
                     window.location = window.location.href.split('?')[0] + "?n=" + sizeNumber + "&b=" + bombsNumber; // + "&rematch=true"; //seems do not work the rematch url
@@ -292,7 +292,7 @@ function Grid(N, BOMBS) {
     }
 
     this.checkVictory = function() {
-        if (this.clickedCells == 6 * N * N)
+        if (this.clickedCells == 6 * N * N && this.remBmbs >= 0)
             swal({
               title: 'Awesome!',
               text: 'You are a real mine survive, good job!',
