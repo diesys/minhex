@@ -11,7 +11,8 @@ MinHex
 			Serve di solito ridurre il traffico, ché non sembra ma in poco una pagina con già mille immagini diventa pesante senza che te ne accorgi:
 			e soprattutto se non lo minimizza vuol dire che non rispetta degli standard che possono dare problemi come il fatto che prima non lo eseguiva su certi browser perché facevi la potenza con ** e non con Math.pow()
 
-		· Aggiungere rightclick per le bandierine ed eventualmente longtouch per i cell
+	!! con 15 bombe su dimensione 2 genera il campo ma non si puo fare il primo click e non si puo giocare, andrebbe impedito di fare sti numeri o cambiata la funziona del primo click (magari la prima e' piu facile)
+
 
 \Gioco
 
@@ -31,6 +32,7 @@ MinHex
 
 \ui
 
+	· Aggiungere rightclick per le bandierine ed eventualmente longtouch per i cell
 	· aggiungere descrizione tag e altro nei meta dell'html
 		[che vuol dire? sono cose per l'indicizzazione e metadati]
 	· aggiungere tooltip anche per le bombe/rematch? o metterlo nell'howto? (meglio la prima)
