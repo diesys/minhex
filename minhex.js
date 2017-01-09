@@ -207,7 +207,7 @@ function Grid(N, BOMBS) {
         this.remBmbs += delta;
         //just a temp fix to a bug that can show negative bombs remaining if you put too flags
         if (this.remBmbs >= 0)
-            document.getElementById("RemainingBombs").innerHTML = this.remBmbs;
+            remainingBombsInd.innerHTML = this.remBmbs;
     }
 
     this.openCell = function(pos) {
@@ -225,7 +225,7 @@ function Grid(N, BOMBS) {
             this.clickedCells++;
             if (cell.isBomb) {
                 cell.animate({
-                    fill: bomb_clr
+                    fill: bomb_clr,
                 }, anim_dur, mina.easein);
                 this.FINISHED = true;
                 cell.state = "clicked";
@@ -254,7 +254,7 @@ function Grid(N, BOMBS) {
                 return
             }
             cell.animate({
-                fill: clicked_clr
+                fill: clicked_clr,
             }, anim_dur, mina.easein);
             if (cell.count)
                 textOnCell(cell.pos, cell.count.toString()).click(this.mouseClick(pos));
@@ -520,7 +520,9 @@ m_play.attr({
 
 //elements
 
-var scroll_hint = document.getElementById('scroll_hint');
+var scroll_hint = document.getElementById("scroll_hint"),
+    rematch_button = document.getElementById("rematch"),
+    remainingBombsInd = document.getElementById("RemainingBombs");
 
 var menu_play_btn = menu.group(menu_play, m_play, m_play_icon),
     menu_size_opt = menu.group(menu_size, m_size, m_size_icon),
@@ -633,7 +635,7 @@ function closemenu() {
         }, animduration);
         setTimeout(function() {
             scroll_hint.className = "hidden"
-            document.getElementById("RemainingBombs").className = "visible"
+            remainingBombsInd.className = "visible"
         }, 500);
 
         // Time to play!
@@ -667,6 +669,23 @@ function openmenu() {
         }, animduration, mina.easeout);
     }, 200);
 
+}
+
+function mouseOverRemBombs() {
+  if(remainingBombsInd.className == "visible") {
+    setTimeout(function() {
+      rematch_button.className = "visible";
+      remainingBombsInd.className = "nodisplay";
+    }, 200);
+    remainingBombsInd.className = "hidden";
+  }
+  else {
+    setTimeout(function() {
+      remainingBombsInd.className = "visible";
+      rematch_button.className = "nodisplay";
+    }, 200);
+    rematch_button.className = "hidden";
+  }
 }
 
 // HowTo
@@ -718,10 +737,10 @@ menu_group.node.onclick = function() {
     closemenu()
 };
 
-document.getElementById("RemainingBombs").onclick = function () {
-    console.log("boh");
+rematch.onclick = function () {
     window.location = window.location.href.split('?')[0] + "?n=" + sizeNumber + "&b=" + bombsNumber;
 }
+
 
 menu_bomb.node.onmousewheel = function(e) {
     wheelSelect(e, 'bomb')

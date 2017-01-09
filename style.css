@@ -151,6 +151,12 @@ svg#menu text {
   }
 }
 
+@keyframes fadetoright {
+   100% {
+      transform: translateX(150%);
+   }
+}
+
 /*@keyframes wobbly {
     50%  {bottom: 10px;}
     100% {bottom: 0px;}
@@ -372,15 +378,16 @@ svg#menu text {
    transition: .2s ease;
 }
 
+/*RemainingBombs and rematch icon*/
+
 h2#RemainingBombs {
-  display: none;
   position: fixed;
   text-align: center;
   background-image: url('img/remaining_bomb.png');
   background-repeat: no-repeat;
   margin: 10px;
   top: 0;
-  right: 10px;
+  right: 0px;
   width: 15px;
   height: 20px;
   margin-top: 5px;
@@ -389,11 +396,35 @@ h2#RemainingBombs {
   font-size: 1.1em;
 }
 
-h2.visible#RemainingBombs {
+h2#rematch {
+  position: fixed;
+  text-align: center;
+  background-image: url('img/rematch.png');
+  background-repeat: no-repeat;
+  margin: 10px;
+  top: 0;
+  right: 0px;
+  width: 15px;
+  height: 20px;
+  margin-top: 5px;
+  padding: 45px 40px;
+  padding-right: 50px;
+  transition: opacity .1s ease-in;
+}
+
+h2.visible {
   display: block;
   animation: fadefromright .5s;
 }
 
+h2.hidden {
+  display: block;
+  animation: fadetoright .5s;
+}
+
+h2.nodisplay {
+  display: none;
+}
 
 /* CUSTOM SWEET-ALERT2 */
 
