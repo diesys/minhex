@@ -672,7 +672,7 @@ function openmenu() {
 }
 
 function showRematch() {
-  autohideT = 3000;
+  autohideT = 2000;
   anim = 200;
   //hiding animation
   remainingBombsInd.className = "hidden";
