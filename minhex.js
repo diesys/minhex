@@ -671,21 +671,29 @@ function openmenu() {
 
 }
 
-function mouseOverRemBombs() {
-  if(remainingBombsInd.className == "visible") {
-    setTimeout(function() {
-      rematch_button.className = "visible";
-      remainingBombsInd.className = "nodisplay";
-    }, 200);
-    remainingBombsInd.className = "hidden";
-  }
-  else {
-    setTimeout(function() {
-      remainingBombsInd.className = "visible";
+function showRematch() {
+  autohideT = 3000;
+  anim = 200;
+  //hiding animation
+  remainingBombsInd.className = "hidden";
+  //appearing animation and undisplay other element
+  setTimeout(function() {
+    rematch_button.className = "visible";
+    remainingBombsInd.className = "nodisplay";
+  }, anim);
+
+  //after some time the remainingBombsInd reappears (useful for touch)
+  setTimeout(function() {
+      rematch_button.className = "hidden";
+  }, autohideT);
+  setTimeout(function() {
       rematch_button.className = "nodisplay";
-    }, 200);
-    rematch_button.className = "hidden";
-  }
+      remainingBombsInd.className = "visible";
+  }, autohideT + anim);
+}
+
+function refreshNewGame() {
+    window.location = window.location.href.split('?')[0] + "?n=" + sizeNumber + "&b=" + bombsNumber;
 }
 
 // HowTo
@@ -736,11 +744,6 @@ menu_group.node.onclick = function() {
         return;
     closemenu()
 };
-
-rematch.onclick = function () {
-    window.location = window.location.href.split('?')[0] + "?n=" + sizeNumber + "&b=" + bombsNumber;
-}
-
 
 menu_bomb.node.onmousewheel = function(e) {
     wheelSelect(e, 'bomb')
