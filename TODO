@@ -11,10 +11,7 @@ MinHex
 			Serve di solito ridurre il traffico, ché non sembra ma in poco una pagina con già mille immagini diventa pesante senza che te ne accorgi:
 			e soprattutto se non lo minimizza vuol dire che non rispetta degli standard che possono dare problemi come il fatto che prima non lo eseguiva su certi browser perché facevi la potenza con ** e non con Math.pow()
 
-	· Accomodare un po' l'etichetta delle bombe rimanenti. Farla cliccabile per la nuova partita? (permetterebbe di lasciar
-		vedere il campo una volta finita la partita - cosa utile)
-
-	· Aggiungere rightclick per le bandierine ed eventualmente longtouch per i cell
+		· Aggiungere rightclick per le bandierine ed eventualmente longtouch per i cell
 
 \Gioco
 
@@ -33,19 +30,13 @@ MinHex
 	? rimpicciolire un pochino i triangoli salvi per focalizzare l'attenzione su quelli da esplorare ancora
 
 \ui
-	· rematch dovrebbe non mostrare di nuovo il menu	(*)
-	? rematch interfaccia								(*)
-	· personalizzare le alert con il css (o fare uno splashscreen)
-
-	(*)	Capire cosa vogliamo che sia il rematch
 
 	· aggiungere descrizione tag e altro nei meta dell'html
 		[che vuol dire? sono cose per l'indicizzazione e metadati]
-
-	· colori
-	· screenshot howto
+	· aggiungere tooltip anche per le bombe/rematch? o metterlo nell'howto? (meglio la prima)
 
 \howto
 
+	· screenshot howto
 	? aggiungere immagine per spiegare l'intorno
 	· scrivere (anche) in inglese. Magari con controllo sulla provenienza.
