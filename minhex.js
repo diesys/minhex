@@ -633,10 +633,12 @@ function closemenu() {
                 display: "none"
             })
         }, animduration);
+
+        showRematch(1); //appears just a second as hint of where the restart button is hidden
         setTimeout(function() {
             scroll_hint.className = "hidden"
             remainingBombsInd.className = "visible"
-        }, 500);
+        }, 1500);
 
         // Time to play!
         initializeScale();
@@ -671,25 +673,28 @@ function openmenu() {
 
 }
 
-function showRematch() {
-  autohideT = 2000;
-  anim = 200;
-  //hiding animation
-  remainingBombsInd.className = "hidden";
-  //appearing animation and undisplay other element
-  setTimeout(function() {
-    rematch_button.className = "visible";
-    remainingBombsInd.className = "nodisplay";
-  }, anim);
+function showRematch(first) {
+    if(first)
+      autohideT = 1000;
+    else
+      autohideT = 2000;
+    anim = 200;
+    //hiding animation
+    remainingBombsInd.className = "hidden";
+    //appearing animation and undisplay other element
+    setTimeout(function() {
+      rematch_button.className = "visible";
+      remainingBombsInd.className = "nodisplay";
+    }, anim);
 
-  //after some time the remainingBombsInd reappears (useful for touch)
-  setTimeout(function() {
-      rematch_button.className = "hidden";
-  }, autohideT);
-  setTimeout(function() {
-      rematch_button.className = "nodisplay";
-      remainingBombsInd.className = "visible";
-  }, autohideT + anim);
+    //after some time the remainingBombsInd reappears (useful for touch)
+    setTimeout(function() {
+        rematch_button.className = "hidden";
+    }, autohideT);
+    setTimeout(function() {
+        rematch_button.className = "nodisplay";
+        remainingBombsInd.className = "visible";
+    }, autohideT + anim);
 }
 
 function refreshNewGame() {
