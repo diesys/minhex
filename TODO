@@ -11,13 +11,12 @@ MinHex
 			Serve di solito ridurre il traffico, ché non sembra ma in poco una pagina con già mille immagini diventa pesante senza che te ne accorgi:
 			e soprattutto se non lo minimizza vuol dire che non rispetta degli standard che possono dare problemi come il fatto che prima non lo eseguiva su certi browser perché facevi la potenza con ** e non con Math.pow()
 
-	!! con 15 bombe su dimensione 2 genera il campo ma non si puo fare il primo click e non si puo giocare, andrebbe impedito di fare sti numeri o cambiata la funziona del primo click (magari la prima e' piu facile)
-		! Infatti questo valore minimo è fatto a caso, i range di bombe, anche se hai voluto metterli, non vanno bene, devo fare i conti e ammetterli di conseguenza
-			? Si può decidere se uno vada scelto prima dell'altro o semplicemente nel caso in cui non siano compatibili non avvia il gioco e dice qualcosa.
-			  questo controesempio è chiaro, il numero di celle se N = 2 è 24, un intorno ne comprende 13, non c'è spazio per 15 bombe. Non deve essere possibile ammettere partite di questo tipo.
+	· Fattorizzare parte comune in wheelSelect e dragSelect o come si chiama. Magari riscrivere tutto in modo più dritto.
 
 
 \Gioco
+
+	? Mettere dei limiti massimi e minimi a size e bombs?
 
 	? se clicco una casella con scritto 4 che ha tre celle non cliccate e una bomba piazzata piazza automaticamente
 		le altre tre bombe - utile
@@ -48,15 +47,3 @@ MinHex
 	· screenshot howto
 	? aggiungere immagine per spiegare l'intorno
 	· scrivere (anche) in inglese. Magari con controllo sulla provenienza.
-
-
-\Note
-
-
-----------------	Wheel on Firefox
-var mousewheelevt=(/Firefox/i.test(navigator.userAgent))? "DOMMouseScroll" : "mousewheel" //FF doesn't recognize mousewheel as of FF3.x
- 
-if (document.attachEvent) //if IE (and Opera depending on user setting)
-    document.attachEvent("on"+mousewheelevt, function(e){alert('Mouse wheel movement detected!')})
-else if (document.addEventListener) //WC3 browsers
-    document.addEventListener(mousewheelevt, function(e){alert('Mouse wheel movement detected!')}, false)
