@@ -552,7 +552,7 @@ var menu_play_btn = menu.group(menu_play, m_play, m_play_icon),
 
 var bombsNumberFloat = B * 1.,
     sizeNumberFloat = N * 1.,
-    maxbombs = 3 * sizeNumber * (sizeNumber + 1), //number of cells
+    //maxbombs = 3 * sizeNumber * (sizeNumber + 1), //number of cells
     maxsize = 14; //just too cells for screens, quite unsable
 
 
@@ -619,14 +619,15 @@ function dragSelect (obj) {
             if (sN > 1 && sN <= maxsize) {
                 sizeNumber = sN;
                 m_size.node.innerHTML = sizeNumber;
-                maxbombs = 3 * sizeNumber * (sizeNumber + 1)
+//                maxbombs = 3 * sizeNumber * (sizeNumber + 1)
             }
         }
     }
 }
 
 function closemenu() {
-    if (bombsNumber < maxbombs) {
+    // Now bombs and size are always compatible ;)
+    //if (bombsNumber < maxbombs) {
         var animduration = 1000;
         menu_hole_shadow.attr({
             opacity: ".3"
@@ -653,7 +654,7 @@ function closemenu() {
         // Time to play!
         initializeScale();
         grid = new Grid(sizeNumber, bombsNumber);
-    } else {
+    /*} else {
         swal({
           title: 'How brave you!',
           text: 'You chose too many bombs, more that you can afford, retry with less!',
@@ -667,7 +668,7 @@ function closemenu() {
               }
             }
         )
-      }
+      }*/
 }
 
 function openmenu() {
