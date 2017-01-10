@@ -292,7 +292,7 @@ function Grid(N, BOMBS) {
     }
 
     this.checkVictory = function() {
-        if (this.clickedCells == 6 * N * N && this.remBmbs >= 0)
+        if (this.clickedCells == 6 * N * N)
             swal({
               title: 'Awesome!',
               text: 'You are a real mine survive, good job!',
@@ -306,6 +306,8 @@ function Grid(N, BOMBS) {
         var cell = this.cell[pos];
         switch (cell.state) {
             case "virgin":
+                if (this.remBmbs <= 0)
+                    return;
                 cell.state = "flag";
                 cell.animate({
                     fill: flag_clr
