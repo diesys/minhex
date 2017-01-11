@@ -1,0 +1,26 @@
+{
+  "name": "MinHex",
+  "short_name": "MinHex",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#4E2A1C",
+  "theme-color": "#4E2A1C",
+  "description": "MinHex is spin-off of the old glory Mines, made with an hexagonal lattice instead. With modern UI made with Snap.svg",
+  "icons": [{
+    "src": "img/favicon72.png",
+    "sizes": "72x72",
+    "type": "image/png"
+  }, {
+    "src": "img/favicon114.png",
+    "sizes": "114x114",
+    "type": "image/png"
+  }, {
+    "src": "img/favicon114.png",
+    "sizes": "144x144",
+    "type": "image/png"
+  }, {
+    "src": "img/favicon256.png",
+    "sizes": "256x256",
+    "type": "image/png"
+  }]
+}
