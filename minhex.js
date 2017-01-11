@@ -1,5 +1,7 @@
-// Get arguments
+// The global variable which contains the game
+var grid;
 
+// Get arguments
 argv = {}
 window.location.search.substring(1).split('&').forEach(function(c) {
     var kv = c.split('=');
@@ -292,7 +294,7 @@ function Grid(N, BOMBS) {
     }
 
     this.checkVictory = function() {
-        if (this.clickedCells == 6 * N * N && this.remBmbs >= 0)
+        if (this.clickedCells == 6 * N * N)
             swal({
               title: 'Awesome!',
               text: 'You are a real mine survive, good job!',
@@ -306,6 +308,8 @@ function Grid(N, BOMBS) {
         var cell = this.cell[pos];
         switch (cell.state) {
             case "virgin":
+                if (this.remBmbs <= 0)
+                    return;
                 cell.state = "flag";
                 cell.animate({
                     fill: flag_clr
@@ -548,38 +552,44 @@ var menu_play_btn = menu.group(menu_play, m_play, m_play_icon),
 
 var bombsNumberFloat = B * 1.,
     sizeNumberFloat = N * 1.,
-    maxbombs = 3 * sizeNumber * (sizeNumber + 1), //number of cells
+    //maxbombs = 3 * sizeNumber * (sizeNumber + 1), //number of cells
     maxsize = 14; //just too cells for screens, quite unsable
 
 
 function wheelSelect(e, opt) {
+    // La situazione è vergognosissima, lo scrolling non funziona allo stesso modo!
     var speedWheel = .01;
-    // credo si possa snellire molto questa, meglio usare l'oggetto chiamante se riusciamo, piuttosto che determinarlo dentro la funzione
+    var delta = e.deltaY || (e.detail * 8);
+    // credo andrebbe sistemata
+
     if (opt == 'bomb') {
-/*        if (e.deltaY > 0)
-            bombsNumberFloat -= .1;
-        else
-            bombsNumberFloat += .1;
-*/
-        bombsNumberFloat -= e.deltaY * speedWheel;
-        bN = parseInt(bombsNumberFloat); // i think this if is equivalent to bombsNumberFloat += e.deltaY * .1;
+        var tempBombsF = bombsNumberFloat - delta * speedWheel,
+            tempBombs = parseInt(tempBombsF);
+        if (tempBombs <= 6 * sizeNumber * sizeNumber - 13 && tempBombs > 0) {
+            bombsNumberFloat = tempBombsF;
+            bombsNumber = tempBombs;
+            m_bomb.node.innerHTML = bombsNumber;
+        }
+        /*bN = parseInt(bombsNumberFloat); // i think this if is equivalent to bombsNumberFloat += e.deltaY * .1;
         if (bN > 0) {
             bombsNumber = bN;
             m_bomb.node.innerHTML = bombsNumber;
-        }
+        }*/
     } else if (opt == 'size') {
-        /*if (e.deltaY > 0)
-            sizeNumberFloat -= .1;
-        else
-            sizeNumberFloat += .1;
-        */
-        sizeNumberFloat -= e.deltaY * speedWheel;
+        var tempSizeF = sizeNumberFloat - delta * speedWheel,
+            tempSize = parseInt(tempSizeF);
+        if (bombsNumber <= 6 * tempSize * tempSize - 13 && tempSize > 0) {
+            sizeNumberFloat = tempSizeF;
+            sizeNumber = tempSize;
+            m_size.node.innerHTML = sizeNumber;
+        }
+        /*sizeNumberFloat -= delta * speedWheel;
         sN = parseInt(sizeNumberFloat);
         if (sN > 1 && sN <= maxsize) {
             sizeNumber = sN;
             m_size.node.innerHTML = sizeNumber;
             maxbombs = 3 * sizeNumber * (sizeNumber + 1)
-        }
+        }*/
     }
 }
 
@@ -609,14 +619,15 @@ function dragSelect (obj) {
             if (sN > 1 && sN <= maxsize) {
                 sizeNumber = sN;
                 m_size.node.innerHTML = sizeNumber;
-                maxbombs = 3 * sizeNumber * (sizeNumber + 1)
+//                maxbombs = 3 * sizeNumber * (sizeNumber + 1)
             }
         }
     }
 }
 
 function closemenu() {
-    if (bombsNumber < maxbombs) {
+    // Now bombs and size are always compatible ;)
+    //if (bombsNumber < maxbombs) {
         var animduration = 1000;
         menu_hole_shadow.attr({
             opacity: ".3"
@@ -643,7 +654,7 @@ function closemenu() {
         // Time to play!
         initializeScale();
         grid = new Grid(sizeNumber, bombsNumber);
-    } else {
+    /*} else {
         swal({
           title: 'How brave you!',
           text: 'You chose too many bombs, more that you can afford, retry with less!',
@@ -657,7 +668,7 @@ function closemenu() {
               }
             }
         )
-      }
+      }*/
 }
 
 function openmenu() {
@@ -750,32 +761,48 @@ menu_group.node.onclick = function() {
     closemenu()
 };
 
-menu_bomb.node.onmousewheel = function(e) {
-    wheelSelect(e, 'bomb')
-};
-m_bomb_icon.node.onmousewheel = function(e) {
-    wheelSelect(e, 'bomb')
-};
-m_bomb.node.onmousewheel = function(e) {
-    wheelSelect(e, 'bomb')
-};
+// Compatibility with Firefox for MouseWheel
 
-menu_size.node.onmousewheel = function(e) {
-    wheelSelect(e, 'size')
-};
-m_size_icon.node.onmousewheel = function(e) {
-    wheelSelect(e, 'size')
-};
-m_size.node.onmousewheel = function(e) {
-    wheelSelect(e, 'size')
-};
+var mousewheelevt=(/Firefox/i.test(navigator.userAgent))? "DOMMouseScroll" : "mousewheel" //FF doesn't recognize mousewheel as of FF3.x
+ 
+// the events to be linked to the mouse wheel
+var wheelBomb = function(e) { wheelSelect(e, 'bomb') },
+    wheelSize = function(e) { wheelSelect(e, 'size') };
+
+if (document.attachEvent) {
+    //if IE (and Opera depending on user setting)
+    menu_bomb.node.attachEvent("on"+mousewheelevt,wheelBomb);
+    m_bomb_icon.node.attachEvent("on"+mousewheelevt,wheelBomb);
+    m_bomb.node.attachEvent("on"+mousewheelevt,wheelBomb);
+    menu_size.node.attachEvent("on"+mousewheelevt,wheelSize);
+    m_size_icon.node.attachEvent("on"+mousewheelevt,wheelSize);
+    m_size.node.attachEvent("on"+mousewheelevt,wheelSize);
+} else if (document.addEventListener) {
+    //WC3 browsers
+    menu_bomb.node.addEventListener(mousewheelevt, wheelBomb);
+    m_bomb_icon.node.addEventListener(mousewheelevt, wheelBomb, false);
+    m_bomb.node.addEventListener(mousewheelevt, wheelBomb, false);    
+    menu_size.node.addEventListener(mousewheelevt, wheelSize, false);
+    m_size_icon.node.addEventListener(mousewheelevt, wheelSize, false);
+    m_size.node.addEventListener(mousewheelevt, wheelSize, false);    
+}
+
+
+/*
+menu_bomb.node.onmousewheel = function(e) { wheelSelect(e, 'bomb') };
+m_bomb_icon.node.onmousewheel = function(e) { wheelSelect(e, 'bomb') };
+m_bomb.node.onmousewheel = function(e) { wheelSelect(e, 'bomb') };
+
+menu_size.node.onmousewheel = function(e) { wheelSelect(e, 'size') };
+m_size_icon.node.onmousewheel = function(e) { wheelSelect(e, 'size') };
+m_size.node.onmousewheel = function(e) { wheelSelect(e, 'size') };*/
 
 // Ora proviamo con il drag
 
 var dragChangeSpeed = 4;
 var stopDragDelay = 100;
 
-var startDrg = function () { dragging = true }
+//var startDrg = function () { dragging = true }
 var stopDrg = function () { setTimeout(function () { dragging = false }, stopDragDelay) }
 
 menu_bomb.node.setAttribute("draggable","true");
@@ -807,4 +834,3 @@ m_size.drag(dragSelect('size'), function () { dragging = true }, function () { N
 
 
 openmenu();
-//var grid;
