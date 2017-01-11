@@ -1,0 +1,43 @@
+CACHE MANIFEST
+# Version 1
+
+CACHE:
+minhex.js
+manifest.json
+style.min.css
+bower_components/Snap.svg/dist/snap.svg-min.js
+bower_components/sweetalert2/dist/sweetalert2.min.js
+bower_components/sweetalert2/dist/sweetalert2.min.css
+
+#IMAGES
+img/favicon114.png
+img/favicon256.png
+img/remaining_bomb.png
+img/rematch.png
+img/tile.png
+
+  #menu
+img/menu/bomb.png
+img/menu/fame.png
+img/menu/hint.png
+img/menu/play.png
+img/menu/size.png
+
+  #howto
+img/howto/logo.png
+img/howto/neighbours.png
+img/howto/rethex.png
+
+#FONT
+font/OpenSans-Regular-webfont.ttf
+font/OpenSans-Bold-webfont.ttf
+
+#FALLBACK:
+# This will enable imagename4.png to be as a replacement for
+# all resources under the images dir when there is no network connectivity.
+#img/favicon images/favicon256.png
+
+
+#NETWORK:
+# This will prevent other network resources from being accessed.
+#images/imagename5.png
