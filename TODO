@@ -21,9 +21,7 @@ MinHex
 	? se clicco una casella con scritto 4 che ha tre celle non cliccate e una bomba piazzata piazza automaticamente
 		le altre tre bombe - utile
 
-	? clic lungo come alternativa al doppio click - boh (io metterei pulsante destro e di conseguenza click lungo sul cel)
-		per i cell e' utile, perche' certe volte si sbaglia e scoppia a caso (magari fare anche il doppioclick piu tollerante aiuta, ogni tanto capita di esplodere per sbaglio)
-
+	
 	? sistemare la chiamata ricorsiva dello ``scoprintorno'' (se si riesce a fare in modo efficiente)
 		-> Non clicca ricorsivamente sulle celle già cliccate. Cliccare ma aggiungere altra flag per la chiamata
 			ricorsiva, che una volta terminato l'albero delle chiamate andrebbe resettata.
@@ -33,11 +31,9 @@ MinHex
 \ui
 	· La transizione tra indicatoreBombe e refresh la farei con la dissolvenza invece di questo movimento, è fastidioso se vai verso qualcosa che questa ad un certo
 	  punto ti scappi e poi c'è un lag
-	? Il drag per le impostazioni non sembra funzionare a puntino su Firefox
-	· Sistemare il controllo sui valori minimi e massimi di bombe e dimensione, adesso ne ammette in prima battuta di fuorirange e la cosa crea problemi!
-		-> il controllo va risolto a monte, non ammettendo valori inaccettabili subito, non controllando e in caso scegliendo di non aggiornare
 	· Il movimento dell'indicatore delle bombe avanti e indietro (che succede anche se rimane fermo il mouse) sfalsa anche le scritte delle bombe e il field...
-	· Aggiungere rightclick per le bandierine ed eventualmente longtouch per i cell
+	? clic lungo come alternativa al doppio click - boh (io metterei pulsante destro e di conseguenza click lungo sul cel)
+		per i cell e' utile, perche' certe volte si sbaglia e scoppia a caso (magari fare anche il doppioclick piu tollerante aiuta, ogni tanto capita di esplodere per sbaglio)
 	· aggiungere descrizione tag e altro nei meta dell'html
 		[che vuol dire? sono cose per l'indicizzazione e metadati]
 	· aggiungere tooltip anche per le bombe/rematch? o metterlo nell'howto? (meglio la prima)
