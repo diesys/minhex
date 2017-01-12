@@ -764,7 +764,7 @@ menu_group.node.onclick = function() {
 // Compatibility with Firefox for MouseWheel
 
 var mousewheelevt=(/Firefox/i.test(navigator.userAgent))? "DOMMouseScroll" : "mousewheel" //FF doesn't recognize mousewheel as of FF3.x
- 
+
 // the events to be linked to the mouse wheel
 var wheelBomb = function(e) { wheelSelect(e, 'bomb') },
     wheelSize = function(e) { wheelSelect(e, 'size') };
@@ -781,10 +781,10 @@ if (document.attachEvent) {
     //WC3 browsers
     menu_bomb.node.addEventListener(mousewheelevt, wheelBomb);
     m_bomb_icon.node.addEventListener(mousewheelevt, wheelBomb, false);
-    m_bomb.node.addEventListener(mousewheelevt, wheelBomb, false);    
+    m_bomb.node.addEventListener(mousewheelevt, wheelBomb, false);
     menu_size.node.addEventListener(mousewheelevt, wheelSize, false);
     m_size_icon.node.addEventListener(mousewheelevt, wheelSize, false);
-    m_size.node.addEventListener(mousewheelevt, wheelSize, false);    
+    m_size.node.addEventListener(mousewheelevt, wheelSize, false);
 }
 
 
