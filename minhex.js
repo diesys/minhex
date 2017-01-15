@@ -334,6 +334,8 @@ function Grid(N, BOMBS) {
         c.state = "virgin" // virgin, flag, clicked
         c.click(this.mouseClick([i, j]));
         c.grid = this;
+        c.node.snapObj = c;
+        c.node.addEventListener("contextmenu", function () { this.snapObj.grid.toggleFlag([i,j]) });
         c.nbHood = [];
         this.cell[[i, j]] = c;
     }
@@ -763,6 +765,10 @@ menu_group.node.onclick = function() {
         return;
     closemenu()
 };
+
+// Disable rightclick event (except for toggleFlag)
+
+document.oncontextmenu = function () { return false };
 
 // Compatibility with Firefox for MouseWheel
 
