@@ -350,6 +350,44 @@ svg#menu text {
    transition: .2s ease;
 }
 
+
+
+.button.HowTo.open {
+   max-width: 30%;
+   /*bottom: 20px;*/
+   box-shadow: none;
+   background: none;
+   text-transform: none;
+   font-weight: 100;
+   text-transform: uppercase;
+   left: 15px;
+   bottom: 6px;
+   position: fixed;
+   top: auto;
+   left: 50%;
+   transform: translate(-50%, 0);
+   border: none;
+   /*animation: ;*/
+   transition: all .8s;
+   /*color: rgba(248, 183, 27, 0.5);*/
+   color: rgba(0,0,0,.8);
+   text-shadow: 0 0px 4px rgba(248, 183, 27,0.15);
+   font-size: 1.5em;
+}
+
+.button.HowTo.open:hover {
+   box-shadow: none;
+   /*color: rgba(248, 183, 27, 1);*/
+   color: rgba(0,0,0,1);
+   /* Safari */
+   -webkit-transition: .2s ease;
+   transition: .2s ease;
+}
+
+.button.HowTo.open:active {
+  transform: translate(-50%, 4px);
+}
+
 .button.HowTo.next {
    right: -15px;
    padding: 10px;
