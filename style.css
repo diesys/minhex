@@ -367,11 +367,11 @@ svg#menu text {
    left: 50%;
    transform: translate(-50%, 0);
    border: none;
-   /*animation: ;*/
    transition: all .8s;
    /*color: rgba(248, 183, 27, 0.5);*/
    color: rgba(0,0,0,.8);
    text-shadow: 0 0px 4px rgba(248, 183, 27,0.15);
+   animation: fadein 1s;
    font-size: 1.5em;
 }
 
