@@ -231,6 +231,13 @@ svg#menu text {
    padding: 8px 12px;
 }
 
+@media (max-width: 767px) {
+  .HowTo h1, .HowTo p {
+    margin: 0 40px 0 40px;
+  }
+}
+
+
 .HowTo h1 {
   top: 320px;
   position: relative;
@@ -388,10 +395,18 @@ svg#menu text {
   transform: translate(-50%, 4px);
 }
 
+.button.HowTo.next, .button.HowTo.prev {
+  background: rgba(0,0,0,.4);
+  box-shadow: none;
+  padding: 16px 8px 20px 3px;
+  border: none;
+  font-size: 20px;
+  height: 200px;
+}
+
 .button.HowTo.next {
-   right: -15px;
-   padding: 10px;
-   padding-right: 25px;
+   right: -20px;
+   padding-right: 20px;
    animation: fadefromright 1s ease;
 }
 
@@ -403,9 +418,8 @@ svg#menu text {
 }
 
 .button.HowTo.prev {
-   left: -15px;
-   padding: 10px;
-   padding-left: 25px;
+   left: -20px;
+   padding-left: 20px;
    animation: fadefromleft 1s ease;
 }
 
