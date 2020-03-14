@@ -74,6 +74,16 @@ var field = Snap('#field');
 // Calculate and Set the field dimensions
 var hsr3 = Math.pow(4, 0.4) / 2;
 
+// Max bomb ration with respect to number of cells (excluding the first neighboorhood)
+const bombratio = .5;
+
+// Bonus and Penalty for flags rightly and wrongly placed, resp.
+wrongFlagPenalty = -5;
+rightFlagBonus = 5;
+
+// The Game Score
+var score = 0;
+
 //  If the body ratio (y/x) is less than hsr3 (the hexagon box ratio, so the field ratio)
 //  then we must fit the field according to the body height deriving the right width,
 //  otherwise we must use the body width.
@@ -185,6 +195,20 @@ function Grid(N, BOMBS) {
     this.cell = {};
     this.clickedCells = 0;
     this.remBmbs = BOMBS;
+    this.score = 0;
+
+    this.refreshscore = function () {
+        // console.log(this.clickedCells);
+        scoreInd.innerHTML = `Punteggio: ${this.clickedCells}`;
+    }
+
+    this.finalscore = function () {
+        bombscore = 0;
+        for (var c in this.cell)
+            if (this.cell[c].state == "flag")
+                bombscore += this.cell[c].isBomb ? rightFlagBonus : wrongFlagPenalty
+        return this.clickedCells + bombscore;
+    }
 
     this.mouseClick = function(pos) {
         return function() {
@@ -210,6 +234,7 @@ function Grid(N, BOMBS) {
         //just a temp fix to a bug that can show negative bombs remaining if you put too flags
         if (this.remBmbs >= 0)
             remainingBombsInd.innerHTML = this.remBmbs;
+        this.refreshscore();
     }
 
     this.openCell = function(pos) {
@@ -231,18 +256,11 @@ function Grid(N, BOMBS) {
                 }, anim_dur, mina.easein);
                 this.FINISHED = true;
                 cell.state = "clicked";
-                // setTimeout(function() {
-                //     // rematch
-                //     var answer = confirm("Pieces of your fleshy brain are all over the walls. Pay more attention to mines next time. Rematch?")
-                //     if (answer)
-                //     // the url just without vars, and the just used ones
-                //         window.location = window.location.href.split('?')[0] + "?n=" + sizeNumber + "&b=" + bombsNumber; // + "&rematch=true"; //seems do not work the rematch url
-                //     else
-                //         window.location = window.location.href.split('?')[0] + "?n=" + sizeNumber + "&b=" + bombsNumber;
-                // }, 700);
+                // final score
+                // console.log(this.finalscore())
                 swal({
                   title: 'Damn!',
-                  text: 'Pieces of your fleshy brain are all over the walls. Pay more attention to mines next time!',
+                  text: `Pieces of your fleshy brain are all over the walls. Pay more attention to mines next time! However your score is ${this.finalscore()}`
                 })
 
                 for (c of Object.keys(this.cell))
@@ -275,6 +293,7 @@ function Grid(N, BOMBS) {
                     if (this.cell[c].state == "virgin")
                         this.openCell(c);
         }
+        this.refreshscore();
         this.checkVictory();
     }
 
@@ -325,6 +344,7 @@ function Grid(N, BOMBS) {
                 this.clickedCells--;
                 this.refreshBombs(1);
         }
+        // this.refreshscore();
         this.checkVictory();
     }
 
@@ -529,6 +549,7 @@ m_play.attr({
 var scroll_hint = document.getElementById("scroll_hint"),
     rematch_button = document.getElementById("rematch"),
     remainingBombsInd = document.getElementById("RemainingBombs");
+    scoreInd = document.getElementById("Score");
 
 var menu_play_btn = menu.group(menu_play, m_play, m_play_icon),
     menu_size_opt = menu.group(menu_size, m_size, m_size_icon),
@@ -567,7 +588,8 @@ function wheelSelect(e, opt) {
     if (opt == 'bomb') {
         var tempBombsF = bombsNumberFloat - delta * speedWheel,
             tempBombs = parseInt(tempBombsF);
-        if (tempBombs <= 6 * sizeNumber * sizeNumber - 13 && tempBombs > 0) {
+        // if (tempBombs <= 6 * sizeNumber * sizeNumber - 13 && tempBombs > 0) {
+        if (compatibilitySizeBomb(sizeNumber, tempBombs)) {
             bombsNumberFloat = tempBombsF;
             bombsNumber = tempBombs;
             m_bomb.node.innerHTML = bombsNumber;
@@ -580,7 +602,8 @@ function wheelSelect(e, opt) {
     } else if (opt == 'size') {
         var tempSizeF = sizeNumberFloat - delta * speedWheel,
             tempSize = parseInt(tempSizeF);
-        if (bombsNumber <= 6 * tempSize * tempSize - 13 && tempSize > 0) {
+        // if (bombsNumber <= 6 * tempSize * tempSize - 13 && tempSize > 0) {
+        if (compatibilitySizeBomb(tempSize, bombsNumber)) {
             sizeNumberFloat = tempSizeF;
             sizeNumber = tempSize;
             m_size.node.innerHTML = sizeNumber;
@@ -601,6 +624,11 @@ function wheelSelect(e, opt) {
 var dragging = false,
     dragTolerance = 5;
 
+function compatibilitySizeBomb (size, bombs) {
+    return (size > 0) && (bombs > 0) && (bombs <= bombratio * (6 * size * size) - 13)
+}
+
+
 function dragSelect (obj) {
     var speedDrag = .1;
     return function (dx, dy) {
@@ -611,7 +639,8 @@ function dragSelect (obj) {
         if (obj == "bomb") {
             var tempBombsF = B - dy * speedDrag,
                 tempBombs = parseInt(tempBombsF);
-            if (tempBombs <= 6 * sizeNumber * sizeNumber - 13 && tempBombs > 0) {
+            //if (tempBombs <= 6 * sizeNumber * sizeNumber - 13 && tempBombs > 0) {
+            if (compatibilitySizeBomb(sizeNumber, tempBombs)) {
                 bombsNumberFloat = tempBombsF;
                 bombsNumber = tempBombs;
                 m_bomb.node.innerHTML = bombsNumber;
@@ -620,7 +649,8 @@ function dragSelect (obj) {
             var tempSizeF = N - dy * speedDrag,
                 tempSize = parseInt(tempSizeF);
 
-            if (bombsNumber <= 6 * tempSize * tempSize - 13 && tempSize > 0) {
+            //if (bombsNumber <= 6 * tempSize * tempSize - 13 && tempSize > 0) {
+            if (compatibilitySizeBomb(tempSize, bombsNumber)) {
                 sizeNumberFloat = tempSizeF;
                 sizeNumber = tempSize;
                 m_size.node.innerHTML = sizeNumber;
