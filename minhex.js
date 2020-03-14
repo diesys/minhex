@@ -535,7 +535,7 @@ var menu_play_btn = menu.group(menu_play, m_play, m_play_icon),
     menu_bomb_opt = menu.group(menu_bomb, m_bomb, m_bomb_icon),
     // menu_fame_opt = menu.group(menu_fame, /*m_fame,*/ m_fame_icon),
 
-    menu_hole = menu.circle(menu_center[0], menu_center[1], menu_hex_points[1][0] / 8).attr({
+    menu_hole = menu.circle(menu_center[0], menu_center[1], 0).attr({
         fill: "#fff"
     }),
 
@@ -677,15 +677,15 @@ function closemenu() {
 }
 
 function openmenu() {
-    var animduration = 400;
-    setTimeout(function() {
+    var animduration = 800;
+    // setTimeout(function() {
         // menu_group.animate({
         //     transform: "r" + 360, centerX, centerY
         //   }, animduration, mina.ease);
         menu_hole.animate({
             r: menu_hex_points[1][0]
         }, animduration, mina.easeout);
-    }, 200);
+    // }, 200);
 
 }
 

@@ -18,10 +18,6 @@ body, html, .HowTo {
    max-height: 100%;
    height: 100%;
    margin: 0;
-   bottom: 0;
-   top: 0;
-   left: 0;
-   top: 0;
    background-image: url('img/tile.png');
    background-color: #411F15;
    color: #eee;
@@ -235,6 +231,13 @@ svg#menu text {
    padding: 8px 12px;
 }
 
+@media (max-width: 767px) {
+  .HowTo h1, .HowTo p {
+    margin: 0 40px 0 40px;
+  }
+}
+
+
 .HowTo h1 {
   top: 320px;
   position: relative;
@@ -354,10 +357,56 @@ svg#menu text {
    transition: .2s ease;
 }
 
+
+
+.button.HowTo.open {
+   max-width: 30%;
+   /*bottom: 20px;*/
+   box-shadow: none;
+   background: none;
+   text-transform: none;
+   font-weight: 100;
+   text-transform: uppercase;
+   left: 15px;
+   bottom: 6px;
+   position: fixed;
+   top: auto;
+   left: 50%;
+   transform: translate(-50%, 0);
+   border: none;
+   transition: all .8s;
+   /*color: rgba(248, 183, 27, 0.5);*/
+   color: rgba(0,0,0,.8);
+   text-shadow: 0 0px 4px rgba(248, 183, 27,0.15);
+   animation: fadein 1s;
+   font-size: 1.5em;
+}
+
+.button.HowTo.open:hover {
+   box-shadow: none;
+   /*color: rgba(248, 183, 27, 1);*/
+   color: rgba(0,0,0,1);
+   /* Safari */
+   -webkit-transition: .2s ease;
+   transition: .2s ease;
+}
+
+.button.HowTo.open:active {
+  transform: translate(-50%, 4px);
+}
+
+.button.HowTo.next, .button.HowTo.prev {
+  background: rgba(0,0,0,.4);
+  box-shadow: none;
+  padding: 16px 8px 20px 3px;
+  border: none;
+  font-size: 20px;
+  height: 200px;
+}
+
 .button.HowTo.next {
-   right: -15px;
-   padding: 10px;
-   padding-right: 25px;
+   right: -20px;
+   padding-right: 20px;
    animation: fadefromright 1s ease;
 }
 
@@ -369,9 +418,8 @@ svg#menu text {
 }
 
 .button.HowTo.prev {
-   left: -15px;
-   padding: 10px;
-   padding-left: 25px;
+   left: -20px;
+   padding-left: 20px;
    animation: fadefromleft 1s ease;
 }
 
