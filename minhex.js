@@ -199,7 +199,8 @@ function Grid(N, BOMBS) {
 
     this.refreshscore = function () {
         // console.log(this.clickedCells);
-        scoreInd.innerHTML = `Punteggio: ${this.clickedCells}`;
+        scoreInd.innerHTML = `${this.clickedCells}`;
+        scoreInd.classList.toggle('rotate');
     }
 
     this.finalscore = function () {

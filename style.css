@@ -478,6 +478,30 @@ h2.nodisplay {
   display: none;
 }
 
+h2#Score {
+   position: fixed;
+   padding: 8px 6px;
+   margin: 30px;
+   background: #F8B71B;
+   /*! border-radius: 65%; */
+   /*! aspect-ratio: 1/1; */
+   clip-path: polygon(50% 0%, 100% 25%, 100% 77%, 50% 100%, 0% 75%, 0% 25%);
+   color: #222;
+   font-weight: 999;
+   height: 1.4em;
+   width: 1.3em;
+   text-align:center;
+   font-size: 1.7em;
+   transform-origin: 50% 50%;
+   transition: clip-path .5s;
+}
+
+h2.rotate#Score {
+   /* transform: rotate(60deg); */
+   clip-path: polygon(100% 25%, 100% 77%, 50% 100%, 0% 75%, 0% 25%, 50% 0%);
+}
+
+
 /* CUSTOM SWEET-ALERT2 */
 
 .swal2-modal {
