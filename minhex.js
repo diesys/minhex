@@ -1,7 +1,7 @@
 // The global variable which contains the game
 var grid;
 
-const addUserURL = "addscore"
+const addUserURL = "addscore.php"
 
 // Get arguments
 argv = {}
