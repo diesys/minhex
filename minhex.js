@@ -1,6 +1,8 @@
 // The global variable which contains the game
 var grid;
 
+const addUserURL = "."
+
 // Get arguments
 argv = {}
 window.location.search.substring(1).split('&').forEach(function(c) {
@@ -239,6 +241,7 @@ function Grid(N, BOMBS) {
     }
 
     this.openCell = function(pos) {
+        
         if (this.FINISHED)
             return
 
@@ -259,9 +262,26 @@ function Grid(N, BOMBS) {
                 cell.state = "clicked";
                 // final score
                 // console.log(this.finalscore())
+                
+
                 swal({
-                  title: 'Damn!',
-                  text: `Pieces of your fleshy brain are all over the walls. Pay more attention to mines next time! However your score is ${this.finalscore()}`
+                    title: 'Damn!',
+                    input: 'text',
+                    text: `Pieces of your fleshy brain are all over the walls. Pay more attention to mines next time! However your score is ${this.finalscore()}`,
+                    inputPlaceholder: 'Type your message here...',
+                    inputAttributes: {
+                      'aria-label': 'Type your message here'
+                    },
+                    showConfirmButton: true
+                }).then(function (username) {
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", addUserURL, true);
+                    xhr.setRequestHeader('Content-Type', 'application/json');
+                    xhr.send(JSON.stringify({
+                        username: username,
+                        score: this.finalscore
+                    }));
+                    console.log(this.finalscore);
                 })
 
                 for (c of Object.keys(this.cell))
