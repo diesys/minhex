@@ -132,6 +132,17 @@ function initializeScale() {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+function sendScore(username) {
+    finalscore = document.querySelector('#Score').innerHTML;
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", addUserURL, true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    // xhr.send("username=cacca&score=35");
+    xhr.send("username="+username+"&score="+finalscore);
+    console.log(finalscore);
+}
+
+
 
 function mouseOver() {
     if (this.state == "virgin")
@@ -268,18 +279,12 @@ function Grid(N, BOMBS) {
                     title: 'Damn!',
                     input: 'text',
                     text: `Pieces of your fleshy brain are all over the walls. Pay more attention to mines next time! However your score is ${this.finalscore()}`,
-                    inputPlaceholder: 'Type your message here...',
+                    inputPlaceholder: 'username',
                     inputAttributes: {
-                      'aria-label': 'Type your message here'
+                      'aria-label': 'Type your username'
                     },
                     showConfirmButton: true
-                }).then(function (username) {
-                    var xhr = new XMLHttpRequest();
-                    xhr.open("POST", addUserURL, true);
-                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");                  
-                    xhr.send("username=cacca&score=35");
-                    console.log(this.finalscore);
-                })
+                }).then(function (username) {sendScore(username);})
 
                 for (c of Object.keys(this.cell))
                     if (this.cell[c].isBomb && c != pos) {
@@ -333,9 +338,15 @@ function Grid(N, BOMBS) {
     this.checkVictory = function() {
         if (this.clickedCells == 6 * N * N)
             swal({
-              title: 'Awesome!',
-              text: 'You are a real mine survive, good job!',
-            })
+                title: 'Awesome!',
+                input: 'text',
+                text: `You are a real mine survive, good job your score is ${this.finalscore()}`,
+                inputPlaceholder: 'username',
+                inputAttributes: {
+                    'aria-label': 'Type your username'
+                },
+                showConfirmButton: true
+            }).then(function (username) {sendScore(username);})
     }
 
     this.toggleFlag = function(pos) {
