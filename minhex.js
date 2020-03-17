@@ -288,7 +288,7 @@ function Grid(N, BOMBS) {
                       'aria-label': 'Type your username'
                     },
                     showConfirmButton: true
-                }).then(function (username) {sendScore(username);})
+                }).then(function (username) {sendScore(username,this.clickedCells);})
 
                 for (c of Object.keys(this.cell))
                     if (this.cell[c].isBomb && c != pos) {
