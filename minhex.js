@@ -275,7 +275,9 @@ function Grid(N, BOMBS) {
                     showConfirmButton: true
                 }).then(function (username) {
                     var xhr = new XMLHttpRequest();
-                    xhr.open("POST", addUserURL, true);
+                    // xhr.open("POST", addUserURL, true);
+                    xhr.open("POST", "addscore.php", true);
+
                     // xhr.open("GET", addUserURL, true);
                     // xhr.setRequestHeader('Content-Type', 'application/json');
                     xhr.setRequestHeader('Content-Type', 'text/plain');
