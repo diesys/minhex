@@ -132,14 +132,14 @@ function initializeScale() {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-function sendScore(username) {
-    finalscore = document.querySelector('#Score').innerHTML;
+function sendScore(username,score) {
+    //score = document.querySelector('#Score').innerHTML;
     var xhr = new XMLHttpRequest();
     xhr.open("POST", addUserURL, true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     // xhr.send("username=cacca&score=35");
-    xhr.send("username="+username+"&score="+finalscore);
-    console.log(finalscore);
+    xhr.send("username=" + username + "&score=" + score);
+    console.log(score);
 }
 
 
@@ -337,16 +337,17 @@ function Grid(N, BOMBS) {
 
     this.checkVictory = function() {
         if (this.clickedCells == 6 * N * N)
+            score = this.finalscore();
             swal({
                 title: 'Awesome!',
                 input: 'text',
-                text: `You are a real mine survive, good job your score is ${this.finalscore()}`,
+                text: `You are a real mine survive, good job your score is ${score}`,
                 inputPlaceholder: 'username',
                 inputAttributes: {
                     'aria-label': 'Type your username'
                 },
                 showConfirmButton: true
-            }).then(function (username) {sendScore(username);})
+            }).then(function (username) {sendScore(username,score);})
     }
 
     this.toggleFlag = function(pos) {
