@@ -480,16 +480,16 @@ h2.nodisplay {
 
 h2#Score {
    position: fixed;
-   padding: 8px 6px;
    margin: 30px;
+   padding: .5em;
    background: #F8B71B;
    /*! border-radius: 65%; */
    /*! aspect-ratio: 1/1; */
-   clip-path: polygon(50% 0%, 100% 25%, 100% 77%, 50% 100%, 0% 75%, 0% 25%);
+   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
    color: #222;
    font-weight: 999;
-   height: 1.4em;
-   width: 1.3em;
+   min-height: 1.7em;
+   min-width: 2em;
    text-align:center;
    font-size: 1.7em;
    transform-origin: 50% 50%;
