@@ -277,11 +277,13 @@ function Grid(N, BOMBS) {
                     var xhr = new XMLHttpRequest();
                     xhr.open("POST", addUserURL, true);
                     // xhr.open("GET", addUserURL, true);
-                    xhr.setRequestHeader('Content-Type', 'application/json');
-                    xhr.send(JSON.stringify({
+                    // xhr.setRequestHeader('Content-Type', 'application/json');
+                    xhr.setRequestHeader('Content-Type', 'text/plain');
+                    /*xhr.send(JSON.stringify({
                         username: username,
                         score: this.finalscore
-                    }));
+                    }));*/
+                    xhr.send("ciao");
                     console.log(this.finalscore);
                 })
 
