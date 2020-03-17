@@ -336,7 +336,7 @@ function Grid(N, BOMBS) {
     }
 
     this.checkVictory = function() {
-        if (this.clickedCells == 6 * N * N)
+        if (this.clickedCells == 6 * N * N) {
             score = this.finalscore();
             swal({
                 title: 'Awesome!',
@@ -348,6 +348,7 @@ function Grid(N, BOMBS) {
                 },
                 showConfirmButton: true
             }).then(function (username) {sendScore(username,score);})
+        }
     }
 
     this.toggleFlag = function(pos) {
