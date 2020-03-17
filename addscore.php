@@ -1,5 +1,6 @@
 <?php
     
+
     // hall of fame
     $hof = file_get_contents('hof.json');
     $data = json_decode($hof, true);
@@ -12,5 +13,8 @@
     
     // writing hof to file
     file_put_contents('hof.json', $newhof);
+    
+    // file_put_contents('ciao', $_POST);
+    // file_put_contents('ciao', $_GET);
 
 ?>
