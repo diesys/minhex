@@ -1,7 +1,7 @@
 // The global variable which contains the game
 var grid;
 
-const addUserURL = "addscore.php"
+const addUserURL = "./addscore.php"
 
 // Get arguments
 argv = {}
@@ -276,6 +276,7 @@ function Grid(N, BOMBS) {
                 }).then(function (username) {
                     var xhr = new XMLHttpRequest();
                     xhr.open("POST", addUserURL, true);
+                    // xhr.open("GET", addUserURL, true);
                     xhr.setRequestHeader('Content-Type', 'application/json');
                     xhr.send(JSON.stringify({
                         username: username,
