@@ -213,7 +213,11 @@ function Grid(N, BOMBS) {
     this.refreshscore = function () {
         // console.log(this.clickedCells);
         scoreInd.innerHTML = `${this.clickedCells}`;
-        scoreInd.classList.toggle('rotate');
+        scoreInd.classList.toggle('animating');
+        // animation
+        setTimeout(function () {
+            scoreInd.classList.toggle('animating');
+        }, 400);
     }
 
     this.finalscore = function () {
