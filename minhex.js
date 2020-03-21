@@ -208,11 +208,11 @@ function Grid(N, BOMBS) {
     this.cell = {};
     this.clickedCells = 0;
     this.remBmbs = BOMBS;
-    this.score = 0;
+    this.clicks = 0;
 
     this.refreshscore = function () {
-        // console.log(this.clickedCells);
-        scoreInd.innerHTML = `${this.clickedCells}`;
+        // scoreInd.innerHTML = `${this.clickedCells}`;
+        scoreInd.innerHTML = `${this.clicks}`;
         scoreInd.classList.toggle('rotate');
     }
 
@@ -236,6 +236,7 @@ function Grid(N, BOMBS) {
             doubleClick.waitingSndClick = true;
             var f = function() {
                 // single click
+                this.grid.clicks++;
                 doubleClick.waitingSndClick = false;
                 this.grid.openCell(pos);
             };
@@ -364,6 +365,7 @@ function Grid(N, BOMBS) {
                 cell.animate({
                     fill: flag_clr
                 }, anim_dur, mina.easein);
+                this.clicks++;
                 this.clickedCells++;
                 this.refreshBombs(-1);
                 break;
@@ -372,6 +374,7 @@ function Grid(N, BOMBS) {
                 cell.animate({
                     fill: base_clr
                 }, anim_dur, mina.easeout);
+                this.clicks--;
                 this.clickedCells--;
                 this.refreshBombs(1);
         }
