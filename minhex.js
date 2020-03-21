@@ -276,7 +276,9 @@ function Grid(N, BOMBS) {
                 }, anim_dur, mina.easein);
                 // We don't want to score-count the explosion click
                 this.clicks--;
-                this.refreshscore(this.clicks + this.finalBonus());
+                score = this.clicks + this.finalBonus()
+                this.refreshscore(score);
+
                 this.FINISHED = true;
                 cell.state = "clicked";
 
@@ -289,7 +291,7 @@ function Grid(N, BOMBS) {
                       'aria-label': 'Type your username'
                     },
                     showConfirmButton: true
-                }).then(function (username) {sendScore(username, this.clicks + this.finalBonus());})
+                }).then(function (username) {sendScore(username, score);})
 
                 for (c of Object.keys(this.cell))
                     if (this.cell[c].isBomb && c != pos) {
