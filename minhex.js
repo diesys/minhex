@@ -267,6 +267,9 @@ function Grid(N, BOMBS) {
             this.placeBombs(pos);
             this.STARTED = true;
         }
+        // compenso il click contato erroneamente in mouseclick
+        if (cell.state == "clicked")
+            this.clicks--;
         if (cell.state == "virgin") {
             cell.state = "clicked";
             this.clickedCells++;
@@ -315,14 +318,18 @@ function Grid(N, BOMBS) {
 
         } else // convert to switch?
         if (cell.state == "clicked") {
+            // non mi piace, lo faccio per compensare il click che non dovrebbe essere conteggiato in questo caso
+            //this.clicks--;
             var placedBombs = 0;
             for (c of cell.nbHood)
                 if (this.cell[c].state == "flag")
                     placedBombs++;
             if (placedBombs == cell.count)
                 for (c of cell.nbHood)
-                    if (this.cell[c].state == "virgin")
+                    if (this.cell[c].state == "virgin") {
+                        this.clicks++;
                         this.openCell(c);
+                    }
         }
         this.refreshscore(this.clicks);
         this.checkVictory();
