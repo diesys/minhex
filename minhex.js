@@ -276,6 +276,7 @@ function Grid(N, BOMBS) {
                 }, anim_dur, mina.easein);
                 // We don't want to score-count the explosion click
                 this.clicks--;
+                this.refreshscore(this.clicks + this.finalBonus());
                 this.FINISHED = true;
                 cell.state = "clicked";
 
@@ -288,7 +289,7 @@ function Grid(N, BOMBS) {
                       'aria-label': 'Type your username'
                     },
                     showConfirmButton: true
-                }).then(function (username) {sendScore(username,this.clickedCells);})
+                }).then(function (username) {sendScore(username, this.clicks + this.finalBonus());})
 
                 for (c of Object.keys(this.cell))
                     if (this.cell[c].isBomb && c != pos) {
@@ -300,6 +301,7 @@ function Grid(N, BOMBS) {
 
                 return
             }
+            // !this should be fixed, too slow when recursively called 
             cell.animate({
                 fill: clicked_clr,
             }, anim_dur, mina.easein);
