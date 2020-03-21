@@ -94,7 +94,7 @@ svg#menu text {
 /* fix positioning of relative bomb numbers */
 @-moz-document url-prefix() {
    svg text {
-      transform: translateY(4px);
+      transform: translateY(5px);
    }
 }
 
