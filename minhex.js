@@ -210,9 +210,9 @@ function Grid(N, BOMBS) {
     this.remBmbs = BOMBS;
     this.clicks = 0;
 
-    this.refreshscore = function () {
+    this.refreshscore = function (score) {
         // console.log(this.clickedCells);
-        scoreInd.innerHTML = `${this.clicks}`;
+        scoreInd.innerHTML = `${score}`;
         scoreInd.classList.toggle('animating');
         // animation
         setTimeout(function () {
@@ -220,12 +220,12 @@ function Grid(N, BOMBS) {
         }, 400);
     }
 
-    this.finalscore = function () {
+    this.finalBonus = function () {
         bombscore = 0;
         for (var c in this.cell)
             if (this.cell[c].state == "flag")
                 bombscore += this.cell[c].isBomb ? rightFlagBonus : wrongFlagPenalty
-        return this.clickedCells + bombscore;
+        return bombscore;
     }
 
     this.mouseClick = function(pos) {
@@ -253,7 +253,7 @@ function Grid(N, BOMBS) {
         //just a temp fix to a bug that can show negative bombs remaining if you put too flags
         if (this.remBmbs >= 0)
             remainingBombsInd.innerHTML = this.remBmbs;
-        this.refreshscore();
+        this.refreshscore(this.clicks);
     }
 
     this.openCell = function(pos) {
@@ -274,16 +274,15 @@ function Grid(N, BOMBS) {
                 cell.animate({
                     fill: bomb_clr,
                 }, anim_dur, mina.easein);
+                // We don't want to score-count the explosion click
+                this.clicks--;
                 this.FINISHED = true;
                 cell.state = "clicked";
-                // final score
-                // console.log(this.finalscore())
-                
 
                 swal({
                     title: 'Damn!',
                     input: 'text',
-                    text: `Pieces of your fleshy brain are all over the walls. Pay more attention to mines next time! However your score is ${this.finalscore()}`,
+                    text: `Pieces of your fleshy brain are all over the walls. Pay more attention to mines next time! However your score is ${this.clicks + this.finalBonus()}`,
                     inputPlaceholder: 'username',
                     inputAttributes: {
                       'aria-label': 'Type your username'
@@ -321,7 +320,7 @@ function Grid(N, BOMBS) {
                     if (this.cell[c].state == "virgin")
                         this.openCell(c);
         }
-        this.refreshscore();
+        this.refreshscore(this.clicks);
         this.checkVictory();
     }
 
@@ -342,7 +341,8 @@ function Grid(N, BOMBS) {
 
     this.checkVictory = function() {
         if (this.clickedCells == 6 * N * N) {
-            score = this.finalscore();
+            score = this.clicks + this.finalBonus();
+            this.refreshscore(score);
             swal({
                 title: 'Awesome!',
                 input: 'text',
@@ -554,7 +554,7 @@ var m_text_opt = {
     'alignment-baseline': 'central'
 };
 m_text_opt['font-size'] = parseInt(L * .1) + 'pt';
-m_text_opt['font-family'] = 'OpenSansBold';
+// m_text_opt['font-family'] = 'OpenSansBold';
 m_text_opt['font-weight'] = 600;
 m_text_opt['fill'] = "#fff";
 
