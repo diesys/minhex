@@ -91,6 +91,14 @@ svg#menu text {
    text-shadow: 0 2px 3px rgba(0, 0, 0, .35);
 }
 
+/* fix positioning of relative bomb numbers */
+@-moz-document url-prefix() {
+   svg text {
+      transform: translateY(5px);
+   }
+}
+
+
 /* HOW TO */
 
 @keyframes fadefrombottom {
@@ -98,7 +106,7 @@ svg#menu text {
       opacity: 0;
       transform: translateY(100%);
    }
-   , 100% {
+   100% {
       opacity: 1;
       transform: translateY(0);
    }
