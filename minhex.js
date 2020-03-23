@@ -131,15 +131,67 @@ function initializeScale() {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
 function sendScore(username,score) {
     //score = document.querySelector('#Score').innerHTML;
     var xhr = new XMLHttpRequest();
     xhr.open("POST", addUserURL, true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    // xhr.send("username=cacca&score=35");
     xhr.send("username=" + username + "&score=" + score);
-    console.log(score);
+    
+    /// aggiunta
+    /*const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+      })
+      
+      swalWithBootstrapButtons.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel!',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.value) {
+          swalWithBootstrapButtons.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+          )
+        } else if (
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            'Cancelled',
+            'Your imaginary file is safe :)',
+            'error'
+          )
+        }
+      })*/
+    /// aggiunta
+    swal({
+        title: 'Match over',
+        //input: 'text',
+        text: 'What do you want to do now?',
+        //inputPlaceholder: 'username',
+        /*inputAttributes: {
+          'aria-label': 'Type your username'
+        },*/
+        showCancelButton: true,
+        confirmButtonText: 'Play again!',
+        cancelButtonText: 'Hall Of Fame',
+        
+        showConfirmButton: true
+
+    }).then(function (result) {
+        refreshNewGame()
+    }).catch(function (err) {
+        window.location = "./hof.php"
+    })
 }
 
 
@@ -288,7 +340,8 @@ function Grid(N, BOMBS) {
                 swal({
                     title: 'Damn!',
                     input: 'text',
-                    text: `Pieces of your fleshy brain are all over the walls. Pay more attention to mines next time! However your score is ${this.clicks + this.finalBonus()}`,
+                    // text: `Pieces of your fleshy brain are all over the walls. Pay more attention to mines next time! However your score is ${this.clicks + this.finalBonus()}`,
+                    text: `Pieces of your fleshy brain are all over the walls. Pay more attention to mines next time! However your score is ${score}`,
                     inputPlaceholder: 'username',
                     inputAttributes: {
                       'aria-label': 'Type your username'
@@ -363,7 +416,9 @@ function Grid(N, BOMBS) {
                     'aria-label': 'Type your username'
                 },
                 showConfirmButton: true
-            }).then(function (username) {sendScore(username,score);})
+            }).then(function (username) {
+                sendScore(username,score);
+            })
         }
     }
 
