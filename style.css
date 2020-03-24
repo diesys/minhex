@@ -336,6 +336,10 @@ svg#menu text {
    position: fixed;
    left: 15px;
    bottom: 15px;
+   background-color: #f8d74b;
+   color: #5A3120;
+   font-size: 1.2em;
+
 }
 .button.credits {
    right: 15px;

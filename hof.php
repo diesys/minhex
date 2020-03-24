@@ -81,7 +81,7 @@
             <?php endforeach; ?>
         </table>
 
-        <a class="button playagain" ref="index.html">Play again!</a>
+        <a class="button playagain" href="index.html">Play again!</a>
 
     </body>
 
