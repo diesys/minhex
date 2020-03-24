@@ -71,11 +71,13 @@
 
     <svg id="menu" height="85%" width="90%"></svg>
 
-    <script src='minhex.js'></script>
+    <script src='minhex.js' defer></script>
     <!-- <script src="minhex.min.js"></script> -->
     <!-- <script src='minhexui.js'></script> -->
 
-    <a class="button HowTo open" onclick="HowTo(1)" href="#">MinHex</a>
+    <a class="button HowTo nodisplay open" id="howToOpenBtn" onclick="HowTo(1)" href="#">MinHex</a>
+    
+    <a class="button hof nodisplay" id="hofLink" href="hof.php">Hall of Fame</a>
 
     <div id="HT3" class="HowTo hidden">
         <div id="grad_ht"></div>

@@ -81,6 +81,8 @@
             <?php endforeach; ?>
         </table>
 
+        <a class="button hof" ref="index.html">Hall of Fame</a>
+
     </body>
 
 </html>

@@ -327,6 +327,11 @@ svg#menu text {
    bottom: 15px;
 }
 
+.button.hof {
+   position: fixed;
+   left: 15px;
+   bottom: 15px;
+}
 .button.credits {
    right: 15px;
    bottom: 15px;
@@ -483,8 +488,9 @@ h2.hidden {
   animation: fadetoright .5s;
 }
 
-h2.nodisplay {
+.nodisplay {
   display: none;
+  opacity: 0;
 }
 
 h2#Score {

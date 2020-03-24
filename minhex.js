@@ -784,6 +784,9 @@ function closemenu() {
             })
         }, animduration);
 
+        document.getElementById('hofLink').classList.remove('nodisplay');
+        document.getElementById('howToOpenBtn').classList.remove('nodisplay');
+
         showRematch(1); //appears just a second as hint of where the restart button is hidden
         setTimeout(function() {
             scroll_hint.className = "hidden"
