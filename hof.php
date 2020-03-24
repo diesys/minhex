@@ -48,7 +48,13 @@
 
     </head>
 
-    <body>
+    <body class="flexBody">
+
+        <header>
+            <img src="img/hof_cup.png" height="100" width="100" alt="MinHex cup" />
+            <h1>Hall of Fame</h1> 
+            <img src="img/icon.png" height="100" width="100" alt="MinHex logo" />
+        </header>
                 
         <table id="hof_table">
             <tr>

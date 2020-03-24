@@ -19,7 +19,7 @@ body, html, .HowTo {
    height: 100%;
    margin: 0;
    background-image: url('img/tile.png');
-   background-color: #411F15;
+   background-color: rgb(90, 46, 32);
    color: #eee;
    cursor: default;
    position: fixed;
@@ -385,7 +385,7 @@ svg#menu text {
    transition: all .8s;
    /*color: rgba(248, 183, 27, 0.5);*/
    color: rgba(0,0,0,.8);
-   text-shadow: 0 0px 4px rgba(248, 183, 27,0.15);
+   text-shadow: 0 0px 4px rgba(248, 183, 27,0.25);
    animation: fadein 1s;
    font-size: 1.5em;
 }
@@ -393,6 +393,7 @@ svg#menu text {
 .button.HowTo.open:hover {
    box-shadow: none;
    /*color: rgba(248, 183, 27, 1);*/
+   text-shadow: 0 0px 4px rgba(248, 183, 27,0.4);
    color: rgba(0,0,0,1);
    /* Safari */
    -webkit-transition: .2s ease;
@@ -556,15 +557,29 @@ h2.animating#Score {
 
 /* HALL OF FAME */
 
+body.flexBody {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   color: #fff;
+}
+
+body.flexBody header {
+   margin-top: 40px;
+   display: flex;
+   align-items: center;
+}
+body.flexBody header > h1 {
+   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.65);
+   margin: 0 20px;
+}
+
 #hof_table {
-   position: absolute;
-   transform: translate(-50%, -50%);
-   left: 50%;
-   top: 50%;
    overflow-y: scroll;
    background: #f8b71b;
    color: #411F15;
    padding: 20px 25px;
+   margin-top: 50px;
 
    word-wrap: break-word;
    overflow-wrap: break-word;
@@ -583,11 +598,11 @@ h2.animating#Score {
    font-weight: 900;
    font-family: 'OpenSansBold';
 }
+
 #hof_table th:nth-child(1) {text-align: left;}
 #hof_table th:nth-child(2) {text-align: right;}
 
 #hof_table tr {
-   /* border-bottom: 1px dashed rgba(0, 0, 0, .35); */
    min-height: 1.8em;
 }
 
