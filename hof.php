@@ -81,7 +81,7 @@
             <?php endforeach; ?>
         </table>
 
-        <a class="button playagain" href="index.html">Play again!</a>
+        <a class="button playagain" href="https://flowin.space/minhex">Play again!</a>
 
     </body>
 
