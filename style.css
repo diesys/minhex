@@ -332,6 +332,11 @@ svg#menu text {
    left: 15px;
    bottom: 15px;
 }
+.button.playagain {
+   position: fixed;
+   left: 15px;
+   bottom: 15px;
+}
 .button.credits {
    right: 15px;
    bottom: 15px;

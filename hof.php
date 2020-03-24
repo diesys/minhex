@@ -9,8 +9,8 @@
     <meta name="Description" content="MinHex is spin-off of the old glory Mines, made with an hexagonal lattice instead. With modern UI made with Snap.svg | Hall of Fame">
     
     <!-- MinHex style -->
-    <link rel="stylesheet" href="style.css">
-    <!-- <link rel="stylesheet" href="style.min.css"> -->
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="stylesheet" href="style.min.css">
 
     <!-- Mobile Specifics -->
     <link rel="manifest" href="manifest.json">
@@ -81,7 +81,7 @@
             <?php endforeach; ?>
         </table>
 
-        <a class="button hof" ref="index.html">Hall of Fame</a>
+        <a class="button playagain" ref="index.html">Play again!</a>
 
     </body>
 
