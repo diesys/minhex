@@ -320,7 +320,7 @@ function Grid(N, BOMBS) {
         var cell = this.cell[pos];
         if (!this.STARTED) {
             //this.initialize(pos);
-            this.placeBombs(pos);
+            //this.placeBombs(pos);
             this.STARTED = true;
             this.FIRSTCLICK = true;
         }
