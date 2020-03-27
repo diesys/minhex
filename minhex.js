@@ -257,6 +257,7 @@ function Grid(N, BOMBS) {
     this.BOMBS = BOMBS;
     this.STARTED = false;
     this.FINISHED = false;
+    this.FIRSTCLICK = false;
     this.cell = {};
     this.clickedCells = 0;
     this.remBmbs = BOMBS;
@@ -297,6 +298,9 @@ function Grid(N, BOMBS) {
                 this.grid.openCell(pos);
             };
             doubleClick.lastClick = setTimeout(f, doubleClick.mouseClickDelay);
+            if (this.FIRSTCLICK) {
+                this.FIRSTCLICK = false;
+            }
         }
     }
 
@@ -318,9 +322,10 @@ function Grid(N, BOMBS) {
             //this.initialize(pos);
             this.placeBombs(pos);
             this.STARTED = true;
+            this.FIRSTCLICK = true;
         }
         // compenso il click contato erroneamente in mouseclick
-        if (cell.state == "clicked")
+        if (cell.state == "clicked" && this.FIRSTCLICK)
             this.clicks--;
         if (cell.state == "virgin") {
             cell.state = "clicked";
@@ -487,7 +492,7 @@ function Grid(N, BOMBS) {
         return nbh
     }
 
-
+    /*
     this.placeBombs = function(firstClick) {
         // exclude the cells next to the first click, so you can start safely
         var toExclude = this.cell[firstClick].nbHood.map(function(x) {
@@ -506,7 +511,7 @@ function Grid(N, BOMBS) {
             candidates.splice(choiceInd, 1);
         }
     }
-
+    */
     function coords(c) {
         return c.split(",").map(parseFloat);
     }
