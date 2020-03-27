@@ -74,9 +74,6 @@
             <tr>
                 <td><?php echo $user; ?></td>
                 <td><?php echo $score; ?></td>
-                <!-- <td> -->
-                    <?php// echo $row[2]; ?>
-                <!-- </td> -->
             </tr>
             <?php endforeach; ?>
         </table>
