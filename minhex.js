@@ -257,14 +257,14 @@ function Grid(N, BOMBS) {
     this.BOMBS = BOMBS;
     this.STARTED = false;
     this.FINISHED = false;
-    this.FIRSTCLICK = false;
+    // this.FIRSTCLICK = false;
     this.cell = {};
     this.clickedCells = 0;
     this.remBmbs = BOMBS;
     this.clicks = 0;
+    this.score = 0;
 
     this.refreshscore = function (score) {
-        // console.log(this.clickedCells);
         scoreInd.innerHTML = `${score}`;
         scoreInd.classList.toggle('animating');
         // animation
@@ -293,14 +293,14 @@ function Grid(N, BOMBS) {
             doubleClick.waitingSndClick = true;
             var f = function() {
                 // single click
-                this.grid.clicks++;
+                // this.grid.clicks++;
                 doubleClick.waitingSndClick = false;
-                this.grid.openCell(pos);
+                this.grid.openCell(pos, human = true);
             };
             doubleClick.lastClick = setTimeout(f, doubleClick.mouseClickDelay);
-            if (this.FIRSTCLICK) {
-                this.FIRSTCLICK = false;
-            }
+            // if (this.FIRSTCLICK) {
+            //     this.grid.FIRSTCLICK = false;
+            // }
         }
     }
 
@@ -309,10 +309,10 @@ function Grid(N, BOMBS) {
         //just a temp fix to a bug that can show negative bombs remaining if you put too flags
         if (this.remBmbs >= 0)
             remainingBombsInd.innerHTML = this.remBmbs;
-        this.refreshscore(this.clicks);
+        // this.refreshscore(this.clicks);
     }
 
-    this.openCell = function(pos) {
+    this.openCell = function(pos, human = false) {
         
         if (this.FINISHED)
             return
@@ -322,26 +322,25 @@ function Grid(N, BOMBS) {
             //this.initialize(pos);
             this.placeBombs(pos);
             this.STARTED = true;
-            this.FIRSTCLICK = true;
         }
-        // compenso il click contato erroneamente in mouseclick
-        if (cell.state == "clicked" && this.FIRSTCLICK)
-            this.clicks--;
         if (cell.state == "virgin") {
-            cell.state = "clicked";
             this.clickedCells++;
+            if (human) {
+                this.score++;
+                this.refreshscore(this.score)
+            }
+            cell.state = "clicked";
+
             if (cell.isBomb) {
                 cell.animate({
                     fill: bomb_clr,
                 }, anim_dur, mina.easein);
                 // We don't want to score-count the explosion click
-                this.clicks--;
-                score = this.clicks + this.finalBonus()
-                this.refreshscore(score);
-
+                this.score--;
                 this.FINISHED = true;
-                cell.state = "clicked";
-
+                score = this.score + this.finalBonus();
+                this.refreshscore(score);
+                
                 swal({
                     title: 'Damn!',
                     input: 'text',
@@ -368,32 +367,45 @@ function Grid(N, BOMBS) {
             cell.animate({
                 fill: clicked_clr,
             }, anim_dur, mina.easein);
-            if (cell.count)
+            if (cell.count) {
                 textOnCell(cell.pos, cell.count.toString()).click(this.mouseClick(pos));
-            else
-                for (c of cell.nbHood)
+            } else {
+                for (c of cell.nbHood) {
                     this.openCell(c);
+                }
+            }
+
 
         } else // convert to switch?
         if (cell.state == "clicked") {
-            // non mi piace, lo faccio per compensare il click che non dovrebbe essere conteggiato in questo caso
-            //this.clicks--;
+            // Controllare, penso faccia dei giri inutili
             var placedBombs = 0;
-            for (c of cell.nbHood)
-                if (this.cell[c].state == "flag")
+            var clickCountRefresh = false;
+            var cellsToClick = 0;
+            for (c of cell.nbHood) {
+                if (this.cell[c].state == "flag") {
                     placedBombs++;
-            if (placedBombs == cell.count)
-                for (c of cell.nbHood)
+                }
+            }
+            if (placedBombs == cell.count) {
+                for (c of cell.nbHood) {
                     if (this.cell[c].state == "virgin") {
-                        this.clicks++;
                         this.openCell(c);
+                        cellsToClick++;
+                        clickCountRefresh = true;
                     }
+                }
+                if (clickCountRefresh && human) {
+                    this.score += cellsToClick;
+                    this.refreshscore(this.score);
+                }
+            }
         }
-        this.refreshscore(this.clicks);
+        // this.refreshscore(this.clicks);
         this.checkVictory();
     }
 
-    this.checkVictoryOldAlert = function() {
+    /*this.checkVictoryOldAlert = function() {
         if (this.clickedCells == 6 * N * N)
             setTimeout(function() {
                 // Ok to retry with same parameters or cancel to have the menu back again
@@ -406,11 +418,11 @@ function Grid(N, BOMBS) {
                 else
                     window.location = window.location.href.split('?')[0] + "?n=" + sizeNumber + "&b=" + bombsNumber;
             }, 700);
-    }
+    }*/
 
     this.checkVictory = function() {
         if (this.clickedCells == 6 * N * N) {
-            score = this.clicks + this.finalBonus();
+            score = this.score + this.finalBonus();
             this.refreshscore(score);
             swal({
                 title: 'Awesome!',
@@ -440,8 +452,8 @@ function Grid(N, BOMBS) {
                 cell.animate({
                     fill: flag_clr
                 }, anim_dur, mina.easein);
-                this.clicks++;
                 this.clickedCells++;
+                this.score++;
                 this.refreshBombs(-1);
                 break;
             case "flag":
@@ -449,11 +461,12 @@ function Grid(N, BOMBS) {
                 cell.animate({
                     fill: base_clr
                 }, anim_dur, mina.easeout);
-                this.clicks--;
                 this.clickedCells--;
+                this.score--;
                 this.refreshBombs(1);
         }
-        // this.refreshscore();
+
+        this.refreshscore(this.score);
         this.checkVictory();
     }
 
@@ -492,7 +505,7 @@ function Grid(N, BOMBS) {
         return nbh
     }
 
-    /*
+    
     this.placeBombs = function(firstClick) {
         // exclude the cells next to the first click, so you can start safely
         var toExclude = this.cell[firstClick].nbHood.map(function(x) {
@@ -511,7 +524,7 @@ function Grid(N, BOMBS) {
             candidates.splice(choiceInd, 1);
         }
     }
-    */
+    
     function coords(c) {
         return c.split(",").map(parseFloat);
     }
