@@ -299,7 +299,7 @@ function Grid(N, BOMBS) {
             };
             doubleClick.lastClick = setTimeout(f, doubleClick.mouseClickDelay);
             if (this.FIRSTCLICK) {
-                this.FIRSTCLICK = false;
+                this.grid.FIRSTCLICK = false;
             }
         }
     }
@@ -320,16 +320,19 @@ function Grid(N, BOMBS) {
         var cell = this.cell[pos];
         if (!this.STARTED) {
             //this.initialize(pos);
-            //this.placeBombs(pos);
+            this.placeBombs(pos);
             this.STARTED = true;
-            this.FIRSTCLICK = true;
+            console.log("gioco iniziato")
         }
         // compenso il click contato erroneamente in mouseclick
-        if (cell.state == "clicked" && this.FIRSTCLICK)
+        if (cell.state == "clicked" && !this.FIRSTCLICK)
             this.clicks--;
         if (cell.state == "virgin") {
+            //if (!this.FIRSTCLICK) {
+                this.clickedCells++;
+            //}
             cell.state = "clicked";
-            this.clickedCells++;
+
             if (cell.isBomb) {
                 cell.animate({
                     fill: bomb_clr,
@@ -368,11 +371,14 @@ function Grid(N, BOMBS) {
             cell.animate({
                 fill: clicked_clr,
             }, anim_dur, mina.easein);
-            if (cell.count)
+            if (cell.count) {
                 textOnCell(cell.pos, cell.count.toString()).click(this.mouseClick(pos));
-            else
-                for (c of cell.nbHood)
+            } else {
+                for (c of cell.nbHood) {
                     this.openCell(c);
+                }
+            }
+
 
         } else // convert to switch?
         if (cell.state == "clicked") {
@@ -385,12 +391,18 @@ function Grid(N, BOMBS) {
             if (placedBombs == cell.count)
                 for (c of cell.nbHood)
                     if (this.cell[c].state == "virgin") {
-                        this.clicks++;
+                        console.log(c)
+                        if (this.cell[c].count != 0){
+                            this.clicks++;
+                        }
                         this.openCell(c);
                     }
         }
         this.refreshscore(this.clicks);
         this.checkVictory();
+        if (this.STARTED & !this.FIRSTCLICK){
+            this.FIRSTCLICK = true;
+        }
     }
 
     this.checkVictoryOldAlert = function() {
@@ -492,7 +504,7 @@ function Grid(N, BOMBS) {
         return nbh
     }
 
-    /*
+    
     this.placeBombs = function(firstClick) {
         // exclude the cells next to the first click, so you can start safely
         var toExclude = this.cell[firstClick].nbHood.map(function(x) {
@@ -511,7 +523,7 @@ function Grid(N, BOMBS) {
             candidates.splice(choiceInd, 1);
         }
     }
-    */
+    
     function coords(c) {
         return c.split(",").map(parseFloat);
     }
