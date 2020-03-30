@@ -15,7 +15,7 @@ window.location.search.substring(1).split('&').forEach(function(c) {
 
 //SWEET-ALERT2 default
 swal.setDefaults({
-    background: '#5A3120 url(img/tile.png)',
+    background: '#5A3120 url(css/img/tile.png)',
     confirmButtonColor: '#f8b71b',
     showCloseButton: true,
     showConfirmButton: false
