@@ -1,7 +1,7 @@
 // The global variable which contains the game
 var grid;
 
-const addUserURL = "./addscore.php"
+const addUserURL = "hof/addscore.php"
 
 // Get arguments
 argv = {}
@@ -190,7 +190,7 @@ function sendScore(username,score) {
     }).then(function (result) {
         refreshNewGame()
     }).catch(function (err) {
-        window.location = "./hof.php"
+        window.location = "hof/"
     })
 }
 
