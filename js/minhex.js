@@ -33,23 +33,40 @@ var sizeNumber = N,
 
 var
     // base_clr = "#A9D41C",
-    base_clr = "#76B918",
+    // base_clr = "#76B918",
+    base_clr = "#75b92d",
+    // base_clr = "#75b92d30",
     // field_bg_color = "#59710E",
-    field_bg_color = "#190900",
-    field_bg_opacity = "1",
-    stroke_clr = "rgba(0,0,0,.1)",
-    stroke_width = "2",
+    // field_bg_color = "#190900",
+    // field_bg_color = "rgba(0,0,0,.2)",
+    // field_bg_color = "#75b92d",
+    field_bg_color = "#000000",
+    field_bg_opacity = ".4",
+    stroke_clr = "rgba(0,0,0,.2)",
+    // stroke_clr = "#4a1e1050",
+    // stroke_clr = "rgba(54, 70, 12, .2)",
+    stroke_width = "1",
     // clicked_clr = "#698511",
-    clicked_clr = "#507521",
+    // clicked_clr = "#507521",
+    // clicked_clr = "#36460c",
+    // clicked_clr = "#32440f",
+    // clicked_clr = "#5a2e20",
+    // clicked_clr = "none",
+    clicked_clr = "none",
+    // clicked_clr = "#32440f00",
+    // clicked_clr = "#27350c",
     // over_clr = "#e8ff7d",
     over_clr = "#B4E575",
+    // over_clr = "rgba(255,255,255,.1)",
     bomb_clr = "#C10F08",
     bomb2_clr = "#950601",
     flag_clr = "#f8b71b",
     anim_dur = 130;
 
 var textDimension = 2.1,
-    fontColor = "#fff",
+    // fontColor = "#fff",
+    // fontColor = "rgba(255,255,255,.6)",
+    fontColor = base_clr,
     font = 'OpenSansBold';
 
 ///////////////////////////////////////////
@@ -364,9 +381,12 @@ function Grid(N, BOMBS) {
                 return
             }
             // !this should be fixed, too slow when recursively called 
-            cell.animate({
-                fill: clicked_clr,
-            }, anim_dur, mina.easein);
+            // cell.animate({
+            //     fill: clicked_clr,
+            // }, anim_dur, mina.easein);
+            cell.attr({
+                fill: clicked_clr
+            })
             if (cell.count) {
                 textOnCell(cell.pos, cell.count.toString()).click(this.mouseClick(pos));
             } else {
@@ -562,14 +582,6 @@ var menu = Snap('#menu');
 // UI CONF
 document.getElementById('menu').setAttribute('width', fieldWidth);
 document.getElementById('menu').setAttribute('height', fieldHeight);
-// var menu_hex_points = new Array()
-// menu_hex_points.push([x0,y0])
-// menu_hex_points.push([x0 + N*l, y0])
-// menu_hex_points.push([x0 + N*1.5*l, y0 + N*l*hsr3])
-// menu_hex_points.push([x0 + N*l, y0 + N*l*hsr3*2])
-// menu_hex_points.push([x0, y0 + N*l*hsr3*2])
-// menu_hex_points.push([x0-N*l/2, y0 + N*l*hsr3])
-
 
 // hex field coords
 var menu_hex_points = new Array()
@@ -586,7 +598,8 @@ var menu_center = [menu_hex_points[0][0] + (menu_hex_points[1][0] - menu_hex_poi
     // menu_play_clr = "#a9d41c",
     menu_play_clr = base_clr,
     menu_hex_clr = menu_play_clr,
-    menu_bomb_clr = "#E61913",
+    // menu_bomb_clr = "#E61913",
+    menu_bomb_clr = "#f1241e",
     menu_size_clr = "#F5B10A",
     // menu_fame_clr = "#8BAF17",
     menu_fame_clr = "clicked_clr",
@@ -627,11 +640,6 @@ var fieldshadow = field.filter(Snap.filter.shadow(0, 6, 12, "#000", .4)),
         mask: menu_hole
     });
 
-// if (argv["rematch"] == "true") {
-//   field_bg.attr({
-//     display: "none"
-//   });
-// }
 
 var m_text_opt = {
     'text-anchor': 'middle',
@@ -653,14 +661,11 @@ var bombBox = 0.35,
 // non mi piace questo sistema
 var m_bomb = menu.text(menu_center[0], 1.75 * menu_center[1], B).attr(m_text_opt),
     m_bomb_icon = menu.image('img/menu/bomb.png', menu_center[0] - L * bombBox * .5, 1.25 * menu_center[1], L * bombBox, L * bombBox),
-    // m_bomb_icon = menu.image('img/menu/bomb.png', menu_center[0] - m_img_halfsize, 1.25 * menu_center[1]),
     m_size = menu.text(menu_hex_points[3][0], 1.6 * menu_center[1], N).attr(m_text_opt),
     m_size_icon = menu.image('img/menu/size.png', menu_hex_points[3][0] - L * sizeBox * .5, 1.1 * menu_center[1], L * sizeBox, L * sizeBox),
-    // m_size_icon = menu.image('img/menu/size.png', menu_hex_points[3][0] - m_img_halfsize, 1.1 * menu_center[1]),
     m_play = menu.text(menu_center[0] - .95 * L * playBox, menu_center[1], "PLAY").attr(m_text_opt),
     m_play_icon = menu.image('img/menu/play.png', menu_hex_points[5][0] + L * playBox * .25, menu_center[1] - L * playBox * .5, L * playBox, L * playBox);
 
-// m_play_icon = menu.image('img/menu/play.png', menu_hex_points[5][0] + m_img_halfsize/2, menu_center[1] - m_img_halfsize);
 m_play.attr({
     fill: "#1f1f1f"
 });
@@ -684,7 +689,9 @@ var menu_play_btn = menu.group(menu_play, m_play, m_play_icon),
 
     menu_hole_shadow = menu.circle(menu_center[0], menu_center[1] + 2, menu_hex_points[1][0] + 45).attr({
         fill: "#000",
+        // fill: "transparent",
         opacity: "0",
+        // opacity: ".4",
         mask: menu_hex_holemask
     }),
 

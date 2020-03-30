@@ -19,8 +19,11 @@ body, html, .HowTo {
    height: 100%;
    margin: 0;
    padding: 0;
-   background-image: url('img/tile.png');
-   background-color: rgb(90, 46, 32);
+   /* background-image: url('img/tile.png'); */
+   /* background-color: rgb(90, 46, 32); */
+   background-image: url('img/grass.png');
+   background-color: #5a2e20;
+   /* background-color: #27380e; */
    color: #eee;
    cursor: default;
    position: fixed;
@@ -116,7 +119,7 @@ svg#menu text {
       opacity: 0;
       transform: translateX(-100%);
    }
-   , 100% {
+    100% {
       opacity: 1;
       transform: translateX(0);
    }
@@ -127,7 +130,7 @@ svg#menu text {
       opacity: 0;
       transform: translateX(100%);
    }
-   , 100% {
+   100% {
       opacity: 1;
       transform: translateX(0);
    }
@@ -138,7 +141,7 @@ svg#menu text {
       opacity: 0;
       transform: translateY(-100%);
    }
-   , 100% {
+   100% {
       opacity: 1;
       transform: translateY(0);
    }
@@ -148,7 +151,7 @@ svg#menu text {
    0% {
       opacity: 0;
    }
-   , 100% {
+   100% {
       opacity: 1;
    }
 }
@@ -294,6 +297,7 @@ svg#menu text {
    /*background-color: #f8b71b;*/
    /*background-color: #633A17;*/
    background-color: #5A3120;
+   /* background-color: #2f480b; */
    border: 2px solid rgba(0, 0, 0, .3);
    /*color: #111;*/
    color: #f8b71b;
