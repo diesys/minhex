@@ -803,7 +803,7 @@ function closemenu() {
         }, animduration);
 
         document.getElementById('hofLink').classList.remove('nodisplay');
-        document.getElementById('howToOpenBtn').classList.remove('nodisplay');
+        // document.getElementById('howToOpenBtn').classList.remove('nodisplay');
 
         showRematch(1); //appears just a second as hint of where the restart button is hidden
         setTimeout(function() {
@@ -874,32 +874,32 @@ function refreshNewGame() {
 
 // HowTo
 
-function HowTo(option) {
-    ht1 = document.getElementById("HT1");
-    ht2 = document.getElementById("HT2");
-    ht3 = document.getElementById("HT3");
-    // var animduration = 800;
+// function HowTo(option) {
+//     ht1 = document.getElementById("HT1");
+//     ht2 = document.getElementById("HT2");
+//     ht3 = document.getElementById("HT3");
+//     // var animduration = 800;
 
-    if (option == '1') {
-        ht1.className = "HowTo active";
-    } else if (option == '2') {
-        ht1.className = "HowTo hidden";
-        ht2.className = "HowTo active";
-    } else if (option == '3') {
-        ht2.className = "HowTo hidden";
-        ht3.className = "HowTo active";
-    } else {
-        ht1.className = "HowTo inactive";
-        ht2.className = "HowTo inactive";
-        ht3.className = "HowTo inactive";
-        //intermediate class to get a disappearing animation
-        setTimeout(function() {
-          ht1.className = "HowTo hidden";
-          ht2.className = "HowTo hidden";
-          ht3.className = "HowTo hidden";
-        }, 900); ///// !!!! DONT CHANGE UNTIL YOU CHANGE THE CSS ANIMATION FADEOUT DURARION !!!
-    }
-}
+//     if (option == '1') {
+//         ht1.className = "HowTo active";
+//     } else if (option == '2') {
+//         ht1.className = "HowTo hidden";
+//         ht2.className = "HowTo active";
+//     } else if (option == '3') {
+//         ht2.className = "HowTo hidden";
+//         ht3.className = "HowTo active";
+//     } else {
+//         ht1.className = "HowTo inactive";
+//         ht2.className = "HowTo inactive";
+//         ht3.className = "HowTo inactive";
+//         //intermediate class to get a disappearing animation
+//         setTimeout(function() {
+//           ht1.className = "HowTo hidden";
+//           ht2.className = "HowTo hidden";
+//           ht3.className = "HowTo hidden";
+//         }, 900); ///// !!!! DONT CHANGE UNTIL YOU CHANGE THE CSS ANIMATION FADEOUT DURARION !!!
+//     }
+// }
 
 // function fadeOut(element, milliseconds) {
 //   var interv = milliseconds / 20;
