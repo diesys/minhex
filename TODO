@@ -2,6 +2,11 @@
   (fare una flexbox verticale a sinistra con icona+punteggio; iconabomba+bomberimanenti, etc) animati e ad esagono con colori sensati diveri
 - creare menu
 
+-- ripulire i colori e il JS per fare la possibilita di cambiare colore (bicromatico, o monocromatico e i colori relativi, cosi cambiando uno cambi tutto dallo sfondo alle celle all'hover)
+
+-- BUG ?: se si mette una bandierina (di cui magari non si e' certi) e si clicca poi su un numero dell'intorno (pensando sia ben messa la bandierina)
+	si salta in aria
+
 · alleggerire dimensione (perche favicon e logo pesano cosi tanto?? ripulire cartella musica e mettere solo audio)
 · ripulire minhex.js dalla roba di ui
 · ripulire css

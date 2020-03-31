@@ -32,32 +32,28 @@ var sizeNumber = N,
 
 
 var
-    // base_clr = "#A9D41C",
-    // base_clr = "#76B918",
     base_clr = "#75b92d",
     // base_clr = "#75b92d30",
     // field_bg_color = "#59710E",
     // field_bg_color = "#190900",
-    // field_bg_color = "rgba(0,0,0,.2)",
     // field_bg_color = "#75b92d",
     field_bg_color = "#000000",
-    field_bg_opacity = ".4",
-    stroke_clr = "rgba(0,0,0,.2)",
+    field_bg_opacity = ".3",
     // stroke_clr = "#4a1e1050",
     // stroke_clr = "rgba(54, 70, 12, .2)",
+    stroke_clr = "rgba(0,0,0,.2)",
     stroke_width = "1",
     // clicked_clr = "#698511",
     // clicked_clr = "#507521",
     // clicked_clr = "#36460c",
     // clicked_clr = "#32440f",
     // clicked_clr = "#5a2e20",
-    // clicked_clr = "none",
-    clicked_clr = "none",
     // clicked_clr = "#32440f00",
     // clicked_clr = "#27350c",
+    clicked_clr = "none",
     // over_clr = "#e8ff7d",
-    over_clr = "#B4E575",
     // over_clr = "rgba(255,255,255,.1)",
+    over_clr = "#B4E575",
     bomb_clr = "#C10F08",
     bomb2_clr = "#950601",
     flag_clr = "#f8b71b",
@@ -66,7 +62,8 @@ var
 var textDimension = 2.1,
     // fontColor = "#fff",
     // fontColor = "rgba(255,255,255,.6)",
-    fontColor = base_clr,
+    // fontColor = base_clr,
+    fontColor = flag_clr,
     font = 'OpenSansBold';
 
 ///////////////////////////////////////////
@@ -149,55 +146,15 @@ function initializeScale() {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function sendScore(username,score) {
-    //score = document.querySelector('#Score').innerHTML;
     var xhr = new XMLHttpRequest();
     xhr.open("POST", addUserURL, true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.send("username=" + username + "&score=" + score);
-    
-    /// aggiunta
-    /*const swalWithBootstrapButtons = Swal.mixin({
-        customClass: {
-          confirmButton: 'btn btn-success',
-          cancelButton: 'btn btn-danger'
-        },
-        buttonsStyling: false
-      })
-      
-      swalWithBootstrapButtons.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Yes, delete it!',
-        cancelButtonText: 'No, cancel!',
-        reverseButtons: true
-      }).then((result) => {
-        if (result.value) {
-          swalWithBootstrapButtons.fire(
-            'Deleted!',
-            'Your file has been deleted.',
-            'success'
-          )
-        } else if (
-          result.dismiss === Swal.DismissReason.cancel
-        ) {
-          swalWithBootstrapButtons.fire(
-            'Cancelled',
-            'Your imaginary file is safe :)',
-            'error'
-          )
-        }
-      })*/
-    /// aggiunta
+  
+    /// aggiunta punteggio
     swal({
         title: 'Match over',
-        //input: 'text',
         text: 'What do you want to do now?',
-        //inputPlaceholder: 'username',
-        /*inputAttributes: {
-          'aria-label': 'Type your username'
-        },*/
         showCancelButton: true,
         confirmButtonText: 'Play again!',
         cancelButtonText: 'Hall Of Fame',
@@ -210,7 +167,6 @@ function sendScore(username,score) {
         window.location = "hof/"
     })
 }
-
 
 
 function mouseOver() {
@@ -309,15 +265,10 @@ function Grid(N, BOMBS) {
             }
             doubleClick.waitingSndClick = true;
             var f = function() {
-                // single click
-                // this.grid.clicks++;
                 doubleClick.waitingSndClick = false;
                 this.grid.openCell(pos, human = true);
             };
             doubleClick.lastClick = setTimeout(f, doubleClick.mouseClickDelay);
-            // if (this.FIRSTCLICK) {
-            //     this.grid.FIRSTCLICK = false;
-            // }
         }
     }
 
@@ -380,13 +331,10 @@ function Grid(N, BOMBS) {
 
                 return
             }
-            // !this should be fixed, too slow when recursively called 
-            // cell.animate({
-            //     fill: clicked_clr,
-            // }, anim_dur, mina.easein);
-            cell.attr({
-                fill: clicked_clr
-            })
+            
+            // SE SI VUOLE LA TRASPARENZA NON PUO ANIMARE SNAP.SVG!!! quindi va fatto con attr e non animate sotto
+            cell.attr({fill: clicked_clr})
+
             if (cell.count) {
                 textOnCell(cell.pos, cell.count.toString()).click(this.mouseClick(pos));
             } else {
@@ -424,21 +372,6 @@ function Grid(N, BOMBS) {
         // this.refreshscore(this.clicks);
         this.checkVictory();
     }
-
-    /*this.checkVictoryOldAlert = function() {
-        if (this.clickedCells == 6 * N * N)
-            setTimeout(function() {
-                // Ok to retry with same parameters or cancel to have the menu back again
-                var answ = confirm("You are a real mine survivor! Good Job. Retry?")
-                if (answ)
-                // the url just without vars, and the just used ones
-                    window.location = window.location.href.split('?')[0] + "?n=" + sizeNumber + "&b=" + bombsNumber; // + "&rematch=true"; //seems do not work the rematch url
-
-                // this should open the menu and cancel variabiles instead of reloading the page?
-                else
-                    window.location = window.location.href.split('?')[0] + "?n=" + sizeNumber + "&b=" + bombsNumber;
-            }, 700);
-    }*/
 
     this.checkVictory = function() {
         if (this.clickedCells == 6 * N * N) {
@@ -571,13 +504,6 @@ function Grid(N, BOMBS) {
 
 var menu = Snap('#menu');
 
-// hide the menu if it's a rematch
-// if (argv["rematch"] == "true") {
-//   menu.attr({
-//     display: "none"
-//   });
-// }
-
 
 // UI CONF
 document.getElementById('menu').setAttribute('width', fieldWidth);
@@ -607,7 +533,6 @@ var menu_center = [menu_hex_points[0][0] + (menu_hex_points[1][0] - menu_hex_poi
 
 
     // filters
-    // menushadow = menu.filter(Snap.filter.shadow(0, 10, 15, "#000", .4)),
     menuopt_shadow = menu.filter(Snap.filter.shadow(0, 1, 3, "#000", .3)),
 
     //menu options elements
@@ -723,11 +648,6 @@ function wheelSelect(e, opt) {
             bombsNumber = tempBombs;
             m_bomb.node.innerHTML = bombsNumber;
         }
-        /*bN = parseInt(bombsNumberFloat); // i think this if is equivalent to bombsNumberFloat += e.deltaY * .1;
-        if (bN > 0) {
-            bombsNumber = bN;
-            m_bomb.node.innerHTML = bombsNumber;
-        }*/
     } else if (opt == 'size') {
         var tempSizeF = sizeNumberFloat - delta * speedWheel,
             tempSize = parseInt(tempSizeF);
@@ -737,13 +657,6 @@ function wheelSelect(e, opt) {
             sizeNumber = tempSize;
             m_size.node.innerHTML = sizeNumber;
         }
-        /*sizeNumberFloat -= delta * speedWheel;
-        sN = parseInt(sizeNumberFloat);
-        if (sN > 1 && sN <= maxsize) {
-            sizeNumber = sN;
-            m_size.node.innerHTML = sizeNumber;
-            maxbombs = 3 * sizeNumber * (sizeNumber + 1)
-        }*/
     }
 }
 
@@ -791,64 +704,43 @@ function dragSelect (obj) {
 
 function closemenu() {
     // Now bombs and size are always compatible ;)
-    //if (bombsNumber < maxbombs) {
-        var animduration = 1000;
-        menu_hole_shadow.attr({
-            opacity: ".3"
-        });
-        menu_hole.animate({
-            r: 0
-        }, animduration, mina.bounce);
-        menu_hole_shadow.animate({
-            r: 0,
-            opacity: ".1"
-        }, animduration, mina.bounce);
-        setTimeout(function() {
-            menu.attr({
-                display: "none"
-            })
-        }, animduration);
+    var animduration = 1000;
+    menu_hole_shadow.attr({
+        opacity: ".3"
+    });
+    menu_hole.animate({
+        r: 0
+    }, animduration, mina.bounce);
+    menu_hole_shadow.animate({
+        r: 0,
+        opacity: ".1"
+    }, animduration, mina.bounce);
+    setTimeout(function() {
+        menu.attr({
+            display: "none"
+        })
+    }, animduration);
 
-        document.getElementById('hofLink').classList.remove('nodisplay');
-        // document.getElementById('howToOpenBtn').classList.remove('nodisplay');
+    document.getElementById('hofLink').classList.remove('nodisplay');
+    // document.getElementById('howToOpenBtn').classList.remove('nodisplay');
 
-        showRematch(1); //appears just a second as hint of where the restart button is hidden
-        setTimeout(function() {
-            scroll_hint.className = "hidden"
-            remainingBombsInd.className = "visible"
-        }, 1500);
+    showRematch(1); //appears just a second as hint of where the restart button is hidden
+    setTimeout(function() {
+        scroll_hint.className = "hidden"
+        remainingBombsInd.className = "visible"
+    }, 1500);
 
-        // Time to play!
-        initializeScale();
-        grid = new Grid(sizeNumber, bombsNumber);
-    /*} else {
-        swal({
-          title: 'How brave you!',
-          text: 'You chose too many bombs, more that you can afford, retry with less!',
-          timer: 2000,
-        }).then(
-          function () {},
-            // handling the promise rejection
-            function (dismiss) {
-              if (dismiss === 'timer') {
-                console.log('sweetalert closed by the timer, retry with less bombs')
-              }
-            }
-        )
-      }*/
+    // Time to play!
+    initializeScale();
+    grid = new Grid(sizeNumber, bombsNumber);
+
 }
 
 function openmenu() {
     var animduration = 800;
-    // setTimeout(function() {
-        // menu_group.animate({
-        //     transform: "r" + 360, centerX, centerY
-        //   }, animduration, mina.ease);
-        menu_hole.animate({
-            r: menu_hex_points[1][0]
-        }, animduration, mina.easeout);
-    // }, 200);
-
+    menu_hole.animate({
+        r: menu_hex_points[1][0]
+    }, animduration, mina.easeout);
 }
 
 function showRematch(first) {
@@ -888,12 +780,10 @@ menu_group.node.onclick = function() {
 };
 
 // Disable rightclick event (except for toggleFlag)
-
 document.oncontextmenu = function () { return false };
 
-// Compatibility with Firefox for MouseWheel
-
-var mousewheelevt=(/Firefox/i.test(navigator.userAgent))? "DOMMouseScroll" : "mousewheel" //FF doesn't recognize mousewheel as of FF3.x
+// Compatibility with Firefox for MouseWheel (FF doesn't recognize mousewheel as of FF3.x)
+var mousewheelevt=(/Firefox/i.test(navigator.userAgent))? "DOMMouseScroll" : "mousewheel"
 
 // the events to be linked to the mouse wheel
 var wheelBomb = function(e) { wheelSelect(e, 'bomb') },
@@ -917,18 +807,7 @@ if (document.attachEvent) {
     m_size.node.addEventListener(mousewheelevt, wheelSize, false);
 }
 
-
-/*
-menu_bomb.node.onmousewheel = function(e) { wheelSelect(e, 'bomb') };
-m_bomb_icon.node.onmousewheel = function(e) { wheelSelect(e, 'bomb') };
-m_bomb.node.onmousewheel = function(e) { wheelSelect(e, 'bomb') };
-
-menu_size.node.onmousewheel = function(e) { wheelSelect(e, 'size') };
-m_size_icon.node.onmousewheel = function(e) { wheelSelect(e, 'size') };
-m_size.node.onmousewheel = function(e) { wheelSelect(e, 'size') };*/
-
 // Ora proviamo con il drag
-
 var dragChangeSpeed = 4;
 var stopDragDelay = 100;
 
@@ -936,22 +815,13 @@ var stopDragDelay = 100;
 var stopDrg = function () { setTimeout(function () { dragging = false }, stopDragDelay) }
 
 menu_bomb.node.setAttribute("draggable","true");
-menu_bomb.drag(dragSelect('bomb'), function () {}, function () { stopDrg(); /*event.dataTransfer.setData('text/plain', null);*/ B = bombsNumber });
-/*menu_bomb.node.addEventListener('dragstart', function (e){
-                e.dataTransfer.setData('text/plain', 'node');
-            }, false);*/
+menu_bomb.drag(dragSelect('bomb'), function () {}, function () { stopDrg(); B = bombsNumber });
 
 m_bomb_icon.node.setAttribute("draggable","true");
-m_bomb_icon.drag(dragSelect('bomb'), function () {}, function () { stopDrg(); /*event.dataTransfer.setData('text/plain', null);*/ B = bombsNumber });
-/*m_bomb_icon.node.addEventListener('dragstart', function (e){
-                e.dataTransfer.setData('text/plain', 'node');
-            }, false);*/
+m_bomb_icon.drag(dragSelect('bomb'), function () {}, function () { stopDrg(); B = bombsNumber });
 
 m_bomb.node.setAttribute("draggable","true");
-m_bomb.drag(dragSelect('bomb'), function () {}, function () { stopDrg(); /*event.dataTransfer.setData('text/plain', null);*/ B = bombsNumber });
-/*m_bomb.node.addEventListener('dragstart', function (e){
-                e.dataTransfer.setData('text/plain', 'node');
-            }, false);*/
+m_bomb.drag(dragSelect('bomb'), function () {}, function () { stopDrg(); B = bombsNumber });
 
 menu_size.node.setAttribute("draggable","true");
 menu_size.drag(dragSelect('size'), function () {}, function () { N = sizeNumber; stopDrg() });
@@ -961,6 +831,5 @@ m_size_icon.drag(dragSelect('size'), function () {}, function () { N = sizeNumbe
 
 m_size.node.setAttribute("draggable","true");
 m_size.drag(dragSelect('size'), function () { dragging = true }, function () { N = sizeNumber; stopDrg() });
-
 
 openmenu();
