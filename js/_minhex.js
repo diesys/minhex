@@ -5,7 +5,7 @@ const addUserURL = "hof/addscore.php"
 
 // Get arguments
 argv = {}
-window.location.search.substring(1).split('&').forEach(function (c) {
+window.location.search.substring(1).split('&').forEach(function(c) {
     var kv = c.split('=');
     argv[kv[0]] = kv[1]
 });
@@ -32,16 +32,27 @@ var sizeNumber = N,
 
 
 var
-    // base_clr = "#A9D41C",
-    base_clr = "#76B918",
+    base_clr = "#75b92d",
+    // base_clr = "#75b92d30",
     // field_bg_color = "#59710E",
-    field_bg_color = "#190900",
-    field_bg_opacity = "1",
-    stroke_clr = "rgba(0,0,0,.1)",
-    stroke_width = "2",
+    // field_bg_color = "#190900",
+    // field_bg_color = "#75b92d",
+    field_bg_color = "#000000",
+    field_bg_opacity = ".3",
+    // stroke_clr = "#4a1e1050",
+    // stroke_clr = "rgba(54, 70, 12, .2)",
+    stroke_clr = "rgba(0,0,0,.2)",
+    stroke_width = "1",
     // clicked_clr = "#698511",
     clicked_clr = "#507521",
+    // clicked_clr = "#36460c",
+    // clicked_clr = "#32440f",
+    // clicked_clr = "#5a2e20",
+    // clicked_clr = "#32440f00",
+    // clicked_clr = "#27350c",
+    // clicked_clr = "none",
     // over_clr = "#e8ff7d",
+    // over_clr = "rgba(255,255,255,.1)",
     over_clr = "#B4E575",
     bomb_clr = "#C10F08",
     bomb2_clr = "#950601",
@@ -49,7 +60,10 @@ var
     anim_dur = 130;
 
 var textDimension = 2.1,
-    fontColor = "#fff",
+    // fontColor = "#fff",
+    fontColor = "rgba(255,255,255,.85)",
+    // fontColor = base_clr,
+    // fontColor = flag_clr,
     font = 'OpenSansBold';
 
 ///////////////////////////////////////////
@@ -131,60 +145,20 @@ function initializeScale() {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function sendScore(username, score) {
-    //score = document.querySelector('#Score').innerHTML;
+function sendScore(username,score) {
     var xhr = new XMLHttpRequest();
     xhr.open("POST", addUserURL, true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.send("username=" + username + "&score=" + score);
-
-    /// aggiunta
-    /*const swalWithBootstrapButtons = Swal.mixin({
-        customClass: {
-          confirmButton: 'btn btn-success',
-          cancelButton: 'btn btn-danger'
-        },
-        buttonsStyling: false
-      })
-      
-      swalWithBootstrapButtons.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Yes, delete it!',
-        cancelButtonText: 'No, cancel!',
-        reverseButtons: true
-      }).then((result) => {
-        if (result.value) {
-          swalWithBootstrapButtons.fire(
-            'Deleted!',
-            'Your file has been deleted.',
-            'success'
-          )
-        } else if (
-          result.dismiss === Swal.DismissReason.cancel
-        ) {
-          swalWithBootstrapButtons.fire(
-            'Cancelled',
-            'Your imaginary file is safe :)',
-            'error'
-          )
-        }
-      })*/
-    /// aggiunta
+  
+    /// aggiunta punteggio
     swal({
         title: 'Match over',
-        //input: 'text',
         text: 'What do you want to do now?',
-        //inputPlaceholder: 'username',
-        /*inputAttributes: {
-          'aria-label': 'Type your username'
-        },*/
         showCancelButton: true,
         confirmButtonText: 'Play again!',
         cancelButtonText: 'Hall Of Fame',
-
+        
         showConfirmButton: true
 
     }).then(function (result) {
@@ -193,7 +167,6 @@ function sendScore(username, score) {
         window.location = "hof/"
     })
 }
-
 
 
 function mouseOver() {
@@ -222,10 +195,10 @@ function drawCell(i, j) {
         stroke: stroke_clr
     }
     if ((i + j) % 2)
-        // down-triangle
+    // down-triangle
         triangle = field.polygon(x - s / 2 + m * hsr3, y + m / 2, x, y + s * hsr3 - m * hsr3, x + s / 2 - m * hsr3, y + m / 2).attr(attributes);
     else
-        // up-triangle
+    // up-triangle
         triangle = field.polygon(x, y + m, x - l / 2 + m * hsr3, y + l * hsr3 - m / 2, x + l / 2 - m * hsr3, y + l * hsr3 - m / 2).attr(attributes);
 
     triangle.pos = [i, j];
@@ -281,8 +254,8 @@ function Grid(N, BOMBS) {
         return bombscore;
     }
 
-    this.mouseClick = function (pos) {
-        return function () {
+    this.mouseClick = function(pos) {
+        return function() {
             if (doubleClick.waitingSndClick) {
                 // double click
                 this.grid.toggleFlag(pos);
@@ -291,20 +264,15 @@ function Grid(N, BOMBS) {
                 return
             }
             doubleClick.waitingSndClick = true;
-            var f = function () {
-                // single click
-                // this.grid.clicks++;
+            var f = function() {
                 doubleClick.waitingSndClick = false;
                 this.grid.openCell(pos, human = true);
             };
             doubleClick.lastClick = setTimeout(f, doubleClick.mouseClickDelay);
-            // if (this.FIRSTCLICK) {
-            //     this.grid.FIRSTCLICK = false;
-            // }
         }
     }
 
-    this.refreshBombs = function (delta) {
+    this.refreshBombs = function(delta) {
         this.remBmbs += delta;
         //just a temp fix to a bug that can show negative bombs remaining if you put too flags
         if (this.remBmbs >= 0)
@@ -312,8 +280,8 @@ function Grid(N, BOMBS) {
         // this.refreshscore(this.clicks);
     }
 
-    this.openCell = function (pos, human = false) {
-
+    this.openCell = function(pos, human = false) {
+        
         if (this.FINISHED)
             return
 
@@ -340,7 +308,7 @@ function Grid(N, BOMBS) {
                 this.FINISHED = true;
                 score = this.score + this.finalBonus();
                 this.refreshscore(score);
-
+                
                 swal({
                     title: 'Damn!',
                     input: 'text',
@@ -348,12 +316,10 @@ function Grid(N, BOMBS) {
                     text: `Pieces of your fleshy brain are all over the walls. Pay more attention to mines next time! However your score is ${score}`,
                     inputPlaceholder: 'username',
                     inputAttributes: {
-                        'aria-label': 'Type your username'
+                      'aria-label': 'Type your username'
                     },
                     showConfirmButton: true
-                }).then(function (username) {
-                    sendScore(username, score);
-                })
+                }).then(function (username) {sendScore(username, score);})
 
                 for (c of Object.keys(this.cell))
                     if (this.cell[c].isBomb && c != pos) {
@@ -365,10 +331,10 @@ function Grid(N, BOMBS) {
 
                 return
             }
-            // !this should be fixed, too slow when recursively called 
-            cell.animate({
-                fill: clicked_clr,
-            }, anim_dur, mina.easein);
+            
+            // SE SI VUOLE LA TRASPARENZA NON PUO ANIMARE SNAP.SVG!!! quindi va fatto con attr e non animate sotto
+            cell.attr({fill: clicked_clr})
+
             if (cell.count) {
                 textOnCell(cell.pos, cell.count.toString()).click(this.mouseClick(pos));
             } else {
@@ -379,50 +345,35 @@ function Grid(N, BOMBS) {
 
 
         } else // convert to switch?
-            if (cell.state == "clicked") {
-                // Controllare, penso faccia dei giri inutili
-                var placedBombs = 0;
-                var clickCountRefresh = false;
-                var cellsToClick = 0;
-                for (c of cell.nbHood) {
-                    if (this.cell[c].state == "flag") {
-                        placedBombs++;
-                    }
-                }
-                if (placedBombs == cell.count) {
-                    for (c of cell.nbHood) {
-                        if (this.cell[c].state == "virgin") {
-                            this.openCell(c);
-                            cellsToClick++;
-                            clickCountRefresh = true;
-                        }
-                    }
-                    if (clickCountRefresh && human) {
-                        this.score += cellsToClick;
-                        this.refreshscore(this.score);
-                    }
+        if (cell.state == "clicked") {
+            // Controllare, penso faccia dei giri inutili
+            var placedBombs = 0;
+            var clickCountRefresh = false;
+            var cellsToClick = 0;
+            for (c of cell.nbHood) {
+                if (this.cell[c].state == "flag") {
+                    placedBombs++;
                 }
             }
+            if (placedBombs == cell.count) {
+                for (c of cell.nbHood) {
+                    if (this.cell[c].state == "virgin") {
+                        this.openCell(c);
+                        cellsToClick++;
+                        clickCountRefresh = true;
+                    }
+                }
+                if (clickCountRefresh && human) {
+                    this.score += cellsToClick;
+                    this.refreshscore(this.score);
+                }
+            }
+        }
         // this.refreshscore(this.clicks);
         this.checkVictory();
     }
 
-    /*this.checkVictoryOldAlert = function() {
-        if (this.clickedCells == 6 * N * N)
-            setTimeout(function() {
-                // Ok to retry with same parameters or cancel to have the menu back again
-                var answ = confirm("You are a real mine survivor! Good Job. Retry?")
-                if (answ)
-                // the url just without vars, and the just used ones
-                    window.location = window.location.href.split('?')[0] + "?n=" + sizeNumber + "&b=" + bombsNumber; // + "&rematch=true"; //seems do not work the rematch url
-
-                // this should open the menu and cancel variabiles instead of reloading the page?
-                else
-                    window.location = window.location.href.split('?')[0] + "?n=" + sizeNumber + "&b=" + bombsNumber;
-            }, 700);
-    }*/
-
-    this.checkVictory = function () {
+    this.checkVictory = function() {
         if (this.clickedCells == 6 * N * N) {
             score = this.score + this.finalBonus();
             this.refreshscore(score);
@@ -436,12 +387,12 @@ function Grid(N, BOMBS) {
                 },
                 showConfirmButton: true
             }).then(function (username) {
-                sendScore(username, score);
+                sendScore(username,score);
             })
         }
     }
 
-    this.toggleFlag = function (pos) {
+    this.toggleFlag = function(pos) {
         if (this.FINISHED || !this.STARTED)
             return
 
@@ -472,27 +423,25 @@ function Grid(N, BOMBS) {
         this.checkVictory();
     }
 
-    this.addCell = function (i, j) {
+    this.addCell = function(i, j) {
         var c = drawCell(i, j);
         c.isBomb = false;
         c.state = "virgin" // virgin, flag, clicked
         c.click(this.mouseClick([i, j]));
         c.grid = this;
         c.node.snapObj = c;
-        c.node.addEventListener("contextmenu", function () {
-            this.snapObj.grid.toggleFlag([i, j])
-        });
+        c.node.addEventListener("contextmenu", function () { this.snapObj.grid.toggleFlag([i,j]) });
         c.nbHood = [];
         this.cell[[i, j]] = c;
     }
 
-    this.nbHoodOf = function (pos) {
+    this.nbHoodOf = function(pos) {
         var nbh = [];
         var i = pos[0],
             j = pos[1];
-        for (k of [-2, -1, 1, 2])
+        for (k of[-2, -1, 1, 2])
             nbh.push([i + k, j]);
-        for (k of [-1, -0, 1])
+        for (k of[-1, -0, 1])
             nbh = nbh.concat([
                 [i + k, j - 1],
                 [i + k, j + 1]
@@ -509,14 +458,14 @@ function Grid(N, BOMBS) {
         return nbh
     }
 
-
-    this.placeBombs = function (firstClick) {
+    
+    this.placeBombs = function(firstClick) {
         // exclude the cells next to the first click, so you can start safely
-        var toExclude = this.cell[firstClick].nbHood.map(function (x) {
+        var toExclude = this.cell[firstClick].nbHood.map(function(x) {
             return x.toString()
         });
         toExclude.push(firstClick.toString());
-        var candidates = Object.keys(this.cell).filter(function (x) {
+        var candidates = Object.keys(this.cell).filter(function(x) {
             return toExclude.indexOf(x) == -1
         });
         for (var b = 0; b < this.BOMBS; b++) {
@@ -528,7 +477,7 @@ function Grid(N, BOMBS) {
             candidates.splice(choiceInd, 1);
         }
     }
-
+    
     function coords(c) {
         return c.split(",").map(parseFloat);
     }
@@ -544,7 +493,7 @@ function Grid(N, BOMBS) {
     // calculating the neighborhood for each cells and saving it
     var cellCoords = Object.keys(this.cell);
     for (c of cellCoords)
-        this.cell[c].nbHood = this.nbHoodOf(coords(c)).filter(function (nbh) {
+        this.cell[c].nbHood = this.nbHoodOf(coords(c)).filter(function(nbh) {
             return cellCoords.indexOf(nbh.toString()) != -1
         });
     this.refreshBombs(0);
@@ -555,25 +504,10 @@ function Grid(N, BOMBS) {
 
 var menu = Snap('#menu');
 
-// hide the menu if it's a rematch
-// if (argv["rematch"] == "true") {
-//   menu.attr({
-//     display: "none"
-//   });
-// }
-
 
 // UI CONF
 document.getElementById('menu').setAttribute('width', fieldWidth);
 document.getElementById('menu').setAttribute('height', fieldHeight);
-// var menu_hex_points = new Array()
-// menu_hex_points.push([x0,y0])
-// menu_hex_points.push([x0 + N*l, y0])
-// menu_hex_points.push([x0 + N*1.5*l, y0 + N*l*hsr3])
-// menu_hex_points.push([x0 + N*l, y0 + N*l*hsr3*2])
-// menu_hex_points.push([x0, y0 + N*l*hsr3*2])
-// menu_hex_points.push([x0-N*l/2, y0 + N*l*hsr3])
-
 
 // hex field coords
 var menu_hex_points = new Array()
@@ -590,7 +524,8 @@ var menu_center = [menu_hex_points[0][0] + (menu_hex_points[1][0] - menu_hex_poi
     // menu_play_clr = "#a9d41c",
     menu_play_clr = base_clr,
     menu_hex_clr = menu_play_clr,
-    menu_bomb_clr = "#E61913",
+    // menu_bomb_clr = "#E61913",
+    menu_bomb_clr = "#f1241e",
     menu_size_clr = "#F5B10A",
     // menu_fame_clr = "#8BAF17",
     menu_fame_clr = "clicked_clr",
@@ -598,7 +533,6 @@ var menu_center = [menu_hex_points[0][0] + (menu_hex_points[1][0] - menu_hex_poi
 
 
     // filters
-    // menushadow = menu.filter(Snap.filter.shadow(0, 10, 15, "#000", .4)),
     menuopt_shadow = menu.filter(Snap.filter.shadow(0, 1, 3, "#000", .3)),
 
     //menu options elements
@@ -631,11 +565,6 @@ var fieldshadow = field.filter(Snap.filter.shadow(0, 6, 12, "#000", .4)),
         mask: menu_hole
     });
 
-// if (argv["rematch"] == "true") {
-//   field_bg.attr({
-//     display: "none"
-//   });
-// }
 
 var m_text_opt = {
     'text-anchor': 'middle',
@@ -657,14 +586,11 @@ var bombBox = 0.35,
 // non mi piace questo sistema
 var m_bomb = menu.text(menu_center[0], 1.75 * menu_center[1], B).attr(m_text_opt),
     m_bomb_icon = menu.image('img/menu/bomb.png', menu_center[0] - L * bombBox * .5, 1.25 * menu_center[1], L * bombBox, L * bombBox),
-    // m_bomb_icon = menu.image('img/menu/bomb.png', menu_center[0] - m_img_halfsize, 1.25 * menu_center[1]),
     m_size = menu.text(menu_hex_points[3][0], 1.6 * menu_center[1], N).attr(m_text_opt),
     m_size_icon = menu.image('img/menu/size.png', menu_hex_points[3][0] - L * sizeBox * .5, 1.1 * menu_center[1], L * sizeBox, L * sizeBox),
-    // m_size_icon = menu.image('img/menu/size.png', menu_hex_points[3][0] - m_img_halfsize, 1.1 * menu_center[1]),
     m_play = menu.text(menu_center[0] - .95 * L * playBox, menu_center[1], "PLAY").attr(m_text_opt),
     m_play_icon = menu.image('img/menu/play.png', menu_hex_points[5][0] + L * playBox * .25, menu_center[1] - L * playBox * .5, L * playBox, L * playBox);
 
-// m_play_icon = menu.image('img/menu/play.png', menu_hex_points[5][0] + m_img_halfsize/2, menu_center[1] - m_img_halfsize);
 m_play.attr({
     fill: "#1f1f1f"
 });
@@ -675,7 +601,7 @@ m_play.attr({
 var scroll_hint = document.getElementById("scroll_hint"),
     rematch_button = document.getElementById("rematch"),
     remainingBombsInd = document.getElementById("RemainingBombs");
-scoreInd = document.getElementById("Score");
+    scoreInd = document.getElementById("Score");
 
 var menu_play_btn = menu.group(menu_play, m_play, m_play_icon),
     menu_size_opt = menu.group(menu_size, m_size, m_size_icon),
@@ -688,7 +614,9 @@ var menu_play_btn = menu.group(menu_play, m_play, m_play_icon),
 
     menu_hole_shadow = menu.circle(menu_center[0], menu_center[1] + 2, menu_hex_points[1][0] + 45).attr({
         fill: "#000",
+        // fill: "transparent",
         opacity: "0",
+        // opacity: ".4",
         mask: menu_hex_holemask
     }),
 
@@ -706,7 +634,7 @@ var bombsNumberFloat = B * 1.,
 
 
 function wheelSelect(e, opt) {
-    // La situazione Ã¨ vergognosissima, lo scrolling non funziona allo stesso modo!
+    // La situazione è vergognosissima, lo scrolling non funziona allo stesso modo!
     var speedWheel = .01;
     var delta = e.deltaY || (e.detail * 8);
     // credo andrebbe sistemata
@@ -720,11 +648,6 @@ function wheelSelect(e, opt) {
             bombsNumber = tempBombs;
             m_bomb.node.innerHTML = bombsNumber;
         }
-        /*bN = parseInt(bombsNumberFloat); // i think this if is equivalent to bombsNumberFloat += e.deltaY * .1;
-        if (bN > 0) {
-            bombsNumber = bN;
-            m_bomb.node.innerHTML = bombsNumber;
-        }*/
     } else if (opt == 'size') {
         var tempSizeF = sizeNumberFloat - delta * speedWheel,
             tempSize = parseInt(tempSizeF);
@@ -734,13 +657,6 @@ function wheelSelect(e, opt) {
             sizeNumber = tempSize;
             m_size.node.innerHTML = sizeNumber;
         }
-        /*sizeNumberFloat -= delta * speedWheel;
-        sN = parseInt(sizeNumberFloat);
-        if (sN > 1 && sN <= maxsize) {
-            sizeNumber = sN;
-            m_size.node.innerHTML = sizeNumber;
-            maxbombs = 3 * sizeNumber * (sizeNumber + 1)
-        }*/
     }
 }
 
@@ -750,15 +666,15 @@ function wheelSelect(e, opt) {
 var dragging = false,
     dragTolerance = 5;
 
-function compatibilitySizeBomb(size, bombs) {
+function compatibilitySizeBomb (size, bombs) {
     return (size > 0) && (bombs > 0) && (bombs <= bombratio * (6 * size * size) - 13)
 }
 
 
-function dragSelect(obj) {
+function dragSelect (obj) {
     var speedDrag = .1;
     return function (dx, dy) {
-        if (Math.abs(dy) + Math.abs(dx) < dragTolerance)
+        if (Math.abs(dy)+Math.abs(dx) < dragTolerance)
             return;
         dragging = true;
 
@@ -788,7 +704,6 @@ function dragSelect(obj) {
 
 function closemenu() {
     // Now bombs and size are always compatible ;)
-    //if (bombsNumber < maxbombs) {
     var animduration = 1000;
     menu_hole_shadow.attr({
         opacity: ".3"
@@ -800,7 +715,7 @@ function closemenu() {
         r: 0,
         opacity: ".1"
     }, animduration, mina.bounce);
-    setTimeout(function () {
+    setTimeout(function() {
         menu.attr({
             display: "none"
         })
@@ -810,7 +725,7 @@ function closemenu() {
     // document.getElementById('howToOpenBtn').classList.remove('nodisplay');
 
     showRematch(1); //appears just a second as hint of where the restart button is hidden
-    setTimeout(function () {
+    setTimeout(function() {
         scroll_hint.className = "hidden"
         remainingBombsInd.className = "visible"
     }, 1500);
@@ -818,55 +733,35 @@ function closemenu() {
     // Time to play!
     initializeScale();
     grid = new Grid(sizeNumber, bombsNumber);
-    /*} else {
-        swal({
-          title: 'How brave you!',
-          text: 'You chose too many bombs, more that you can afford, retry with less!',
-          timer: 2000,
-        }).then(
-          function () {},
-            // handling the promise rejection
-            function (dismiss) {
-              if (dismiss === 'timer') {
-                console.log('sweetalert closed by the timer, retry with less bombs')
-              }
-            }
-        )
-      }*/
+
 }
 
 function openmenu() {
     var animduration = 800;
-    // setTimeout(function() {
-    // menu_group.animate({
-    //     transform: "r" + 360, centerX, centerY
-    //   }, animduration, mina.ease);
     menu_hole.animate({
         r: menu_hex_points[1][0]
     }, animduration, mina.easeout);
-    // }, 200);
-
 }
 
 function showRematch(first) {
-    if (first)
-        autohideT = 1000;
+    if(first)
+      autohideT = 1000;
     else
-        autohideT = 2000;
+      autohideT = 2000;
     anim = 200;
     //hiding animation
     remainingBombsInd.className = "hidden";
     //appearing animation and undisplay other element
-    setTimeout(function () {
-        rematch_button.className = "visible";
-        remainingBombsInd.className = "nodisplay";
+    setTimeout(function() {
+      rematch_button.className = "visible";
+      remainingBombsInd.className = "nodisplay";
     }, anim);
 
     //after some time the remainingBombsInd reappears (useful for touch)
-    setTimeout(function () {
+    setTimeout(function() {
         rematch_button.className = "hidden";
     }, autohideT);
-    setTimeout(function () {
+    setTimeout(function() {
         rematch_button.className = "nodisplay";
         remainingBombsInd.className = "visible";
     }, autohideT + anim);
@@ -876,41 +771,32 @@ function refreshNewGame() {
     window.location = window.location.href.split('?')[0] + "?n=" + sizeNumber + "&b=" + bombsNumber;
 }
 
-
 // UI associations
 
-menu_group.node.onclick = function () {
+menu_group.node.onclick = function() {
     if (dragging == true)
         return;
     closemenu()
 };
 
 // Disable rightclick event (except for toggleFlag)
+document.oncontextmenu = function () { return false };
 
-document.oncontextmenu = function () {
-    return false
-};
-
-// Compatibility with Firefox for MouseWheel
-
-var mousewheelevt = (/Firefox/i.test(navigator.userAgent)) ? "DOMMouseScroll" : "mousewheel" //FF doesn't recognize mousewheel as of FF3.x
+// Compatibility with Firefox for MouseWheel (FF doesn't recognize mousewheel as of FF3.x)
+var mousewheelevt=(/Firefox/i.test(navigator.userAgent))? "DOMMouseScroll" : "mousewheel"
 
 // the events to be linked to the mouse wheel
-var wheelBomb = function (e) {
-        wheelSelect(e, 'bomb')
-    },
-    wheelSize = function (e) {
-        wheelSelect(e, 'size')
-    };
+var wheelBomb = function(e) { wheelSelect(e, 'bomb') },
+    wheelSize = function(e) { wheelSelect(e, 'size') };
 
 if (document.attachEvent) {
     //if IE (and Opera depending on user setting)
-    menu_bomb.node.attachEvent("on" + mousewheelevt, wheelBomb);
-    m_bomb_icon.node.attachEvent("on" + mousewheelevt, wheelBomb);
-    m_bomb.node.attachEvent("on" + mousewheelevt, wheelBomb);
-    menu_size.node.attachEvent("on" + mousewheelevt, wheelSize);
-    m_size_icon.node.attachEvent("on" + mousewheelevt, wheelSize);
-    m_size.node.attachEvent("on" + mousewheelevt, wheelSize);
+    menu_bomb.node.attachEvent("on"+mousewheelevt,wheelBomb);
+    m_bomb_icon.node.attachEvent("on"+mousewheelevt,wheelBomb);
+    m_bomb.node.attachEvent("on"+mousewheelevt,wheelBomb);
+    menu_size.node.attachEvent("on"+mousewheelevt,wheelSize);
+    m_size_icon.node.attachEvent("on"+mousewheelevt,wheelSize);
+    m_size.node.attachEvent("on"+mousewheelevt,wheelSize);
 } else if (document.addEventListener) {
     //WC3 browsers
     menu_bomb.node.addEventListener(mousewheelevt, wheelBomb);
@@ -921,74 +807,29 @@ if (document.attachEvent) {
     m_size.node.addEventListener(mousewheelevt, wheelSize, false);
 }
 
-
-/*
-menu_bomb.node.onmousewheel = function(e) { wheelSelect(e, 'bomb') };
-m_bomb_icon.node.onmousewheel = function(e) { wheelSelect(e, 'bomb') };
-m_bomb.node.onmousewheel = function(e) { wheelSelect(e, 'bomb') };
-
-menu_size.node.onmousewheel = function(e) { wheelSelect(e, 'size') };
-m_size_icon.node.onmousewheel = function(e) { wheelSelect(e, 'size') };
-m_size.node.onmousewheel = function(e) { wheelSelect(e, 'size') };*/
-
 // Ora proviamo con il drag
-
 var dragChangeSpeed = 4;
 var stopDragDelay = 100;
 
 //var startDrg = function () { dragging = true }
-var stopDrg = function () {
-    setTimeout(function () {
-        dragging = false
-    }, stopDragDelay)
-}
+var stopDrg = function () { setTimeout(function () { dragging = false }, stopDragDelay) }
 
-menu_bomb.node.setAttribute("draggable", "true");
-menu_bomb.drag(dragSelect('bomb'), function () {}, function () {
-    stopDrg(); /*event.dataTransfer.setData('text/plain', null);*/
-    B = bombsNumber
-});
-/*menu_bomb.node.addEventListener('dragstart', function (e){
-                e.dataTransfer.setData('text/plain', 'node');
-            }, false);*/
+menu_bomb.node.setAttribute("draggable","true");
+menu_bomb.drag(dragSelect('bomb'), function () {}, function () { stopDrg(); B = bombsNumber });
 
-m_bomb_icon.node.setAttribute("draggable", "true");
-m_bomb_icon.drag(dragSelect('bomb'), function () {}, function () {
-    stopDrg(); /*event.dataTransfer.setData('text/plain', null);*/
-    B = bombsNumber
-});
-/*m_bomb_icon.node.addEventListener('dragstart', function (e){
-                e.dataTransfer.setData('text/plain', 'node');
-            }, false);*/
+m_bomb_icon.node.setAttribute("draggable","true");
+m_bomb_icon.drag(dragSelect('bomb'), function () {}, function () { stopDrg(); B = bombsNumber });
 
-m_bomb.node.setAttribute("draggable", "true");
-m_bomb.drag(dragSelect('bomb'), function () {}, function () {
-    stopDrg(); /*event.dataTransfer.setData('text/plain', null);*/
-    B = bombsNumber
-});
-/*m_bomb.node.addEventListener('dragstart', function (e){
-                e.dataTransfer.setData('text/plain', 'node');
-            }, false);*/
+m_bomb.node.setAttribute("draggable","true");
+m_bomb.drag(dragSelect('bomb'), function () {}, function () { stopDrg(); B = bombsNumber });
 
-menu_size.node.setAttribute("draggable", "true");
-menu_size.drag(dragSelect('size'), function () {}, function () {
-    N = sizeNumber;
-    stopDrg()
-});
+menu_size.node.setAttribute("draggable","true");
+menu_size.drag(dragSelect('size'), function () {}, function () { N = sizeNumber; stopDrg() });
 
-m_size_icon.node.setAttribute("draggable", "true");
-m_size_icon.drag(dragSelect('size'), function () {}, function () {
-    N = sizeNumber;
-    stopDrg()
-});
+m_size_icon.node.setAttribute("draggable","true");
+m_size_icon.drag(dragSelect('size'), function () {}, function () { N = sizeNumber; stopDrg() });
 
-m_size.node.setAttribute("draggable", "true");
-m_size.drag(dragSelect('size'), function () {
-    dragging = true
-}, function () {
-    N = sizeNumber;
-    stopDrg()
-});
-
+m_size.node.setAttribute("draggable","true");
+m_size.drag(dragSelect('size'), function () { dragging = true }, function () { N = sizeNumber; stopDrg() });
 
 openmenu();
