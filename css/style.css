@@ -237,7 +237,8 @@ svg#menu text {
 }
 
 .HowTo.active img {
-   animation: fadefromleft .8s ease;
+   animation: fadein .6s ease;
+   /* animation: fadefromleft .8s ease; */
 }
 
 .HowTo h1, .HowTo p {

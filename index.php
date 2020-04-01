@@ -13,14 +13,14 @@
     <script src="js/snap.svg.min.js"></script>
 
     <!-- for IE support sorry... -->
-    <!-- <script src="js/es6-promise.auto.min.js"></script> -->
+    <script src="js/es6-promise.auto.min.js"></script>
     <script src="js/sweetalert2.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="css/sweetalert2.min.css">
     
     <!-- MinHex style -->
-    <link rel="stylesheet" href="css/style.css">
-    <!-- <link rel="stylesheet" href="css/style.min.css"> -->
+    <!-- <link rel="stylesheet" href="css/style.css"> -->
+    <link rel="stylesheet" href="css/style.min.css">
 
     <!-- Mobile Specifics -->
     <link rel="manifest" href="manifest.json">
@@ -57,8 +57,8 @@
     <link rel="apple-touch-icon" sizes="256x256" href="img/favicon256.png" type="image/x-icon">
 
 
-    <!-- <script src='js/minhex.min.js' defer></script> -->
-    <script src="js/minhex.js" defer></script>
+    <script src='js/minhex.min.js' defer></script>
+    <!-- <script src="js/minhex.js" defer></script> -->
     <script src="js/minhex_ui.min.js" defer></script>
     <!-- <script src="js/minhex_ui.js" defer></script> -->
 
