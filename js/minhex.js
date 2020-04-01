@@ -44,13 +44,13 @@ var
     stroke_clr = "rgba(0,0,0,.2)",
     stroke_width = "1",
     // clicked_clr = "#698511",
-    // clicked_clr = "#507521",
+    clicked_clr = "#507521",
     // clicked_clr = "#36460c",
     // clicked_clr = "#32440f",
     // clicked_clr = "#5a2e20",
     // clicked_clr = "#32440f00",
     // clicked_clr = "#27350c",
-    clicked_clr = "none",
+    // clicked_clr = "none",
     // over_clr = "#e8ff7d",
     // over_clr = "rgba(255,255,255,.1)",
     over_clr = "#B4E575",
@@ -61,9 +61,9 @@ var
 
 var textDimension = 2.1,
     // fontColor = "#fff",
-    // fontColor = "rgba(255,255,255,.6)",
+    fontColor = "rgba(255,255,255,.7)",
     // fontColor = base_clr,
-    fontColor = flag_clr,
+    // fontColor = flag_clr,
     font = 'OpenSansBold';
 
 ///////////////////////////////////////////
