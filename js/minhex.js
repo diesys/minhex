@@ -61,7 +61,7 @@ var
 
 var textDimension = 2.1,
     // fontColor = "#fff",
-    fontColor = "rgba(255,255,255,.7)",
+    fontColor = "rgba(255,255,255,.85)",
     // fontColor = base_clr,
     // fontColor = flag_clr,
     font = 'OpenSansBold';
