@@ -16,7 +16,6 @@ buttons.forEach(element => {
                 document.querySelector('#howtos').classList.add('hidden')
             }, 700)
         }
-        // }
         console.log(href)
     })
 })
