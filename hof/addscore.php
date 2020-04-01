@@ -1,20 +1,17 @@
 <?php
+
+    // get hall of fame from data JSON
+    $json = file_get_contents('data.json');
+    $data = json_decode($json, true);
+    $scores = $data["scores"];
+
+    // getting username and final score from the main game and adding to hof (data,score)
+    array_push($scores, array('user'=> $_POST['username'], 'score' => $_POST['score']));
+    $data["scores"] = $scores;
     
-
-    // hall of fame
-    $hof = file_get_contents('hof.json');
-    $data = json_decode($hof, true);
-
-    // getting username and final score from the main game and adding to hof
-    $data[$_POST['username']] = $_POST['score'];
-    // $data[$_GET['username']] = $_GET['score'];
-    // var_dump($data);
-    $newhof = json_encode($data);
+    $newHof = json_encode($data);
     
     // writing hof to file
-    file_put_contents('hof.json', $newhof);
+    file_put_contents('data.json', $newHof);
     
-    // file_put_contents('ciao', $_POST);
-    // file_put_contents('ciao', $_GET);
-
 ?>

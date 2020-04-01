@@ -63,19 +63,30 @@
                 <!-- <th>time</th> -->
             </tr>
             <?php 
-                // get hall of fame JSON
-                $hof = file_get_contents('hof.json');
-                $data = json_decode($hof, true);
-                // sorts the hof
-                arsort($data);
+                // get hall of fame from data JSON
+                $json = file_get_contents('data.json');
+                $data = json_decode($json, true);
+                $hof = $data["scores"];
+                
+                // user-defined comparison ascending sort by score
+                function hof_sort(array $a, array $b) {
+                    if ($a['score'] == $b['score']) {
+                        return 0;
+                    } else {
+                        return ($a['score'] > $b['score'])? -1:1;
+                    }
+                }
+                // Sort el of the array by prev function
+                usort($hof, "hof_sort");
 
-                foreach ($data as $user => $score):
+                // prints the hof
+                foreach ($hof as $entry):
             ?>
             <tr>
-                <td><?php echo $user; ?></td>
-                <td><?php echo $score; ?></td>
+                <td><?php echo $entry['user']; ?></td>
+                <td><?php echo $entry['score']; ?></td>
             </tr>
-            <?php endforeach; ?>
+            <?php endforeach;?>
         </table>
 
         <a class="button playagain" href="../">Play again!</a>

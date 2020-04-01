@@ -1,0 +1,20 @@
+{
+    "hits" : 0,
+    "timestamps": ["2020/01/01 00:00:00"],
+    "scores" : [
+        {"user": "CORONAVIRUS", "score": "3141"},
+        {"user": "poteva andare peggio", "score": "-168"},
+        {"user": "Papa Francesco", "score": "243"},
+        {"user": "scarsoccio", "score": "13"},
+        {"user": "malemale", "score": "39"},
+        {"user": "die", "score": "98"},
+        {"user": "COMESIARRIVAA3000", "score": "280"},
+        {"user": "ko", "score": "239"},
+        {"user": "Papa Ratzinger", "score": "324"},
+        {"user": "Impossibile!", "score": "78"},
+        {"user": "Yeah", "score": "195"},
+        {"user": "Nunzio", "score": "716"},
+        {"user": "Papa Pap Test", "score": "245"},
+        {"user": "Baugod", "score": "12"}
+    ]
+}
