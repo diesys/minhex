@@ -54,14 +54,14 @@
 
         <header>
             <img src="../img/hof_cup.png" height="100" width="100" alt="MinHex cup" />
-            <h1>Hall of Fame</h1> 
+            <h1>Classifica</h1> 
             <img src="../img/icon.png" height="100" width="100" alt="MinHex logo" />
         </header>
                 
         <table id="hof_table">
             <tr>
-                <th>user</th>
-                <th>score</th>
+                <th>Nome</th>
+                <th>Punti</th>
                 <!-- <th>time</th> -->
             </tr>
             <?php 
@@ -91,7 +91,7 @@
             <?php endforeach;?>
         </table>
 
-        <a class="button playagain" href="../">Play again!</a>
+        <a class="button playagain" href="../">Rivincita!</a>
 
     </body>
 
