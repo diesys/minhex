@@ -72,7 +72,7 @@
     </div>
 
     <ol class="menu pos-top pos-left dark">
-        <li><a class="menu btn" href="hof/"><span>Classifica</span><img src="css/img/menu_itm_hof.png"></span></a></li>
+        <li><a class="menu btn" href="hof/" target="_blank"><span>Classifica</span><img src="css/img/menu_itm_hof.png"></span></a></li>
         <li><a class="menu btn" href="#" onclick="refreshNewGame();"><span>Rigioca</span><img src="css/img/menu_itm_rematch.png"></span></a></li>
         <li><a class="menu btn modal" href="#HT1"><span>Aiuto</span><img src="css/img/menu_itm_help.png"></span></a></li>
         <li><a class="menu btn modal" href="#credits"><span>Credits</span><img src="css/img/menu_itm_info.png"></span></a></li>
@@ -96,7 +96,7 @@
     <svg id="menu" height="95%" width="100%"></svg>
 
 
-    <a class="button modal HowTo open" href="#HT1">MinHex</a>
+    <!-- <a class="button modal HowTo open" href="#HT1">MinHex</a> -->
     
     <!-- <a class="button hof nodisplay" id="hofLink" href="hof/">Hall of Fame</a> -->
 
