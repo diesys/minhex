@@ -14,7 +14,6 @@
     array_unshift($data["timestamps"], $now);
     // adds one hit counter
     $data["hits"] += 1;
-
     
     // adding and writing to file
     $added = json_encode($data);
