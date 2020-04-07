@@ -71,11 +71,18 @@
         <img id="scroll_hint" src="img/menu/hint.png" />
     </div>
 
-    <ol class="menu pos-top pos-left dark">
-        <li><a class="menu btn" href="hof/" target="_blank"><span>Classifica</span><img src="css/img/menu_itm_hof.png"></span></a></li>
-        <li><a class="menu btn" href="#" onclick="refreshNewGame();"><span>Rigioca</span><img src="css/img/menu_itm_rematch.png"></span></a></li>
+    <ol class="menu left">
+        <!-- <li><a class="menu btn" target="_blank" href="hof/"><span>Classifica</span><img src="css/img/menu_itm_hof.png"></span></a></li>
+        <li><a class="menu btn" href="#" onclick="refreshNewGame();"><span>Rigioca</span><img src="css/img/menu_itm_rematch.png"></span></a></li> -->
         <li><a class="menu btn modal" href="#HT1"><span>Aiuto</span><img src="css/img/menu_itm_help.png"></span></a></li>
         <li><a class="menu btn modal" href="#credits"><span>Credits</span><img src="css/img/menu_itm_info.png"></span></a></li>
+    </ol>
+
+    <ol class="menu right">
+        <li><a class="menu btn" target="_blank" href="hof/"><img src="css/img/menu_itm_hof.png"><span>Classifica</span></a></li>
+        <li><a class="menu btn" href="#" onclick="refreshNewGame();"><img src="css/img/menu_itm_rematch.png"><span>Rigioca</span></a></li>
+        <!-- <li><a class="menu btn modal" href="#HT1"><span>Aiuto</span><img src="css/img/menu_itm_help.png"></span></a></li>
+        <li><a class="menu btn modal" href="#credits"><span>Credits</span><img src="css/img/menu_itm_info.png"></span></a></li> -->
     </ol>
     
     <div class="label score" id="score_box">        
