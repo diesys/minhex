@@ -88,12 +88,12 @@
         <li><a class="menu btn modal" href="#credits"><span>Credits</span><img src="css/img/menu_itm_info.png"></span></a></li> -->
     </ol>
     
-    <div class="label score" id="score_box">        
+    <div class="label score nodisplay" id="score_box">        
         <h2 id="Score"></h2>
         <h4 data-label="Punti"></h4>
     </div>
     
-    <div class="label bombs" id="bombs_box">
+    <div class="label bombs nodisplay" id="bombs_box">
         <h2 id="Bombs"></h2>
         <h4 data-label="Bombe"></h4>
     </div>
@@ -106,21 +106,20 @@
     <svg id="menu" height="95%" width="100%"></svg>
 
 
-    <!-- <a class="button modal HowTo open" href="#HT1">MinHex</a> -->
+    <!-- <a class="btn modal HowTo open" href="#HT1">MinHex</a> -->
     
     <!-- <a class="button hof nodisplay" id="hofLink" href="hof/">Hall of Fame</a> -->
 
 
     <div id="howtos" class="modal container hidden">
-        <a class="button modal close closeHowTo" href="#close">chiudi</a>
+        <a class="btn modal button close closeHowTo" href="#close">chiudi</a>
 
         <div id="credits" class="HowTo modal panel hidden">
             <h1>Credits</h1>
-            <p>Questa versione in JavaScript nasce nel 2016 dalla collaborazione di Nunzio e Diego Turtulici. Ma il gioco originale fu scritto in Python (con Pygame) già qualche tempo prima. Dopo essere stato così tanto in cantiere, la quarantena ha permesso - finalmente - di fargli vedere migliore luce con grafiche rinnovate, punteggio, classifica ed una migliore esperienza utente.
-                <br>Il gioco è rilasciato sotto licenza: <a href="https://www.gnu.org/licenses/agpl-3.0.en.html">AGPLv3</a>.
+            <p>Questa versione in JavaScript nasce nel 2016 dalla collaborazione di Nunzio e Diego Turtulici ma il gioco originale venne scritto in Python (con Pygame) già qualche tempo prima. Dopo essere stato così tanto in cantiere, la quarantena ha permesso - finalmente - di migliorarlo con grafiche rinnovate, punteggio, classifica ed una migliore esperienza utente.
+                <br>Il gioco è <a target="_blank" href="https://github.com/NuxTuxSux/MinHex">disponibile</a> con licenza: <a href="https://www.gnu.org/licenses/agpl-3.0.en.html">AGPLv3</a>.
                 <br><br>
                 hosting: <a href="https://eigenlab.org">eigenLab</a> @ <a href="https://flowin.space">FlowIn.Space</a>
-                <a class="btn modal button" href="https://github.com/NuxTuxSux/MinHex">Guarda il codice!</a>
             </p>
         </div>
 
@@ -128,7 +127,7 @@
             <img src="img/howto/rethex.png" alt="reticolo esagonale" />
             <h1>Perché?</h1>
             <p>Il nome MinHex viene dalla contrazione di <b><a href="#">Mines</a></b> ed <b>Hexagonal</b>. Le celle sono infatti disposte a formare il cosiddetto <a target="_blank" href="https://en.wikipedia.org/wiki/Hexagonal_lattice">reticolo esagonale</a>. Famosissimo in natura e agli uomini per proprietà di parsimonia nell'ingombro dello spazio, godendo - tra le altre - della proprietà di garantire la più "densa" disposizione di oggetti rotondi. Esso emerge infatti negli alveari e viene utilizzato da tempo immemore nella disposizione di oggetti di ogni natura, dalle arance a <i>celle</i> di atomi di carbonio.<br> Tale reticolo ha inoltre interessantissime proprietà matematiche e nella fattispecie anche algebriche, realizzando tra l'altro il più stretto analogo dei numeri interi nel campo dei <a target="_blank" href="https://it.wikipedia.org/wiki/Numero_complesso">numeri complessi</a>. In tale contesto ogni punto di contatto tra le celle triangolari è un numero complesso e l'insieme di questi punti-numeri prende il nome di <a target="_blank" href="https://it.wikipedia.org/wiki/Intero_di_Gauss">Interi di Gauss</a>.
-                <a class="button modal" href="#close">Gioca!</a>
+                <a class="btn modal" href="#close">Gioca!</a>
                 <br><br>
             </p>
         </div> -->
@@ -138,8 +137,8 @@
             <h1>Come si gioca?</h1>
             <p>In questo campo minato ogni cella confina con altre 12. Cliccandone una (che non nasconda una bomba!) vi appariranno dei numeri che vi indicheranno le bombe in quell'intorno. Se pensate che una cella nasconda una bomba, segnalatela con una bandierina (pulsante destro o <i>tap</i> prolungato). Una volta esplorato tutto il campo se avrete disposto correttamente le bandierine sarete salvi e voi e i vostri compagni potrete attraversare il campo indenni, altrimenti...KABOOOM!
                 <br><br>
-                <!-- <a class="button modal" href="#HT3">Vuoi saperne di più?</a> -->
-                <a class="button modal" href="#close">Gioca!</a>
+                <!-- <a class="btn modal" href="#HT3">Vuoi saperne di più?</a> -->
+                <a class="btn modal button" href="#close">Gioca!</a>
             </p>
         </div>
         
@@ -148,7 +147,7 @@
             <h1>Cos'è MinHex?</h1>
             <p>MinHex è un campo minato in cui avete l'obbiettivo di sopravvivere spianando la strada per i vostri compagni. Siete stati catapultati su di un campo minato suddiviso in celle di forma triangolare e disposte secondo il reticolo esagonale. Il primo passo che farete sarà un passo sicuro, ma poi vi converrà prestare attenzione, già il secondo potrebbe essere il vostro ultimo!
                 <br><br>
-                <a class="button modal" href="#HT2">Come si gioca?</a>
+                <a class="btn modal button" href="#HT2">Come si gioca?</a>
             </p>
         </div>
 
