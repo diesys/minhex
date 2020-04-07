@@ -5,9 +5,11 @@
     <title>MinHex | Hall of Fame</title>
 
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="Description" content="MinHex is spin-off of the old glory Mines, made with an hexagonal lattice instead. With modern UI made with Snap.svg | Hall of Fame">
-    
+    <!-- <meta name="Description" content="MinHex is spin-off of the old glory Mines, made with an hexagonal lattice instead. With modern UI made with Snap.svg"> -->
+    <meta name="Description" content="MinHex è una rivisitazione della vecchia gloria 'Campo Minato'/'Prato Fiorito', fatto sul reticolo esagonale. Creato con Snap.svg e una moderna esperienza utente.">
+    <meta name="keywords" content="HTML,CSS,JavaScript,Snap.Svg,Game,Mines,JS,Prato fiorito,Campo minato,bombe,arcade,videogame,opensource,freesoftware,GPL">
+    <meta name="author" content="Nunzio e Diego Turtulici">
+
     <!-- MinHex style -->
     <!-- <link rel="stylesheet" href="style.css"> -->
     <link rel="stylesheet" href="../css/style.min.css">
@@ -22,10 +24,10 @@
     <!-- Colors and bars -->
     <!-- Chrome, Firefox OS and Opera -->
     <!-- <meta name="theme-color" content="#1B0D09"> -->
-    <meta name="theme-color" content="#140906">
+    <meta name="theme-color" content="#000">
 
     <!-- Windows Phone -->
-    <meta name="msapplication-navbutton-color" content="#140906">
+    <meta name="msapplication-navbutton-color" content="#000">
 
         <!-- Apple bar specific -->
         <meta name="apple-mobile-web-app-capable" content="yes">
