@@ -21,3 +21,11 @@ buttons.forEach(element => {
         console.log(href)
     })
 })
+
+//SWEET-ALERT2 default
+swal.setDefaults({
+    background: '#5A3120 url(css/img/tile.png)',
+    confirmButtonColor: '#f8b71b',
+    showCloseButton: true,
+    showConfirmButton: false
+})

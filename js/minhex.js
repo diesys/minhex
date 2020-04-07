@@ -13,14 +13,6 @@ window.location.search.substring(1).split('&').forEach(function (c) {
 
 // General settings  //////////////////////
 
-//SWEET-ALERT2 default
-swal.setDefaults({
-    background: '#5A3120 url(css/img/tile.png)',
-    confirmButtonColor: '#f8b71b',
-    showCloseButton: true,
-    showConfirmButton: false
-})
-
 //--!!this could be made better
 var
     N = parseInt(argv["n"]) || 5,
