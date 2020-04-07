@@ -486,55 +486,6 @@ svg#menu text {
 
 /*RemainingBombs and rematch icon*/
 
-h2#RemainingBombs {
-   position: fixed;
-   text-align: center;
-   background-image: url('img/remaining_bomb.png');
-   background-repeat: no-repeat;
-   margin: 10px;
-   top: 0;
-   right: 0px;
-   width: 15px;
-   height: 20px;
-   margin-top: 5px;
-   padding: 45px 40px;
-   padding-right: 50px;
-   font-size: 1.1em;
-}
-
-h2#rematch {
-   position: fixed;
-   text-align: center;
-   background-image: url('img/rematch.png');
-   background-repeat: no-repeat;
-   margin: 10px;
-   top: 0;
-   right: 0px;
-   width: 15px;
-   height: 20px;
-   margin-top: 5px;
-   padding: 45px 40px;
-   padding-right: 50px;
-   transition: opacity .1s ease-in;
-}
-
-h2.visible {
-   display: block;
-   animation: fadefromright .5s;
-}
-
-h2.hidden {
-   display: block;
-   animation: fadetoright .5s;
-}
-
-.nodisplay {
-   display: none;
-   opacity: 0;
-}
-
-/* h2#Score,
-h2#Bombs { */
 .label > h2 {
    margin: 0 15px;
    font-size: 1.7em;
@@ -552,21 +503,15 @@ h2#Bombs { */
    flex-direction: column;
    align-content: center;
    align-items: center;
-   /*! border-radius: 65%; */
-   /*! aspect-ratio: 1/1; */
-   color: #222;
+   color: #111;
    font-weight: 999;
    height: max-content;
-   /* min-height: 1em; */
    transform-origin: 50% 50%;
    transition: all .3s;
    bottom: 1em;
-   /* animation: fadein .5s; */
-   /* padding-bottom: 12px; */
    text-align: center;
    height: 3em;
 }
- /* h2.label::after { */
  .label > h4::after {
     content: attr(data-label);
     position: relative;
@@ -583,10 +528,6 @@ h2#Bombs { */
 }
 
 .label.score {
-   /* clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); */
-   /* clip-path: polygon(0% 50%, 25% 100%, 75% 100%, 100% 50%, 75% 0%, 25% 0%); */
-   /* padding-right: 10px; */
-   /* text-align: left; */
    background: #F8B71B;
    clip-path: polygon(0% 0%, 0% 100%, 75% 100%, 100% 50%, 75% 0%, 25% 0%);
 }
@@ -597,27 +538,19 @@ h2#Bombs { */
    transform: translateX(20%);
 }
 .label.bombs {
-   /* clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); */
-   /* clip-path: polygon(0% 50%, 25% 100%, 75% 100%, 100% 50%, 75% 0%, 25% 0%); */
-   /* padding-left: 10px; */
-   /* text-align: right; */
    background: #df1c15;
    right: 0;
    clip-path: polygon(0% 50%, 25% 100%, 100% 100%, 100% 50%, 100% 0%, 25% 0%);
 }
 
-/* h2.rotate#Score { */
-.label.animating.nodisplay {
+.label.animating.nodisplay, .nodisplay {
    display: none;
+   opacity: 0;
 }
+
 .label.animating {
    opacity: .8;
    /* transform: rotate(60deg); */
-   /* clip-path: polygon(0% 0%, 0% 100%, 5% 10%, 10% 5%, 75% 0%, 25% 0%); */
-   /* clip-path: polygon(0% 0%, 0% 100%, 50% 90%, 90% 50%, 75% 0%, 25% 0%); */
-   /* clip-path: polygon(0% 0%, 0% 100%, 0% 0%, 0% 0%, 75% 0%, 25% 0%); */
-   /* clip-path: polygon(0% 0%, 0% 50%, 25% 100%, 75% 100%, 100% 50%, 75% 0%); */
-   /* clip-path: polygon(100% 25%, 100% 77%, 50% 100%, 0% 75%, 0% 25%, 50% 0%); */
 }
 .label.score.animating {
    clip-path: polygon(0% 0%, 0% 100%, 75% 100%, 75% 50%, 75% 0%, 25% 0%);
@@ -741,6 +674,11 @@ ol.menu {
    transition: transform .4s;
    z-index: 1000;
 }
+ol.menu.right {
+   right: 0;
+   margin: .5em 0 .5em 2em;
+   padding: 0;
+}
 
 ol.menu li {
    transform: translateX(calc(-100% + 4em));
@@ -755,6 +693,11 @@ ol.menu li {
    background: #00000000;
    animation: fadein 2s;
 }
+ol.menu.right li {
+   padding: 8px 8px 8px 0px;
+   border-radius: 10px 0 0 10px;
+   transform: translateX(calc(100% - 4.4em));
+}
 
 ol.menu li:hover,
 ol.menu li:focus,
@@ -766,6 +709,12 @@ ol.menu li:active {
    border-right-color: #ffffff2a;
    border-bottom-color:#000000a4;
    /* margin: 10px 0; */
+}
+ol.menu.right li:hover,
+ol.menu.right li:focus,
+ol.menu.right li:active {
+   transform: translateX(0);
+   background: linear-gradient(-90deg, rgba(0, 0, 0, .8), rgba(0, 0, 0, .2));
 }
 ol.menu li a {
    align-items: center;
@@ -779,6 +728,9 @@ ol.menu img {
    height: 2em;
    width: 2em;
    margin: auto 14px 0 1em;
+}
+ol.menu.right img {
+   margin: auto 1em 0 14px;
 }
 ol.menu span {
    text-transform: uppercase;
