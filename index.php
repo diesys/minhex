@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <!-- <html manifest="minhex.appcache"> -->
-<html>
+<html lang="it">
 
 <head>
     <title>MinHex</title>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="Description" content="MinHex is spin-off of the old glory Mines, made with an hexagonal lattice instead. With modern UI made with Snap.svg">
+    <!-- <meta name="Description" content="MinHex is spin-off of the old glory Mines, made with an hexagonal lattice instead. With modern UI made with Snap.svg"> -->
+    <meta name="Description" content="MinHex è una rivisitazione della vecchia gloria 'Campo Minato'/'Prato Fiorito', fatto sul reticolo esagonale. Creato con Snap.svg e una moderna esperienza utente.">
+    <meta name="keywords" content="HTML,CSS,JavaScript,Snap.Svg,Game,Mines,JS,Prato fiorito,Campo minato,bombe,arcade,videogame,opensource,freesoftware,GPL">
+    <meta name="author" content="Nunzio e Diego Turtulici">
 
     <!-- JS external Libraries  -->
     <script src="js/snap.svg.min.js"></script>
