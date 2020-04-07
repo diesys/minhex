@@ -57,8 +57,8 @@
     <link rel="apple-touch-icon" sizes="256x256" href="img/favicon256.png" type="image/x-icon">
 
 
-    <script src='js/minhex.js' defer></script>
-    <!-- <script src="js/minhex.js" defer></script> -->
+    <script src="js/minhex.min.js" defer></script>
+    <!-- <script src='js/minhex.js' defer></script> -->
     <script src="js/minhex_ui.min.js" defer></script>
     <!-- <script src="js/minhex_ui.js" defer></script> -->
 
@@ -68,12 +68,28 @@
 
 <body>
     <div id="grad">
-      <img id="scroll_hint" src="img/menu/hint.png" />
+        <img id="scroll_hint" src="img/menu/hint.png" />
     </div>
 
-    <h2 id="Score"></h2>
-    <h2 id="rematch" class="nodisplay" onclick="refreshNewGame();" onmouseover=""></h2>
-    <h2 id="RemainingBombs" class="nodisplay" onmouseover="showRematch();" onclick="showRematch();"></h2>
+    <ol class="menu pos-top pos-left dark">
+        <li><a class="menu btn" href="hof/"><span>Classifica</span><img src="css/img/menu_itm_hof.png"></span></a></li>
+        <li><a class="menu btn" href="#" onclick="refreshNewGame();"><span>Rigioca</span><img src="css/img/menu_itm_rematch.png"></span></a></li>
+        <li><a class="menu btn modal" href="#HT1"><span>Aiuto</span><img src="css/img/menu_itm_help.png"></span></a></li>
+        <li><a class="menu btn modal" href="#credits"><span>Credits</span><img src="css/img/menu_itm_info.png"></span></a></li>
+    </ol>
+    
+    <div class="label score" id="score_box">        
+        <h2 id="Score"></h2>
+        <h4 data-label="Punti"></h4>
+    </div>
+    
+    <div class="label bombs" id="bombs_box">
+        <h2 id="Bombs"></h2>
+        <h4 data-label="Bombe"></h4>
+    </div>
+    
+    <!-- <h2 id="rematch" class="nodisplay" onclick="refreshNewGame();" onmouseover=""></h2> -->
+    <!-- <h2 id="RemainingBombs" class="nodisplay" onmouseover="showRematch();" onclick="showRematch();"></h2> -->
 
     <svg id="field" height="90%" width="95%"></svg>
 
@@ -82,11 +98,21 @@
 
     <a class="button modal HowTo open" href="#HT1">MinHex</a>
     
-    <a class="button hof nodisplay" id="hofLink" href="hof/">Hall of Fame</a>
+    <!-- <a class="button hof nodisplay" id="hofLink" href="hof/">Hall of Fame</a> -->
 
 
     <div id="howtos" class="modal container hidden">
         <a class="button modal close closeHowTo" href="#close">chiudi</a>
+
+        <div id="credits" class="HowTo modal panel hidden">
+            <h1>Credits</h1>
+            <p>Questa versione in JavaScript nasce nel 2016 dalla collaborazione di Nunzio e Diego Turtulici. Ma il gioco originale fu scritto in Python (con Pygame) già qualche tempo prima. Dopo essere stato così tanto in cantiere, la quarantena ha permesso - finalmente - di fargli vedere migliore luce con grafiche rinnovate, punteggio, classifica ed una migliore esperienza utente.
+                <br>Il gioco è rilasciato sotto licenza: <a href="https://www.gnu.org/licenses/agpl-3.0.en.html">AGPLv3</a>.
+                <br><br>
+                hosting: <a href="https://eigenlab.org">eigenLab</a> @ <a href="https://flowin.space">FlowIn.Space</a>
+                <a class="btn modal button" href="https://github.com/NuxTuxSux/MinHex">Guarda il codice!</a>
+            </p>
+        </div>
 
         <!-- <div id="HT3" class="HowTo modal panel hidden">
             <img src="img/howto/rethex.png" alt="reticolo esagonale" />

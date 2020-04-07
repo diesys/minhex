@@ -174,16 +174,20 @@ function sendScore(username, score) {
       })*/
     /// aggiunta
     swal({
-        title: 'Match over',
+        // title: 'Match over',
+        title: 'Partita finita',
         //input: 'text',
-        text: 'What do you want to do now?',
+        // text: 'What do you want to do now?',
+        text: 'Cosa vuoi fare?',
         //inputPlaceholder: 'username',
         /*inputAttributes: {
           'aria-label': 'Type your username'
         },*/
         showCancelButton: true,
-        confirmButtonText: 'Play again!',
-        cancelButtonText: 'Hall Of Fame',
+        // confirmButtonText: 'Play again!',
+        // cancelButtonText: 'Hall Of Fame',
+        confirmButtonText: 'Gioca ancora!',
+        cancelButtonText: 'Mostra classifica',
 
         showConfirmButton: true
 
@@ -266,10 +270,10 @@ function Grid(N, BOMBS) {
 
     this.refreshscore = function (score) {
         scoreInd.innerHTML = `${score}`;
-        scoreInd.classList.toggle('animating');
+        scoreBox.classList.toggle('animating'); 
         // animation
         setTimeout(function () {
-            scoreInd.classList.toggle('animating');
+            scoreBox.classList.toggle('animating');
         }, 400);
     }
 
@@ -307,8 +311,14 @@ function Grid(N, BOMBS) {
     this.refreshBombs = function (delta) {
         this.remBmbs += delta;
         //just a temp fix to a bug that can show negative bombs remaining if you put too flags
-        if (this.remBmbs >= 0)
+        if (this.remBmbs >= 0) {
             remainingBombsInd.innerHTML = this.remBmbs;
+            remainingBombsBox.classList.toggle('animating');
+            // animation
+            setTimeout(function () {
+                remainingBombsBox.classList.toggle('animating');
+            }, 400);
+        }
         // this.refreshscore(this.clicks);
     }
 
@@ -342,14 +352,19 @@ function Grid(N, BOMBS) {
                 this.refreshscore(score);
 
                 swal({
-                    title: 'Damn!',
+                    title: 'Kaboom!',
                     input: 'text',
                     // text: `Pieces of your fleshy brain are all over the walls. Pay more attention to mines next time! However your score is ${this.clicks + this.finalBonus()}`,
-                    text: `Pieces of your fleshy brain are all over the walls. Pay more attention to mines next time! However your score is ${score}`,
+                    text: `Le tue cervella sono spappolate su tutti i muri... fa' più attenzione alle mine la prossima volta! Il tuo punteggio è ${score}`,
                     inputPlaceholder: 'username',
                     inputAttributes: {
-                        'aria-label': 'Type your username'
+                        'aria-label': 'Inserisci il tuo nome...'
                     },
+                    // text: `Pieces of your fleshy brain are all over the walls. Pay more attention to mines next time! However your score is ${score}`,
+                    // inputPlaceholder: 'username',
+                    // inputAttributes: {
+                    //     'aria-label': 'Type your username'
+                    // },
                     showConfirmButton: true
                 }).then(function (username) {
                     sendScore(username, score);
@@ -368,6 +383,7 @@ function Grid(N, BOMBS) {
             // !this should be fixed, too slow when recursively called 
             cell.animate({
                 fill: clicked_clr,
+                scale: .2
             }, anim_dur, mina.easein);
             if (cell.count) {
                 textOnCell(cell.pos, cell.count.toString()).click(this.mouseClick(pos));
@@ -427,13 +443,20 @@ function Grid(N, BOMBS) {
             score = this.score + this.finalBonus();
             this.refreshscore(score);
             swal({
-                title: 'Awesome!',
+                title: 'Ottimo lavoro!',
                 input: 'text',
-                text: `You are a real mine survive, good job your score is ${score}`,
+                text: `Hai trovato tutte le bombe, tu sì che hai fiuto! Il tuo punteggio finale è ${score}`,
                 inputPlaceholder: 'username',
                 inputAttributes: {
-                    'aria-label': 'Type your username'
+                    'aria-label': 'Inserisci il tuo nome...'
                 },
+                // title: 'Awesome!',
+                // input: 'text',
+                // text: `You are a real mine survive, good job your score is ${score}`,
+                // inputPlaceholder: 'username',
+                // inputAttributes: {
+                //     'aria-label': 'Type your username'
+                // },
                 showConfirmButton: true
             }).then(function (username) {
                 sendScore(username, score);
@@ -674,8 +697,11 @@ m_play.attr({
 
 var scroll_hint = document.getElementById("scroll_hint"),
     rematch_button = document.getElementById("rematch"),
-    remainingBombsInd = document.getElementById("RemainingBombs");
-scoreInd = document.getElementById("Score");
+    // remainingBombsInd = document.getElementById("RemainingBombs");
+    remainingBombsInd = document.getElementById("Bombs");
+    scoreInd = document.getElementById("Score");
+    remainingBombsBox = document.getElementById("bombs_box");
+    scoreBox = document.getElementById("score_box");
 
 var menu_play_btn = menu.group(menu_play, m_play, m_play_icon),
     menu_size_opt = menu.group(menu_size, m_size, m_size_icon),
@@ -806,13 +832,13 @@ function closemenu() {
         })
     }, animduration);
 
-    document.getElementById('hofLink').classList.remove('nodisplay');
+    // document.getElementById('hofLink').classList.remove('nodisplay');
     // document.getElementById('howToOpenBtn').classList.remove('nodisplay');
 
-    showRematch(1); //appears just a second as hint of where the restart button is hidden
+    //showRematch(1); //appears just a second as hint of where the restart button is hidden
     setTimeout(function () {
         scroll_hint.className = "hidden"
-        remainingBombsInd.className = "visible"
+        // remainingBombsInd.className = "visible"
     }, 1500);
 
     // Time to play!
@@ -848,29 +874,29 @@ function openmenu() {
 
 }
 
-function showRematch(first) {
-    if (first)
-        autohideT = 1000;
-    else
-        autohideT = 2000;
-    anim = 200;
-    //hiding animation
-    remainingBombsInd.className = "hidden";
-    //appearing animation and undisplay other element
-    setTimeout(function () {
-        rematch_button.className = "visible";
-        remainingBombsInd.className = "nodisplay";
-    }, anim);
+// function showRematch(first) {
+//     if (first)
+//         autohideT = 1000;
+//     else
+//         autohideT = 2000;
+//     anim = 200;
+//     //hiding animation
+//     remainingBombsInd.className = "hidden";
+//     //appearing animation and undisplay other element
+//     setTimeout(function () {
+//         rematch_button.className = "visible";
+//         remainingBombsInd.className = "nodisplay";
+//     }, anim);
 
-    //after some time the remainingBombsInd reappears (useful for touch)
-    setTimeout(function () {
-        rematch_button.className = "hidden";
-    }, autohideT);
-    setTimeout(function () {
-        rematch_button.className = "nodisplay";
-        remainingBombsInd.className = "visible";
-    }, autohideT + anim);
-}
+//     //after some time the remainingBombsInd reappears (useful for touch)
+//     setTimeout(function () {
+//         rematch_button.className = "hidden";
+//     }, autohideT);
+//     setTimeout(function () {
+//         rematch_button.className = "nodisplay";
+//         remainingBombsInd.className = "visible";
+//     }, autohideT + anim);
+// }
 
 function refreshNewGame() {
     window.location = window.location.href.split('?')[0] + "?n=" + sizeNumber + "&b=" + bombsNumber;

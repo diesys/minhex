@@ -1,4 +1,6 @@
-buttons = document.querySelectorAll(".modal.button")
+// buttons = document.querySelectorAll(".modal.button")
+buttons = document.querySelectorAll(".modal.btn")
+// console.log(buttons)
 buttons.forEach(element => {
     element.addEventListener("click", function () {
         href = element.getAttribute('href')
