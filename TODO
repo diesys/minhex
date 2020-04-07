@@ -1,21 +1,65 @@
+- coerenza tra bombe rimanenti e punteggio 
+  (fare una flexbox verticale a sinistra con icona+punteggio; iconabomba+bomberimanenti, etc) animati e ad esagono con colori sensati diveri
+- creare menu
+
+-- ripulire i colori e il JS per fare la possibilita di cambiare colore (bicromatico, o monocromatico e i colori relativi, cosi cambiando uno cambi tutto dallo sfondo alle celle all'hover)
+
+-- BUG ?: se si mette una bandierina (di cui magari non si e' certi) e si clicca poi su un numero dell'intorno (pensando sia ben messa la bandierina)
+	si salta in aria
+
+· alleggerire dimensione (perche favicon e logo pesano cosi tanto?? ripulire cartella musica e mettere solo audio)
+· ripulire minhex.js dalla roba di ui
+· ripulire css
+· aggiungere gradiente sfondo howto
+· sistemare HT3, testo e il bottone "gioca" non so perche' scompare sotto il p, sara' il testo?
+· fare ombra meglio del menu e gameboard
+
+far diventare "modal" una libreria per modali (fullscreen come howto e non fullscreen al posto di swal)
+
 MinHex
 
 \Codice
 
-	! Correggere bug che ti permette di vincere mettendo anche una bandierina in un posto sbagliato, purche siano giuste quelle dove ci sono davvero le bombe
+	· Rivedere il codice per essere minimizzato perche sono quasi mille righe tutto..
+		· È importante?
+		· Non credo si possa fare poi così tanto, magari con estrema fatica puoi renderlo un po' più della metà,
+			ma a scapito di leggibilità (già scarsa), forse efficienza (minimamente), I suppost
 
-	· Inizializzazione in una funzione init() a parte
-	· init() chiama una funzione adjustDimensions()
-		- adjustDimensions() imposta le dimensioni del field in base alla dimensione
-			dello schermo in modo da inscrivere il campo di gioco nel field e avere
-			il field che abbia un bordo garantito percentuale fisso sia in orizzontale
-			che in verticale
-	· chiamare init() su body.onload()
-	· chiamare adjustDimensions() su body.resize()
-	? estendere ricorsivamente lo ``scoprintorno''
+			Quando si fa la versione minimizzata semplicemente non si include quella intera nell'html però di solito è prassi lasciare nel server la stessa non minimizzata in cui togli l'infisso ".min", al momento per il css è così, se vedi ci sono entrambe.
+			Serve di solito ridurre il traffico, ché non sembra ma in poco una pagina con già mille immagini diventa pesante senza che te ne accorgi:
+			e soprattutto se non lo minimizza vuol dire che non rispetta degli standard che possono dare problemi come il fatto che prima non lo eseguiva su certi browser perché facevi la potenza con ** e non con Math.pow()
 
+	· Fattorizzare parte comune in wheelSelect e dragSelect o come si chiama. Magari riscrivere tutto in modo più dritto.
+
+
+\Gioco
+
+	· Pensare bene al punteggio. Contare i clic?
+
+	? Mettere dei limiti massimi e minimi a size e bombs?
+
+	? se clicco una casella con scritto 4 che ha tre celle non cliccate e una bomba piazzata piazza automaticamente
+		le altre tre bombe - utile
+
+	
+	? sistemare la chiamata ricorsiva dello ``scoprintorno'' (se si riesce a fare in modo efficiente)
+		-> Non clicca ricorsivamente sulle celle già cliccate. Cliccare ma aggiungere altra flag per la chiamata
+			ricorsiva, che una volta terminato l'albero delle chiamate andrebbe resettata.
+
+	? quando esplodi le bandierine giuste dovrebbero avere un colore particolare, no?
 
 \ui
+	· La transizione tra indicatoreBombe e refresh la farei con la dissolvenza invece di questo movimento, è fastidioso se vai verso qualcosa che questa ad un certo
+	  punto ti scappi e poi c'è un lag
+	· Il movimento dell'indicatore delle bombe avanti e indietro (che succede anche se rimane fermo il mouse) sfalsa anche le scritte delle bombe e il field...
+	? clic lungo come alternativa al doppio click - boh (io metterei pulsante destro e di conseguenza click lungo sul cel)
+		per i cell e' utile, perche' certe volte si sbaglia e scoppia a caso (magari fare anche il doppioclick piu tollerante aiuta, ogni tanto capita di esplodere per sbaglio)
+	· aggiungere descrizione tag e altro nei meta dell'html
+		[che vuol dire? sono cose per l'indicizzazione e metadati]
+	· aggiungere tooltip anche per le bombe/rematch? o metterlo nell'howto? (meglio la prima)
 
-	· rematch
-	· fare howto, inglese
+\howto
+
+	· screenshot howto
+	? aggiungere immagine per spiegare l'intorno
+	· scrivere (anche) in inglese. Magari con controllo sulla provenienza.
