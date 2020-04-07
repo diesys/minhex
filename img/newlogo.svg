@@ -17,9 +17,9 @@
    version="1.1"
    inkscape:version="0.92.4 5da689c313, 2019-01-14"
    sodipodi:docname="newlogo.svg"
-   inkscape:export-filename="/home/lip/code/MinHex/img/icon.png"
-   inkscape:export-xdpi="45"
-   inkscape:export-ydpi="45">
+   inkscape:export-filename="/home/jake/code/MinHex/img/new_logo.png"
+   inkscape:export-xdpi="75"
+   inkscape:export-ydpi="75">
   <defs
      id="defs4">
     <linearGradient
@@ -563,9 +563,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.3535534"
-     inkscape:cx="-145.49316"
-     inkscape:cy="390.37831"
+     inkscape:zoom="0.7071068"
+     inkscape:cx="-71.90448"
+     inkscape:cy="341.71484"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
