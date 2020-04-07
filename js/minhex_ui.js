@@ -22,6 +22,7 @@ buttons.forEach(element => {
     })
 })
 
+
 // SWAL da sistemare per il futuro.. magari usando le swal2 nuove?
 // o magari le prende dal css con una certa classe di default
 //SWEET-ALERT2 default
