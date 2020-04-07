@@ -550,6 +550,11 @@ function Grid(N, BOMBS) {
                 this.cell[nextToBomb].count++;
             candidates.splice(choiceInd, 1);
         }
+
+        setTimeout(function () {
+            document.getElementById('bombs_box').classList.remove('nodisplay');
+            document.getElementById('score_box').classList.remove('nodisplay');
+        }, 400);
     }
 
     function coords(c) {
@@ -831,19 +836,18 @@ function closemenu() {
             display: "none"
         })
     }, animduration);
-
-    // document.getElementById('hofLink').classList.remove('nodisplay');
-    // document.getElementById('howToOpenBtn').classList.remove('nodisplay');
+    
 
     //showRematch(1); //appears just a second as hint of where the restart button is hidden
     setTimeout(function () {
         scroll_hint.className = "hidden"
         // remainingBombsInd.className = "visible"
     }, 1500);
-
+    
     // Time to play!
     initializeScale();
     grid = new Grid(sizeNumber, bombsNumber);
+
     /*} else {
         swal({
           title: 'How brave you!',
@@ -873,30 +877,6 @@ function openmenu() {
     // }, 200);
 
 }
-
-// function showRematch(first) {
-//     if (first)
-//         autohideT = 1000;
-//     else
-//         autohideT = 2000;
-//     anim = 200;
-//     //hiding animation
-//     remainingBombsInd.className = "hidden";
-//     //appearing animation and undisplay other element
-//     setTimeout(function () {
-//         rematch_button.className = "visible";
-//         remainingBombsInd.className = "nodisplay";
-//     }, anim);
-
-//     //after some time the remainingBombsInd reappears (useful for touch)
-//     setTimeout(function () {
-//         rematch_button.className = "hidden";
-//     }, autohideT);
-//     setTimeout(function () {
-//         rematch_button.className = "nodisplay";
-//         remainingBombsInd.className = "visible";
-//     }, autohideT + anim);
-// }
 
 function refreshNewGame() {
     window.location = window.location.href.split('?')[0] + "?n=" + sizeNumber + "&b=" + bombsNumber;

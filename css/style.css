@@ -561,7 +561,7 @@ h2#Bombs { */
    transform-origin: 50% 50%;
    transition: all .3s;
    bottom: 1em;
-   animation: fadein .5s;
+   /* animation: fadein .5s; */
    /* padding-bottom: 12px; */
    text-align: center;
    height: 3em;
@@ -607,6 +607,9 @@ h2#Bombs { */
 }
 
 /* h2.rotate#Score { */
+.label.animating.nodisplay {
+   display: none;
+}
 .label.animating {
    opacity: .8;
    /* transform: rotate(60deg); */
