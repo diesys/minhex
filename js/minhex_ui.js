@@ -22,10 +22,16 @@ buttons.forEach(element => {
     })
 })
 
+// SWAL da sistemare per il futuro.. magari usando le swal2 nuove?
+// o magari le prende dal css con una certa classe di default
 //SWEET-ALERT2 default
 swal.setDefaults({
-    background: '#5A3120 url(css/img/tile.png)',
-    confirmButtonColor: '#f8b71b',
+    // background: '#5A3120 url(css/img/tile.png)',
+    // background: 'inherit',
+    background: '',
+    // confirmButtonColor: '#f8b71b',
+    confirmButtonColor: '',
+    // confirmButtonColor: 'inherit',
     showCloseButton: true,
     showConfirmButton: false
 })
