@@ -23,26 +23,63 @@ var sizeNumber = N,
     bombsNumber = B;
 
 
-var
-    // base_clr = "#A9D41C",
-    base_clr = "#76B918",
-    // field_bg_color = "#59710E",
-    field_bg_color = "#190900",
-    field_bg_opacity = "1",
-    stroke_clr = "rgba(0,0,0,.1)",
-    stroke_width = "2",
-    // clicked_clr = "#698511",
-    clicked_clr = "#507521",
-    // over_clr = "#e8ff7d",
-    over_clr = "#B4E575",
-    bomb_clr = "#C10F08",
-    bomb2_clr = "#950601",
-    flag_clr = "#f8b71b",
-    anim_dur = 130;
+// var
+//     // base_clr = "#A9D41C",
+//     base_clr = "#76B918",
+//     // field_bg_color = "#59710E",
+//     field_bg_color = "#190900",
+//     field_bg_opacity = "1",
+//     stroke_clr = "rgba(0,0,0,.1)",
+//     stroke_width = "2",
+//     // clicked_clr = "#698511",
+//     clicked_clr = "#507521",
+//     // over_clr = "#e8ff7d",
+//     over_clr = "#B4E575",
+//     bomb_clr = "#C10F08",
+//     bomb2_clr = "#950601",
+//     flag_clr = "#f8b71b",
+//     anim_dur = 130;
 
-var textDimension = 2.1,
-    fontColor = "#fff",
-    font = 'OpenSansBold';
+// var textDimension = 2.1,
+//     fontColor = "#fff",
+//     font = 'OpenSansBold';
+
+//////// TESTS
+
+var base_clr = "#75b92d",
+    base_opacity = 1,
+    field_bg_color = "#000000",
+    // field_bg_opacity = .3,
+    field_bg_opacity = 0,
+    stroke_clr = "rgba(0,0,0,.15)",
+    stroke_width = 4.5,
+    clicked_clr = base_clr,
+    clicked_opacity = .35,
+    over_clr = base_clr,
+    over_opacity = clicked_opacity * 1.8,
+    // bomb_clr = "#ff140b",
+    // bomb_clr = "#d9160f",
+    bomb_clr = "#df1c15",
+    bomb2_clr = bomb_clr, 
+    // adding opacity
+    bomb2_opacity = clicked_opacity,
+    flag_clr = "#f8b71b",
+    anim_dur = 130, // cells animation
+    animduration = 800, // long animations (open/close menu)
+
+    // menu
+    menu_shadow_opacity = .5,
+
+    // text
+    textDimension = 2.1,
+    fontColor = flag_clr + 'f0', // adding (soft) alpha value
+    font = 'OpenSansBold',
+    font_menu_clr = "#191919",
+    font_weight = 900,
+    
+
+    // cells' distances
+    cell_distance = 1.5;
 
 ///////////////////////////////////////////
 // Defining the minimum margin for the field inscribed into the page and the margin of the gametable inscribed into the field
@@ -98,7 +135,8 @@ document.getElementById('field').setAttribute('height', fieldHeight);
 //var l = parseInt(fieldWidth * (1 - 2 * fieldMargin) * .5 / N),
 // distance between triangles   m = parseInt(l/18.3);
 var l,
-    m = 0.1
+    // m = 0.1
+    m = cell_distance
 
 var x0 = fieldWidth * .5 * (.5 + fieldMargin),
     y0 = fieldHeight * fieldMargin;
@@ -195,14 +233,16 @@ function sendScore(username, score) {
 function mouseOver() {
     if (this.state == "virgin")
         this.animate({
-            fill: over_clr
+            fill: over_clr,
+            opacity: over_opacity
         }, anim_dur, mina.easein);
 }
 
 function mouseOut() {
     if (this.state == "virgin")
         this.animate({
-            fill: base_clr
+            fill: base_clr,
+            opacity: base_opacity
         }, anim_dur, mina.easeout);
 }
 
@@ -214,6 +254,7 @@ function drawCell(i, j) {
     var triangle;
     var attributes = {
         fill: base_clr,
+        opacity: base_opacity,
         strokeWidth: stroke_width,
         stroke: stroke_clr
     }
@@ -336,6 +377,7 @@ function Grid(N, BOMBS) {
             if (cell.isBomb) {
                 cell.animate({
                     fill: bomb_clr,
+                    opacity: base_opacity
                 }, anim_dur, mina.easein);
                 // We don't want to score-count the explosion click
                 this.score--;
@@ -365,7 +407,8 @@ function Grid(N, BOMBS) {
                 for (c of Object.keys(this.cell))
                     if (this.cell[c].isBomb && c != pos) {
                         this.cell[c].animate({
-                            fill: bomb2_clr
+                            fill: bomb2_clr,
+                            opacity: bomb2_opacity
                         }, anim_dur, mina.easein);
                         this.cell[c].state = "clicked";
                     }
@@ -375,7 +418,7 @@ function Grid(N, BOMBS) {
             // !this should be fixed, too slow when recursively called 
             cell.animate({
                 fill: clicked_clr,
-                scale: .2
+                opacity: clicked_opacity,
             }, anim_dur, mina.easein);
             if (cell.count) {
                 textOnCell(cell.pos, cell.count.toString()).click(this.mouseClick(pos));
@@ -467,7 +510,8 @@ function Grid(N, BOMBS) {
                     return;
                 cell.state = "flag";
                 cell.animate({
-                    fill: flag_clr
+                    fill: flag_clr,
+                    opacity: base_opacity
                 }, anim_dur, mina.easein);
                 this.clickedCells++;
                 this.score++;
@@ -476,7 +520,8 @@ function Grid(N, BOMBS) {
             case "flag":
                 cell.state = "virgin";
                 cell.animate({
-                    fill: base_clr
+                    fill: base_clr,
+                    opacity: base_opacity
                 }, anim_dur, mina.easeout);
                 this.clickedCells--;
                 this.score--;
@@ -575,24 +620,9 @@ function Grid(N, BOMBS) {
 
 var menu = Snap('#menu');
 
-// hide the menu if it's a rematch
-// if (argv["rematch"] == "true") {
-//   menu.attr({
-//     display: "none"
-//   });
-// }
-
-
 // UI CONF
 document.getElementById('menu').setAttribute('width', fieldWidth);
 document.getElementById('menu').setAttribute('height', fieldHeight);
-// var menu_hex_points = new Array()
-// menu_hex_points.push([x0,y0])
-// menu_hex_points.push([x0 + N*l, y0])
-// menu_hex_points.push([x0 + N*1.5*l, y0 + N*l*hsr3])
-// menu_hex_points.push([x0 + N*l, y0 + N*l*hsr3*2])
-// menu_hex_points.push([x0, y0 + N*l*hsr3*2])
-// menu_hex_points.push([x0-N*l/2, y0 + N*l*hsr3])
 
 
 // hex field coords
@@ -607,13 +637,12 @@ menu_hex_points.push([x0 - L / 2, y0 + L * hsr3])
 var menu_center = [menu_hex_points[0][0] + (menu_hex_points[1][0] - menu_hex_points[0][0]) / 2, menu_hex_points[2][1]],
 
     //colors
-    // menu_play_clr = "#a9d41c",
     menu_play_clr = base_clr,
     menu_hex_clr = menu_play_clr,
-    menu_bomb_clr = "#E61913",
-    menu_size_clr = "#F5B10A",
+    menu_bomb_clr = bomb_clr,
+    menu_size_clr = flag_clr,
     // menu_fame_clr = "#8BAF17",
-    menu_fame_clr = "clicked_clr",
+    menu_fame_clr = base_opacity,
 
 
 
@@ -651,20 +680,14 @@ var fieldshadow = field.filter(Snap.filter.shadow(0, 6, 12, "#000", .4)),
         mask: menu_hole
     });
 
-// if (argv["rematch"] == "true") {
-//   field_bg.attr({
-//     display: "none"
-//   });
-// }
-
 var m_text_opt = {
     'text-anchor': 'middle',
     'alignment-baseline': 'central'
 };
 m_text_opt['font-size'] = parseInt(L * .1) + 'pt';
-// m_text_opt['font-family'] = 'OpenSansBold';
-m_text_opt['font-weight'] = 600;
-m_text_opt['fill'] = "#fff";
+m_text_opt['font-family'] = font;
+m_text_opt['font-weight'] = font_weight;
+m_text_opt['fill'] = font_menu_clr;
 
 // Grandezza immagini percentuale rispetto al lato dell'esagono !!
 var bombBox = 0.35,
@@ -812,17 +835,17 @@ function dragSelect(obj) {
 function closemenu() {
     // Now bombs and size are always compatible ;)
     //if (bombsNumber < maxbombs) {
-    var animduration = 1000;
-    menu_hole_shadow.attr({
-        opacity: ".3"
-    });
+    var animduration = 500;
+    // menu_hole_shadow.attr({
+    //     opacity: ".3"
+    // });
     menu_hole.animate({
         r: 0
     }, animduration, mina.bounce);
-    menu_hole_shadow.animate({
-        r: 0,
-        opacity: ".1"
-    }, animduration, mina.bounce);
+    // menu_hole_shadow.animate({
+    //     r: 0,
+    //     opacity: ".1"
+    // }, animduration, mina.bounce);
     setTimeout(function () {
         menu.attr({
             display: "none"
