@@ -91,7 +91,7 @@
             <?php endforeach;?>
         </table>
 
-        <a class="button playagain" href="../">Rivincita!</a>
+        <a class="button playagain" href="../">Gioca!</a>
 
     </body>
 
