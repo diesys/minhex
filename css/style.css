@@ -525,11 +525,12 @@ a.btn.modal.button:hover {
    transition: all .3s;
    text-align: center;
    height: 3em;
-   top: 1em;
-   animation: fadefrombottom 1s;
+   top: 1.3em;
+   animation: fadefromtop 1s;
 }
 
 .label.bottom:not(.nodisplay) {
+   animation: fadefrombottom 1s;
    bottom: 1em;
 }
  .label > h4::after {
