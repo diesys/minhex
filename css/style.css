@@ -73,7 +73,7 @@ html,
    position: absolute;
    top: 50%;
    left: 50%;
-   transform: translate(-50%, calc(-50% + 1.5em)) scale(1.25);
+   transform: translate(-50%, calc(-50% + 1.5em)) scale(1.2);
 }
 
 svg {
@@ -525,7 +525,7 @@ a.btn.modal.button:hover {
    transition: all .3s;
    text-align: center;
    height: 3em;
-   top: 1.3em;
+   top: 1em;
    animation: fadefromtop 1s;
 }
 
