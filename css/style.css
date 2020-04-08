@@ -769,6 +769,9 @@ ol.menu span {
    top: calc(50% + 10px);
    font-size: 1em;
 }
+ol.menu.right span {
+   padding-right: 15px;
+}
 
 /* ------- (end) MENU --------------------- */
 
