@@ -73,7 +73,7 @@ html,
    position: absolute;
    top: 50%;
    left: 50%;
-   transform: translate(-50%, -50%) scale(1.25);
+   transform: translate(-50%, calc(-50% + 1.5em)) scale(1.25);
 }
 
 svg {
@@ -523,10 +523,14 @@ a.btn.modal.button:hover {
    height: max-content;
    transform-origin: 50% 50%;
    transition: all .3s;
-   bottom: 1em;
    text-align: center;
    height: 3em;
+   top: 1em;
    animation: fadefrombottom 1s;
+}
+
+.label.bottom:not(.nodisplay) {
+   bottom: 1em;
 }
  .label > h4::after {
     content: attr(data-label);
@@ -544,8 +548,12 @@ a.btn.modal.button:hover {
 }
 
 .label.score {
+   left: 50%;
    background: #F8B71B;
    clip-path: polygon(0% 0%, 0% 100%, 75% 100%, 100% 50%, 75% 0%, 25% 0%);
+}
+.label.bottom.score {
+   left: 0;
 }
 .label.score h2 {
    transform: translateX(-20%);
@@ -555,8 +563,11 @@ a.btn.modal.button:hover {
 }
 .label.bombs {
    background: #df1c15;
-   right: 0;
+   right: 50%;
    clip-path: polygon(0% 50%, 25% 100%, 100% 100%, 100% 50%, 100% 0%, 25% 0%);
+}
+.label.bottom.bombs {
+   right: 0;
 }
 
 .label.animating.nodisplay, .nodisplay {
@@ -774,15 +785,3 @@ ol.menu.right span {
 }
 
 /* ------- (end) MENU --------------------- */
-
-
-/* TODO +++++++++++++++++++++++++++++++++++++++++++++++ 
-
- · fare menu li con flex... fa troppo schifo cosi non allineato...
- · mettere bombe rimanenti e punteggio meglio...
- · aggiungere la scritta e logo minhex nel menu? nello spazio vuoto
- · tradurre tutto in italiano... (play e js swal)
-
-
-
-*/
