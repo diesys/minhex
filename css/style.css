@@ -97,6 +97,16 @@ svg#menu text {
    text-shadow: 0 2px 3px rgba(0, 0, 0, .35);
 }
 
+svg text,
+svg image,
+svg polygon {
+   cursor: pointer;
+}
+
+svg#menu text {
+   cursor: row-resize;
+}
+
 /* fix positioning of relative bomb numbers */
 @-moz-document url-prefix() {
    svg text {
