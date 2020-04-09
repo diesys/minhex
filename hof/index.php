@@ -57,7 +57,7 @@
             <h1>Classifica</h1> 
             <img src="../img/icon.png" height="100" width="100" alt="MinHex logo" />
         </header>
-                
+               
         <table id="hof_table">
             <tr>
                 <th>Nome</th>
@@ -69,6 +69,7 @@
                 $json = file_get_contents('data.json');
                 $data = json_decode($json, true);
                 $hof = $data["scores"];
+                $hits = json_encode($data["timestamps"]);
                 
                 // user-defined comparison ascending sort by score
                 function hof_sort(array $a, array $b) {
@@ -90,6 +91,42 @@
             </tr>
             <?php endforeach;?>
         </table>
+
+        <div id="viz0"></div>
+        <div id="viz1"></div>
+        <script src="https://unpkg.com/rough-viz@1.0.6"></script>
+        <script>
+            var timestamps = <?php echo $hits ?>
+            
+            // create Bar chart from csv file, using default options
+            new roughViz.Bar({
+                element: '#viz0', // container selection
+                roughness: 1,
+                color: 'orange',
+                strokeWidth: 1,
+                stroke: 'white',
+                fillStyle: 'zigzag',
+                fillWeight: 1,
+                data: 'https://raw.githubusercontent.com/jwilber/random_data/master/flavors.csv',
+                labels: 'flavor',
+                values: 'price'
+            });
+            new roughViz.Line({
+                element: '#viz1', // container selection
+                roughness: 1,
+                y1: 'revenue',
+                y2: 'cost',
+                // y3: 'profit',
+                colors: ['orange','white'],
+                strokeWidth: 1,
+                stroke: 'white',
+                // fillStyle: 'zigzag',
+                // fillWeight: 1,
+                data: 'https://raw.githubusercontent.com/jwilber/random_data/master/profits.csv',
+                // labels: 'flavor',
+                // values: 'price'
+            });
+        </script>
 
         <a class="button playagain" href="../">Gioca!</a>
 

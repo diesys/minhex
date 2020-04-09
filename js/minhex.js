@@ -181,6 +181,7 @@ function mouseOver() {
             fill: over_clr,
             opacity: over_opacity
         }, anim_dur, mina.easein);
+}
 
 function mouseOut() {
     if (this.state == "virgin")
