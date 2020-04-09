@@ -75,6 +75,10 @@ html,
    left: 50%;
    transform: translate(-50%, calc(-50% + 1.5em)) scale(1.2);
 }
+body.bottomLabels #field,
+body.bottomLabels #menu {
+   transform: translate(-50%,-50%) scale(1.25);
+}
 
 svg {
    -webkit-user-select: none;
@@ -529,9 +533,10 @@ a.btn.modal.button:hover {
    animation: fadefromtop 1s;
 }
 
-.label.bottom:not(.nodisplay) {
-   animation: fadefrombottom 1s;
-   bottom: 1em;
+body.bottomLabels .label:not(.nodisplay) {
+   animation: fadefrombottom 1s !important;
+   bottom: 1em !important;
+   top: auto;
 }
  .label > h4::after {
     content: attr(data-label);
@@ -553,8 +558,8 @@ a.btn.modal.button:hover {
    background: #F8B71B;
    clip-path: polygon(0% 0%, 0% 100%, 75% 100%, 100% 50%, 75% 0%, 25% 0%);
 }
-.label.bottom.score {
-   left: 0;
+body.bottomLabels .label.score {
+   left: 0 !important;
 }
 .label.score h2 {
    transform: translateX(-20%);
@@ -567,8 +572,8 @@ a.btn.modal.button:hover {
    right: 50%;
    clip-path: polygon(0% 50%, 25% 100%, 100% 100%, 100% 50%, 100% 0%, 25% 0%);
 }
-.label.bottom.bombs {
-   right: 0;
+body.bottomLabels .label.bombs {
+   right: 0 !important;
 }
 
 .label.animating.nodisplay, .nodisplay {

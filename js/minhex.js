@@ -169,40 +169,6 @@ function sendScore(username, score) {
     xhr.send("username=" + username + "&score=" + score);
 
     /// aggiunta
-    /*const swalWithBootstrapButtons = Swal.mixin({
-        customClass: {
-          confirmButton: 'btn btn-success',
-          cancelButton: 'btn btn-danger'
-        },
-        buttonsStyling: false
-      })
-      
-      swalWithBootstrapButtons.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Yes, delete it!',
-        cancelButtonText: 'No, cancel!',
-        reverseButtons: true
-      }).then((result) => {
-        if (result.value) {
-          swalWithBootstrapButtons.fire(
-            'Deleted!',
-            'Your file has been deleted.',
-            'success'
-          )
-        } else if (
-          result.dismiss === Swal.DismissReason.cancel
-        ) {
-          swalWithBootstrapButtons.fire(
-            'Cancelled',
-            'Your imaginary file is safe :)',
-            'error'
-          )
-        }
-      })*/
-    /// aggiunta
     swal({
         // title: 'Match over',
         title: 'Partita finita',
@@ -390,7 +356,7 @@ function Grid(N, BOMBS) {
                     input: 'text',
                     // text: `Pieces of your fleshy brain are all over the walls. Pay more attention to mines next time! However your score is ${this.clicks + this.finalBonus()}`,
                     text: `Le tue cervella sono spappolate su tutti i muri... fa' più attenzione alle mine la prossima volta! Il tuo punteggio è ${score}`,
-                    inputPlaceholder: 'username',
+                    inputPlaceholder: 'Inserisci il tuo nome...',
                     inputAttributes: {
                         'aria-label': 'Inserisci il tuo nome...'
                     },
@@ -481,7 +447,7 @@ function Grid(N, BOMBS) {
                 title: 'Ottimo lavoro!',
                 input: 'text',
                 text: `Hai trovato tutte le bombe, tu sì che hai fiuto! Il tuo punteggio finale è ${score}`,
-                inputPlaceholder: 'username',
+                inputPlaceholder: 'Inserisci il tuo nome...',
                 inputAttributes: {
                     'aria-label': 'Inserisci il tuo nome...'
                 },
@@ -589,8 +555,8 @@ function Grid(N, BOMBS) {
         }
 
         setTimeout(function () {
-            document.getElementById('bombs_box').classList.remove('nodisplay');
-            document.getElementById('score_box').classList.remove('nodisplay');
+            document.getElementById('bombs_box').classList.remove('nodisplay')
+            document.getElementById('score_box').classList.remove('nodisplay')
         }, 400);
     }
 

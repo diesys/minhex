@@ -36,3 +36,16 @@ swal.setDefaults({
     showCloseButton: true,
     showConfirmButton: false
 })
+
+
+// WINDOW RESIZE (USING ASPECT RATIO TO CHOOSE THE TWO POSITIONS FOR LABELS SCORE/BOMBS)
+function posLabelMenu() {
+    if (window.innerWidth / window.innerHeight > 1 || this.window.innerHeight < 600)
+        document.querySelector('body').classList.add('bottomLabels')
+    else
+        document.querySelector('body').classList.remove('bottomLabels')
+}
+
+// updates the position of the labelMenu (points/bombs) for better visibility
+window.addEventListener("resize", posLabelMenu)
+window.addEventListener("load", posLabelMenu)
