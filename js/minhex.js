@@ -22,29 +22,7 @@ var
 var sizeNumber = N,
     bombsNumber = B;
 
-
-// var
-//     // base_clr = "#A9D41C",
-//     base_clr = "#76B918",
-//     // field_bg_color = "#59710E",
-//     field_bg_color = "#190900",
-//     field_bg_opacity = "1",
-//     stroke_clr = "rgba(0,0,0,.1)",
-//     stroke_width = "2",
-//     // clicked_clr = "#698511",
-//     clicked_clr = "#507521",
-//     // over_clr = "#e8ff7d",
-//     over_clr = "#B4E575",
-//     bomb_clr = "#C10F08",
-//     bomb2_clr = "#950601",
-//     flag_clr = "#f8b71b",
-//     anim_dur = 130;
-
-// var textDimension = 2.1,
-//     fontColor = "#fff",
-//     font = 'OpenSansBold';
-
-//////// TESTS
+//////// color configuration
 
 var base_clr = "#75b92d",
     base_opacity = 1,
@@ -190,6 +168,7 @@ function sendScore(username, score) {
     }).then(function (result) {
         refreshNewGame()
     }).catch(function (err) {
+        // da correggere, perche' cosi va sempre alla hof, qualunque errore...
         window.location = "hof/"
     })
 }
