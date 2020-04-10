@@ -679,6 +679,7 @@ body.flexBody {
    #hof_table {
       animation: fadein .5s;
       border-radius: 0;
+   }
 }
 
 #days {
