@@ -64,7 +64,7 @@
             <div id="days">
                 <!-- <h3>Visite giornaliere</h3> -->
             </div>
-            <center><p>Partite giornaliere</p></center>
+            <center><p>Visite giornaliere</p></center>
         </div>
         <!-- <div id="viz1"></div> -->
         
