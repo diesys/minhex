@@ -62,8 +62,8 @@
         
         <div class="chart" id="days">
             <!-- <h3>Visite giornaliere</h3> -->
+            <center><p>Visite giornaliere</p></center>
         </div>
-        <!-- <center><h3>Visite giornaliere</h3></center> -->
         <!-- <div id="viz1"></div> -->
         
                
