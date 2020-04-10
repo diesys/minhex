@@ -692,6 +692,7 @@ body.flexBody header {
    padding-top: 1em;
    position: fixed;
    height: 5.5em;
+   z-index: 10;
    
    /* position: absolute; */
    /* left: 50%; */
