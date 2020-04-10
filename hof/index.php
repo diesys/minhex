@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>MinHex | Albo d'orog</title>
+    <title>MinHex | Albo d'oro</title>
 
     <meta charset="utf-8">
     <!-- <meta name="Description" content="MinHex is spin-off of the old glory Mines, made with an hexagonal lattice instead. With modern UI made with Snap.svg"> -->
@@ -60,8 +60,10 @@
             </div>
         </header>
         
-        <div class="chart" id="days">
-            <!-- <h3>Visite giornaliere</h3> -->
+        <div class="chart" id="chart">
+            <div id="days">
+                <!-- <h3>Visite giornaliere</h3> -->
+            </div>
             <center><p>Partite giornaliere</p></center>
         </div>
         <!-- <div id="viz1"></div> -->

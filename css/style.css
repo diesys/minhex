@@ -678,11 +678,12 @@ body.flexBody {
    }
    #hof_table {
       animation: fadein .5s;
-      border-radius: 0;
+      border-radius: 0 !important;
+      /* display:none; */
    }
 }
 
-#days {
+#chart {
    grid-area: chart;
 }
 
