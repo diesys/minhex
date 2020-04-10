@@ -108,7 +108,7 @@
         </table>
 
 
-        <script src="https://unpkg.com/rough-viz@1.0.6"></script>
+        <script src="../js/rough-viz@1.0.6.min.js"></script>
         <script>
             var timestamps = <?php echo $hits ?>;
  
