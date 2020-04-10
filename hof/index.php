@@ -53,13 +53,23 @@
     <body class="flexBody">
 
         <header>
-            <img src="../img/hof_cup.png" height="100" width="100" alt="MinHex cup" />
-            <h1>Classifica</h1> 
-            <img src="../img/icon.png" height="100" width="100" alt="MinHex logo" />
+            <div>    
+                <img src="../img/hof_cup.png" height="100" width="100" alt="MinHex cup" />
+                <h1>Albo d'oro</h1> 
+                <img src="../img/icon.png" height="100" width="100" alt="MinHex logo" />
+            </div>
         </header>
+        
+        <div class="chart" id="days">
+            <!-- <h3>Visite giornaliere</h3> -->
+        </div>
+        <!-- <center><h3>Visite giornaliere</h3></center> -->
+        <!-- <div id="viz1"></div> -->
+        
                
         <table id="hof_table">
             <tr>
+                <th>#</th>
                 <th>Nome</th>
                 <th>Punti</th>
                 <!-- <th>time</th> -->
@@ -83,49 +93,69 @@
                 usort($hof, "hof_sort");
 
                 // prints the hof
+                // inizial position: 1
+                $position = 1;
                 foreach ($hof as $entry):
             ?>
             <tr>
-                <td><?php echo $entry['user']; ?></td>
+                <td><?php echo $position; $position++; ?></td>
+                <td><?php if ($entry['user'] != "") echo $entry['user']; else echo '   - - - - -   ' ;?></td>
                 <td><?php echo $entry['score']; ?></td>
             </tr>
             <?php endforeach;?>
         </table>
 
-        <div id="viz0"></div>
-        <div id="viz1"></div>
+
         <script src="https://unpkg.com/rough-viz@1.0.6"></script>
         <script>
-            var timestamps = <?php echo $hits ?>
+            var timestamps = <?php echo $hits ?>;
+ 
+            daysArray = timestamps.map(ts => ts.substr(0,10))
+            daysMap = {}
+            daysArray.map(day => daysMap[day] = (daysMap[day] || 0) + 1)
+            labels = Object.keys(daysMap).sort().reverse()
+            values = labels.map(k => daysMap[k])
+            window.innerWidth < 800 ? window.innerWidth *= .85 : window.innerWidth *= .45            
             
             // create Bar chart from csv file, using default options
-            new roughViz.Bar({
-                element: '#viz0', // container selection
+            new roughViz.BarH({
+                element: '#days', // container selection
                 roughness: 1,
-                color: 'orange',
-                strokeWidth: 1,
-                stroke: 'white',
-                fillStyle: 'zigzag',
-                fillWeight: 1,
-                data: 'https://raw.githubusercontent.com/jwilber/random_data/master/flavors.csv',
+                bowing: 2,
+                color: 'white',
+                stroke: 'orange',
+                strokeWidth: .7,
+                fillStyle: 'hatchure',
+                // fillStyle: 'dashed',
+                // title: 'Visite giornaliere',
+                interactive: false,
+                fillWeight: .4,
+                width: window.innerWidth,
+                height: window.innerHeight*.8,
+                data: {
+                    labels: labels,
+                    values: values
+                    // labels: labels.concat(labels),
+                    // values: values.concat(values)
+                },
                 labels: 'flavor',
                 values: 'price'
             });
-            new roughViz.Line({
-                element: '#viz1', // container selection
-                roughness: 1,
-                y1: 'revenue',
-                y2: 'cost',
-                // y3: 'profit',
-                colors: ['orange','white'],
-                strokeWidth: 1,
-                stroke: 'white',
-                // fillStyle: 'zigzag',
-                // fillWeight: 1,
-                data: 'https://raw.githubusercontent.com/jwilber/random_data/master/profits.csv',
-                // labels: 'flavor',
-                // values: 'price'
-            });
+            // new roughViz.Line({
+            //     element: '#viz1', // container selection
+            //     roughness: 1,
+            //     y1: 'revenue',
+            //     y2: 'cost',
+            //     // y3: 'profit',
+            //     colors: ['orange','white'],
+            //     strokeWidth: 1,
+            //     stroke: 'white',
+            //     // fillStyle: 'zigzag',
+            //     // fillWeight: 1,
+            //     data: 'https://raw.githubusercontent.com/jwilber/random_data/master/profits.csv',
+            //     // labels: 'flavor',
+            //     // values: 'price'
+            // });
         </script>
 
         <a class="button playagain" href="../">Gioca!</a>

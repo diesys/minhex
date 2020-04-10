@@ -1,5 +1,6 @@
 @font-face {
-   font-family: 'OpenSans';
+   font-family: 'OpenSans'; 
+   font-family: 'gaeguregular';
    src: url('font/OpenSans-Regular-webfont.woff') format('woff');
    src: url('font/OpenSans-Regular-webfont.ttf') format('truetype');
 }
@@ -14,7 +15,10 @@
 body,
 html,
 .HowTo {
-   font-family: 'OpenSans';
+   font-family: 'OpenSans'; 
+   /* font-family: 'Gaegu',cursive; */
+
+   /* font-family: 'gaeguregular'; */
    width: 100%;
    max-width: 100%;
    max-height: 100%;
@@ -384,8 +388,9 @@ a.btn.modal.button:hover {
 
 .button.playagain {
    position: fixed;
-   left: 15px;
-   bottom: 15px;
+   right: 2em;
+   top: 2.2em;
+   /* bottom: 15px; */
    background-color: #f8b71b;
    color: #5A3120;
    font-size: 1.2em;
@@ -607,7 +612,8 @@ body.bottomLabels .label.bombs {
 .swal2-modal .swal2-content {
    color: #fff;
    text-shadow: 0 2px 1px rgba(0, 0, 0, 0.5);
-   font-family: 'OpenSans';
+   font-family: 'OpenSans'; 
+/*    font-family: 'gaeguregular'; */
 }
 
 .swal2-modal .swal2-title {
@@ -643,39 +649,82 @@ body.bottomLabels .label.bombs {
 /* HALL OF FAME */
 
 body.flexBody {
-   display: flex;
+   /* display: flex; */
    flex-direction: column;
-   align-items: center;
+   /* align-items: center; */
    color: #fff;
    overflow-y: scroll !important;
    overflow-x: hidden;
+   display: grid;
+   grid-template-areas: 'header header'
+                        'scores chart';
+   grid-template-columns: 50% 50%;
+   grid-template-rows: 7.5em auto;
+}
+
+@media only screen and (max-width: 800px) {
+   body.flexBody {
+      grid-template-areas: 'header'
+                           'chart' 
+                           'scores';
+      grid-template-columns: 100%;
+      grid-template-rows: 7.5em auto auto;
+   }
+   .button.playagain {
+      bottom: 15px !important;
+      top: auto !important;
+      left: 15px !important;
+      right: auto !important;
+   }
+}
+
+#days {
+   grid-area: chart;
 }
 
 body.flexBody header {
-   margin-top: 40px;
+   grid-area: header;
+   padding-top: 1em;
+   position: fixed;
+   height: 5.5em;
+   
+   /* position: absolute; */
+   /* left: 50%; */
+   /* transform: translateX(-50%); */
+   /* width: max-content; */
+   width: 100%;
+   background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0));
+}
+body.flexBody header>div {
+   animation: fadein .5s;
    display: flex;
+   position: absolute;
+   left: 50%;
+   transform: translateX(-50%);
    align-items: center;
 }
 
-body.flexBody header>h1 {
+body.flexBody header h1 {
    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.65);
    margin: 0 20px;
+   width: max-content;
 }
 
 #hof_table {
+   animation: fadefromleft .5s;
+   grid-area: scores;
    overflow-y: scroll;
    background: #f8b71b;
    color: #411F15;
-   padding: 20px 25px;
+   padding: 20px 25px 20px 15px;
    margin-top: 50px;
    margin-bottom: 60px;
 
    word-wrap: break-word;
    overflow-wrap: break-word;
    word-break: break-all;
-   /* border-radius: 4px; */
-   border-radius: 4px 4px 0 0;
-   box-shadow: 0 2px 30px 5px rgba(0, 0, 0, .5);
+   border-radius: 0px 7px 0 0;
+   box-shadow: 0 2px 20px 2px rgba(0, 0, 0, .5);
 }
 
 #hof_table>tbody:nth-child(1)>tr:nth-child(1) {
@@ -689,11 +738,18 @@ body.flexBody header>h1 {
    font-family: 'OpenSansBold';
 }
 
-#hof_table th:nth-child(1) {
+#hof_table th:nth-child(1),
+#hof_table tr>td:nth-child(1) {
+   text-align: center;
+}
+#hof_table th:nth-child(2) {
+/* #hof_table th:nth-child(1) { */
    text-align: left;
 }
 
-#hof_table th:nth-child(2) {
+#hof_table th:nth-child(3),
+#hof_table tr>td:nth-child(3) {
+/* #hof_table th:nth-child(2) { */
    text-align: right;
 }
 
@@ -701,10 +757,16 @@ body.flexBody header>h1 {
    min-height: 1.8em;
 }
 
-#hof_table tr>td:nth-child(2) {
-   text-align: right;
+#hof_table tr>td:nth-child(3) {
+   /* #hof_table tr>td:nth-child(2) { */
    min-width: 100px;
+}
 
+/* PODIO */
+#hof_table>tbody:nth-child(1)>tr:nth-child(2),
+#hof_table>tbody:nth-child(1)>tr:nth-child(3),
+#hof_table>tbody:nth-child(1)>tr:nth-child(4) {
+   font-weight: 900;
 }
 
 /* ---------------------- MENU --------------------- */
@@ -791,3 +853,18 @@ ol.menu.right span {
 }
 
 /* ------- (end) MENU --------------------- */
+
+
+/* ------- CHARTS --------------------- */
+.chart {
+   /* width: 100%; */
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   margin: 20px auto;
+   animation: fadefromright .5s;
+}
+.chart .xAxisdays text {
+   transform: rotate(-40deg);
+}
+/* ------- (end) CHARTS --------------------- */
