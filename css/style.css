@@ -676,6 +676,9 @@ body.flexBody {
       left: 15px !important;
       right: auto !important;
    }
+   #hof_table {
+      animation: fadein .5s;
+      border-radius: 0;
 }
 
 #days {
