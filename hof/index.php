@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>MinHex | Hall of Fame</title>
+    <title>MinHex | Albo d'oro</title>
 
     <meta charset="utf-8">
     <!-- <meta name="Description" content="MinHex is spin-off of the old glory Mines, made with an hexagonal lattice instead. With modern UI made with Snap.svg"> -->
