@@ -389,7 +389,8 @@ a.btn.modal.button:hover {
 .button.playagain {
    position: fixed;
    right: 2em;
-   top: 2.2em;
+   top: 2em;
+   z-index: 101;
    /* bottom: 15px; */
    background-color: #f8b71b;
    color: #5A3120;
