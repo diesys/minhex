@@ -56,7 +56,7 @@
             <div>    
                 <img src="../img/hof_cup.png" height="100" width="100" alt="MinHex cup" />
                 <h1>Albo d'oro</h1> 
-                <img src="../img/icon.png" height="100" width="100" alt="MinHex logo" />
+                <img src="../img/logo.png" height="100" width="100" alt="MinHex logo" />
             </div>
         </header>
         
