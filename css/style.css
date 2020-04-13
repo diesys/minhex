@@ -893,18 +893,21 @@ ol.menu.right span {
    position: absolute;
    bottom: 15px;
    left: 15px;
-   /* min-width: 1em; */
-   /* min-height: 3em; */
-   padding: 0em .25em;
+   width: 1.5em;
+   height: 1.5em;
+   text-align: center;
+   padding: 0;
    vertical-align: middle;
    border-radius: 3em;
    background: rgba(0,0,0,.8);
+   background-image: url('img/menu_itm_gear.png');
+   background-size: contain;
    box-shadow: 2px 0px 20px rgba(5, 5, 5, .5);
    animation: miniscale .8s .5s;
    transform-origin: 50% 50%;
    cursor: pointer;
    transition: all .4s;
-   color: #111111f6;
+   color: #111111;
    font-size: 2em;
    font-weight: 900;
    transform: translateY(0);
@@ -912,7 +915,7 @@ ol.menu.right span {
 }
 #theme_sel_toggle:hover {
    /* transform: scale(1.1); */
-   transform: rotate(20deg);
+   transform: rotate(30deg);
 }
 #theme_sel_toggle.hidden {
    opacity: 0;
