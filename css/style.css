@@ -1,5 +1,5 @@
 @font-face {
-   font-family: 'OpenSans'; 
+   font-family: 'OpenSans', Arial, Helvetica, sans-serif; 
    font-family: 'gaeguregular';
    src: url('font/OpenSans-Regular-webfont.woff') format('woff');
    src: url('font/OpenSans-Regular-webfont.ttf') format('truetype');
@@ -625,7 +625,7 @@ body.bottomLabels .label.bombs {
 .swal2-modal .swal2-content {
    color: #fff;
    text-shadow: 0 2px 1px rgba(0, 0, 0, 0.5);
-   font-family: 'OpenSans'; 
+   font-family: 'OpenSans', Arial, Helvetica, sans-serif; 
 /*    font-family: 'gaeguregular'; */
 }
 
