@@ -9,6 +9,7 @@
     <meta name="Description" content="MinHex è una rivisitazione della vecchia gloria 'Campo Minato'/'Prato Fiorito', fatto sul reticolo esagonale. Creato con Snap.svg e una moderna esperienza utente.">
     <meta name="keywords" content="HTML,CSS,JavaScript,Snap.Svg,Game,Mines,JS,Prato fiorito,Campo minato,bombe,arcade,videogame,opensource,freesoftware,GPL">
     <meta name="author" content="Nunzio e Diego Turtulici">
+    <link rel="canonical" href="https://flowin.space/minhex/">
 
     <!-- MinHex style -->
     <!-- <link rel="stylesheet" href="style.css"> -->

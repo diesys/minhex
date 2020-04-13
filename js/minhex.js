@@ -14,8 +14,7 @@ window.location.search.substring(1).split('&').forEach(function (c) {
 // General settings  //////////////////////
 
 //--!!this could be made better
-var
-    N = parseInt(argv["n"]) || 5,
+var N = parseInt(argv["n"]) || 5,
     dimension = 12.3 / 5 * N, // height measured in triangles' size
     B = parseInt(argv["b"]) || 30;
 
@@ -24,7 +23,7 @@ var sizeNumber = N,
 
 //////// color configuration
 
-var base_clr = "#75b92d",
+var base_clr = argv['c'] ? '#' + argv['c'].split(';')[0] : "#75b92d",
     base_opacity = 1,
     field_bg_color = "#000000",
     // field_bg_opacity = .3,
@@ -37,7 +36,7 @@ var base_clr = "#75b92d",
     over_opacity = clicked_opacity * 1.8,
     // bomb_clr = "#ff140b",
     // bomb_clr = "#d9160f",
-    bomb_clr = "#df1c15",
+    bomb_clr = argv['c'] ? '#' + argv['c'].split(';')[1] : "#df1c15",
     bomb2_clr = bomb_clr, 
     // adding opacity
     bomb2_opacity = clicked_opacity,
@@ -60,6 +59,7 @@ var base_clr = "#75b92d",
     cell_distance = 1.5;
 
 ///////////////////////////////////////////
+
 // Defining the minimum margin for the field inscribed into the page and the margin of the gametable inscribed into the field
 
 var fieldMargin = .05,
@@ -801,8 +801,10 @@ function closemenu() {
     //showRematch(1); //appears just a second as hint of where the restart button is hidden
     setTimeout(function () {
         scroll_hint.className = "hidden"
+        document.querySelector('#theme_sel_toggle').classList.add('hidden')
+        document.querySelector('#color_popup').classList.add('hidden')
         // remainingBombsInd.className = "visible"
-    }, 1500);
+    }, 1000);
     
     // Time to play!
     initializeScale();
@@ -838,8 +840,9 @@ function openmenu() {
 
 }
 
-function refreshNewGame() {
-    window.location = window.location.href.split('?')[0] + "?n=" + sizeNumber + "&b=" + bombsNumber;
+// adding theming option
+function refreshNewGame(color=[base_clr.split('#')[1],bomb_clr.split('#')[1]]) {
+    window.location = window.location.href.split('?')[0] + "?n=" + sizeNumber + "&b=" + bombsNumber + '&c=' + color[0] + ';' + color[1]
 }
 
 

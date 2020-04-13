@@ -10,6 +10,7 @@
     <meta name="Description" content="MinHex è una rivisitazione della vecchia gloria 'Campo Minato'/'Prato Fiorito', fatto sul reticolo esagonale. Creato con Snap.svg e una moderna esperienza utente.">
     <meta name="keywords" content="HTML,CSS,JavaScript,Snap.Svg,Game,Mines,JS,Prato fiorito,Campo minato,bombe,arcade,videogame,opensource,freesoftware,GPL">
     <meta name="author" content="Nunzio e Diego Turtulici">
+    <link rel="canonical" href="https://flowin.space/minhex/">
 
     <!-- JS external Libraries  -->
     <script src="js/snap.svg.min.js"></script>
@@ -19,11 +20,17 @@
     <script src="js/sweetalert2.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="css/sweetalert2.min.css">
-
+    
     <!-- MinHex style -->
-    <!-- <link rel="stylesheet" href="css/style.css"> -->
     <link rel="stylesheet" href="css/style.min.css">
+    <!-- <link rel="stylesheet" href="css/style.css"> -->
     <link href="https://fonts.googleapis.com/css?family=Gaegu&display=swap" rel="stylesheet">
+
+
+    <script src='js/minhex.min.js' defer></script>
+    <!-- <script src="js/minhex.js" defer></script> -->
+    <script src="js/minhex_ui.min.js" defer></script>
+    <!-- <script src="js/minhex_ui.js" defer></script> -->
 
     <!-- Mobile Specifics -->
     <link rel="manifest" href="manifest.json">
@@ -58,12 +65,6 @@
     <link rel="apple-touch-icon" sizes="72x72" href="img/favicon72.png" type="image/x-icon">
     <link rel="apple-touch-icon" sizes="144x144" href="img/favicon144.png" type="image/x-icon">
     <link rel="apple-touch-icon" sizes="256x256" href="img/favicon256.png" type="image/x-icon">
-
-
-    <!-- <script src='js/minhex.min.js' defer></script> -->
-    <script src="js/minhex.js" defer></script>
-    <script src="js/minhex_ui.min.js" defer></script>
-    <!-- <script src="js/minhex_ui.js" defer></script> -->
 
     <!-- font -->
     <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" defer> -->
@@ -159,8 +160,12 @@
             </p>
         </div>
 
+        
         <!-- <div id="grad_ht"></div> -->
     </div>
+
+    <div id="theme_sel_toggle">&#9881;</div>
+    <ol id="color_popup" class="hidden"></ol>
 
 </body>
 
