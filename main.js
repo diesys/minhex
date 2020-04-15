@@ -13,8 +13,9 @@ function createWindow () {
     frame: false,
     transparent: false,
     webPreferences: {
-        nodeIntegrationInWorker: true
-    }
+        // nodeIntegrationInWorker: true
+    },
+    icon: require('path').join('img/favicon256.png')
   })
     
   // and load the index.html of the app.
