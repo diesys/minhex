@@ -741,7 +741,7 @@ body.flexBody header h1 {
 
    word-wrap: break-word;
    overflow-wrap: break-word;
-   word-break: break-all;
+   /* word-break: break-all; */
    border-radius: 0px 7px 0 0;
    box-shadow: 0 2px 20px 2px rgba(0, 0, 0, .5);
 }
@@ -776,10 +776,19 @@ body.flexBody header h1 {
    min-height: 1.8em;
 }
 
+#hof_table tr>td {
+   border-bottom: 1px dashed #0000004d !important;
+}
+#hof_table tr>td:nth-child(2) {
+   padding: 2px 8px;
+}
 #hof_table tr>td:nth-child(3) {
    /* #hof_table tr>td:nth-child(2) { */
    min-width: 100px;
 }
+
+
+
 
 /* PODIO */
 #hof_table>tbody:nth-child(1)>tr:nth-child(2),
