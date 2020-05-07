@@ -3,7 +3,7 @@ buttons = document.querySelectorAll(".modal.btn")
 // console.log(buttons)
 buttons.forEach(element => {
     element.addEventListener("click", function () {
-        href = element.getAttribute('href')
+        href = element.getAttribute('data-href')
         document.querySelector('#howtos').classList.remove('hidden')
         document.querySelectorAll('.modal.panel').forEach(element => {
             element.classList.remove('active')
@@ -18,7 +18,7 @@ buttons.forEach(element => {
                 document.querySelector('#howtos').classList.add('hidden')
             }, 700)
         }
-        console.log(href)
+        // console.log(href)
     })
 })
 
