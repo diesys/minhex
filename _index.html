@@ -76,8 +76,6 @@
     <a href="https://flowin.space/covid" target="_blank" id="covid-kit" style="filter:hue-rotate(20deg);bottom:0;right:0;position:fixed;opacity:.8;cursor:pointer;z-index:20000;background:url('https://flowin.space/covid/img/covid_banner_br.png');height:68px;width:110px;"></a>
 
     <ol class="menu left">
-        <!-- <li><a class="menu btn" target="_blank" href="hof/"><span>Classifica</span><img src="css/img/menu_itm_hof.png"></span></a></li>
-        <li><a class="menu btn" href="#" onclick="refreshNewGame();"><span>Rigioca</span><img src="css/img/menu_itm_rematch.png"></span></a></li> -->
         <li><a class="menu btn modal" href="#HT1"><span>Aiuto</span><img src="css/img/menu_itm_help.png"></span></a></li>
         <li><a class="menu btn modal" href="#credits"><span>Credits</span><img src="css/img/menu_itm_info.png"></span></a></li>
     </ol>
@@ -85,8 +83,13 @@
     <ol class="menu right">
         <li><a class="menu btn" target="_blank" href="hof/"><img src="css/img/menu_itm_hof.png"><span>Albo d'oro</span></a></li>
         <li><a class="menu btn" href="#" onclick="refreshNewGame();"><img src="css/img/menu_itm_rematch.png"><span>Rigioca</span></a></li>
-        <!-- <li><a class="menu btn modal" href="#HT1"><span>Aiuto</span><img src="css/img/menu_itm_help.png"></span></a></li>
-        <li><a class="menu btn modal" href="#credits"><span>Credits</span><img src="css/img/menu_itm_info.png"></span></a></li> -->
+        <li><a class="menu btn" href="#" onclick="toggleOST()"><img id="minhex_ost_icon" src="css/img/menu_itm_music_off.png"><span>Soundtrack</span></a>
+            <audio loop id="minhex_ost">
+                <source src="music/minhex_ost_zoominnexttime.ogg" type="audio/ogg">
+                <source src="music/minhex_ost_zoominnexttime.ogg" type="audio/mpeg">
+                Your browser does not support the audio tag.
+            </audio>
+        </li>
     </ol>
     
     <div class="label score nodisplay" id="score_box">        
@@ -122,6 +125,8 @@
             <p>MinHex, in questa veste di web-app, nasce nel 2016 dalla collaborazione di Nunzio e Diego Turtulici ma il gioco venne originariamente scritto in Python (Pygame) già qualche tempo prima. Dopo essere stato così tanto in cantiere, la quarantena ha permesso - finalmente - di migliorarlo con grafiche rinnovate, punteggio, classifica ed una migliore esperienza utente.
                 <br>Il gioco è <a target="_blank" href="https://github.com/NuxTuxSux/MinHex">disponibile</a> con licenza: <a target="_blank" href="https://www.gnu.org/licenses/agpl-3.0.en.html">AGPLv3</a>.
                 <br>Se hai suggerimenti, commenti scrivi pure alla <a target="_blank" href="https://www.facebook.com/minhexgame">pagina facebook</a>, e metti un like!
+                <br><br>
+                Colonna sonora originale, suonata con <a target="_blank" href="https://en.wikipedia.org/wiki/Yoshimi_(synthesizer)">Yoshimi</a> e scaricabile liberamente in <a target="_blank" href="music/minhex_ost_zoominnexttime.mp3">mp3</a> e <a target="_blank" href="music/minhex_ost_zoominnexttime.ogg">ogg</a>.
                 <br><br>
                 Hosting: <a target="_blank" href="https://eigenlab.org">eigenLab</a> @ <a target="_blank" href="https://flowin.space">FlowIn.Space</a>
             </p>

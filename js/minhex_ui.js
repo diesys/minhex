@@ -22,6 +22,21 @@ buttons.forEach(element => {
     })
 })
 
+// SOUND TRACK
+minhex_ost = document.querySelector('#minhex_ost')
+toggle_minhex_ost = document.querySelector('#minhex_ost')
+
+function toggleOST() {
+    if (minhex_ost.paused) {
+        minhex_ost.play()
+        minhex_ost_icon.src = 'css/img/menu_itm_music.png'
+    }
+    else {
+        minhex_ost.pause()
+        minhex_ost_icon.src = 'css/img/menu_itm_music_off.png'
+    } 
+}
+
 
 // SWAL da sistemare per il futuro.. magari usando le swal2 nuove?
 // o magari le prende dal css con una certa classe di default
