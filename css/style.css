@@ -852,7 +852,8 @@ ol.menu.right li:active {
    transform: translateX(0);
    background: linear-gradient(-90deg, rgba(0, 0, 0, .8), rgba(0, 0, 0, .2));
 }
-ol.menu li a {
+ol.menu li a,
+ol.menu li b {
    align-items: center;
    align-content: stretch;
    display: flex;
