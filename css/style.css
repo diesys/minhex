@@ -553,7 +553,7 @@ a.btn.modal.button:hover {
 
 body.bottomLabels .label:not(.nodisplay) {
    animation: fadefrombottom 1s !important;
-   bottom: 1em !important;
+   bottom: 2em !important;
    top: auto;
 }
  .label > h4::after {
